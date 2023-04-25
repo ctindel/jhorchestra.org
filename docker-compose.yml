@@ -1,0 +1,30 @@
+version: '2'
+services:
+  jho:
+    build:
+      context: .
+    image: jho
+    container_name: jho
+    volumes:
+      - .:/mnt/jho
+    ports:
+      - "8080:1313"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+    command: /tmp/jho/run_local.sh
+  jho_shell:
+    build:
+      context: .
+    image: jho
+    container_name: jho_shell
+    volumes:
+      - .:/mnt/jho
+    ports:
+      - "8080:1313"
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+    command: /tmp/jho/run_shell.sh

@@ -1,0 +1,69 @@
+title = "Jackson Heights Orchestra"
+baseURL = "https://jhorchestra.org"
+languageCode = "en-us"
+theme = "ananke"
+resourceDir = "../resources"
+
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
+googleAnalytics = ""
+enableRobotsTXT = true
+Copyright = "Jackson Heights Orchestra"
+
+[languages]
+  [languages.en]
+    title = "Jackson Heights Orchestra"
+    weight = 1
+    contentDir = "content/en"
+    # languageDirection = 'rtl' for Right-To-Left languages
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+## We list everything here EXCEPT Donate, because we set the menu
+##  item only in the donate.md so it is put on the navbar last
+#[[Menu.Main]]
+#    name = "About"
+#    identifier = "about"
+#    url = "/about"
+#
+#[[Menu.Main]]
+#    name = "Contact"
+#    identifier = "contact"
+#    url = "/contact"
+#
+#[[Menu.Main]]
+#    name = "Media"
+#    identifier = "media"
+#    url = "/media"
+#
+#[[Menu.Main]]
+#    name = "Schedule"
+#    identifier = "schedule"
+#    url = "/schedule"
+
+[params]
+  text_color = ""
+  author = ""
+  favicon = ""
+  site_logo = ""
+  description = "The Premiere Orchestra in Jackson Heights, Queens"
+  # choose a background color from any on this page: https://tachyons.io/docs/themes/skins/ and preface it with "bg-"
+  background_color_class = "bg-black"
+  recent_posts_number = 3
+
+[[params.ananke_socials]]
+name = "youtube"
+url = "https://www.youtube.com/channel/UCJulQspTGCpaDdx2wKYfFvQ"
+
+[[params.ananke_socials]]
+name = "facebook"
+url = "https://www.facebook.com/JacksonHeightsOrchestra"
+
+[[params.ananke_socials]]
+name = "twitter"
+url = "https://twitter.com/GoHugoIO"
+
