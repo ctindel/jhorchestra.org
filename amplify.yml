@@ -1,6 +1,15 @@
-version: 1
+version: 2
 frontend:
   phases:
+    # See this issue about needing to over ride the hugo version for extended support
+    # https://github.com/aws-amplify/amplify-hosting/issues/884
+    preBuild:
+      commands:
+        - wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_extended_0.111.3_Linux-64bit.tar.gz
+        - tar -xf hugo_extended_0.111.3_Linux-64bit.tar.gz hugo
+        - mv hugo /usr/bin/hugo
+        - rm -rf hugo_extended_0.111.3_Linux-64bit.tar.gz
+        - hugo version
     build:
       commands:
         #- git submodule update --init --recursive --depth 1
