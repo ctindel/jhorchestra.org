@@ -18,32 +18,11 @@ Copyright = "Jackson Heights Orchestra"
     contentDir = "content/en"
     # languageDirection = 'rtl' for Right-To-Left languages
 
+# Is this necessary?
 [sitemap]
   changefreq = "monthly"
   priority = 0.5
   filename = "sitemap.xml"
-
-## We list everything here EXCEPT Donate, because we set the menu
-##  item only in the donate.md so it is put on the navbar last
-#[[Menu.Main]]
-#    name = "About"
-#    identifier = "about"
-#    url = "/about"
-#
-#[[Menu.Main]]
-#    name = "Contact"
-#    identifier = "contact"
-#    url = "/contact"
-#
-#[[Menu.Main]]
-#    name = "Media"
-#    identifier = "media"
-#    url = "/media"
-#
-#[[Menu.Main]]
-#    name = "Schedule"
-#    identifier = "schedule"
-#    url = "/schedule"
 
 [params]
   text_color = ""
