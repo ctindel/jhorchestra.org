@@ -4,11 +4,8 @@ frontend:
     build:
       commands:
         #- git submodule update --init --recursive --depth 1
-        - git clone https://github.com/mattstratton/castanet themes/castanet
+        - git clone https://github.com/theNewDynamic/gohugo-theme-ananke themes/ananke
         - hugo
-        - yum install -y libxslt
-        - curl -o /tmp/anchor_rss.xml 'https://anchor.fm/s/554c0a2c/podcast/rss'
-        - xsltproc anchor-podtrac-rss-transform.xsl /tmp/anchor_rss.xml > public/anchor_podtrac_rss.xml
   artifacts:
     baseDirectory: public
     files:
