@@ -10,11 +10,21 @@ menu:
 
 ---
 
-**May 17, 2023:**
+**May 17, 2023 , 7pm @ St Mark's Episcopal Church**
+
+Date: May 17, 2023
+
+Time: 7pm Eastern
+
+Location: St. Mark’s Episcopal Church
+
+Address: 33-50 82nd Street, Jackson Heights, NY 11372
+
+Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
+
+**Program:**
 
 Sibelius - Karelia Overture
-
-Jacob - Sinfonietta No. 1
 
 Fauré - Masques et bergam.
 
@@ -26,8 +36,15 @@ Debussy - Reverie
 
 Selections TBD
 
-**December 13th, 2023:** Bach Double with Susan Metcalf and Ali Kang
+**December 13th, 2023:** 
 
-**March 13th, 2024:**  Mozart Symphony Concertante with Andrew Sord and his cousin Dudley. Andrew played the Sibelius with us in 2019
+Selections TBD
 
-**May 15th, 2024:**  with the one and only Sherrie Maricle and her jazz ensemble. 
+**March 13th, 2024:**
+
+Selections TBD
+
+**May 15th, 2024:**  
+
+Selections TBD
+

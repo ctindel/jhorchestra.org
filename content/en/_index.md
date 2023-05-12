@@ -6,4 +6,4 @@ theme_version: '2.8.2'
 cascade:
   featured_image: '/images/JHO_Audience.jpg'
 ---
-Insert our Mission Statement?
+The Premiere Orchestra in Jackson Heights, Queens

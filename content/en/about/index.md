@@ -7,6 +7,10 @@ menu:
     weight: 1
 ---
 
-We are the premiere orchestra in Jackson Heights, Queens.
+**About the JHO**
 
-Insert our mission statement here
+The Jackson Heights Orchestra (JHO) was established in 2012 by founding Music Director Patricia Glunt in collaboration with the Jackson Heights Beautification Group (JHBG). During her tenure, Glunt grew the ensemble to be one of the premiere orchestras of Queens. After her retirement in 2023, [Insert something here about the next music director]. The JHO is proud to be sponsored by the JHBG and to serve the Jackson Heights community. Visit jhorchestra.org to learn more. 
+
+**Our Mission**
+
+The Jackson Heights Orchestra (JHO) is dedicated to enriching and elevating the dynamic cultural landscape of the Jackson Heights community through its live performances. Our ensemble is composed of musicians from diverse backgrounds, united by a shared passion for music-making. We are committed to providing an inclusive and supportive environment where our musicians can hone their skills, collaborate, and continue their artistic journey.
