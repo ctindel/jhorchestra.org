@@ -6,7 +6,7 @@ description: Donate!
 type: page
 menu:
   main:
-    weight: 5
+    weight: 6
     pre: <i class="fa-solid fa-code"></i>
 
 ---
