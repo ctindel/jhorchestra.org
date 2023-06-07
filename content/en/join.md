@@ -27,9 +27,7 @@ Currently, we are specifically looking for musicians who play string bass, basso
 If you are a local player and would like to be considered for membership in the
 JHO, please [fill out this google form](https://forms.gle/MbvvevQJM4ubKcUQA).
 
-If you have trouble filling out the google form, please email
-[mailto:jho-personnel@gaggle.email](jho-personnel@gaggle.email) with the
-following information:
+If you have trouble filling out the google form, please email jho-personnel@gaggle.email with the following information:
 
 1. Name
 2. Email
