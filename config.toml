@@ -35,13 +35,17 @@ Copyright = "Jackson Heights Orchestra"
   recent_posts_number = 3
 
 [[params.ananke_socials]]
-name = "youtube"
-url = "https://www.youtube.com/channel/UCJulQspTGCpaDdx2wKYfFvQ"
-
-[[params.ananke_socials]]
 name = "facebook"
 url = "https://www.facebook.com/JacksonHeightsOrchestra"
 
 [[params.ananke_socials]]
+name = "instagram"
+url = "https://www.instagram.com/jhorchestra/"
+
+[[params.ananke_socials]]
 name = "twitter"
 url = "https://twitter.com/jhorchestra"
+
+[[params.ananke_socials]]
+name = "youtube"
+url = "https://www.youtube.com/channel/UCJulQspTGCpaDdx2wKYfFvQ"
