@@ -10,31 +10,30 @@ menu:
 
 ---
 
-**May 17, 2023 , 7pm @ St Mark's Episcopal Church**
-
-Date: May 17, 2023
-
-Time: 7pm Eastern
-
-Location: St. Mark’s Episcopal Church
-
-Address: 33-50 82nd Street, Jackson Heights, NY 11372
-
-Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
-
-**Program:**
-
-Sibelius - Karelia Overture
-
-Fauré - Masques et bergam.
-
-Debussy - Claire de Lune
-
-Debussy - Reverie
-
 **July 2, 2023**
 
-Selections TBD
+Time: 6pm Eastern
+
+Location: Travers Park
+
+Address: 76-9 34th Avenue, Jackson Heights, NY 11372
+
+Google Maps Link: https://goo.gl/maps/aGvduPAn7d2PXcZZ9
+
+Program:
+
+1. Star Spangled Banner
+2. Prince of Egypt
+3. Penny Whistle
+4. Satchmo
+5. Lightly Latin
+6. Beatles
+7. Colonel Bogey
+8. Greatest Showman
+9. America the Beautiful
+10. Empire Strikes Back
+11. Stars and Stripes
+12. Born This Way
 
 **December 13th, 2023:** 
 
