@@ -10,40 +10,37 @@ menu:
 
 ---
 
-**July 2, 2023**
+**Tuesday, December 12th, 2023:** 
 
-Time: 6pm Eastern
+Time: 7pm Eastern
 
-Location: Travers Park
+Location: St. Mark’s Episcopal Church
 
-Address: 76-9 34th Avenue, Jackson Heights, NY 11372
+Address: 33-50 82nd Street, Jackson Heights, NY 11372
 
-Google Maps Link: https://goo.gl/maps/aGvduPAn7d2PXcZZ9
+Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
 
 Program:
 
-1. Star Spangled Banner
-2. Prince of Egypt
-3. Penny Whistle
-4. Satchmo
-5. Lightly Latin
-6. Beatles
-7. Colonel Bogey
-8. Greatest Showman
-9. America the Beautiful
-10. Empire Strikes Back
-11. Stars and Stripes
-12. Born This Way
+1. Bach: Jesu, Joy of Man's Desiring
+2. Saint-Saens: IV. March Militaire Française from Suite l'Algérienne, op. 60
+3. Bach: Concerto no. 3 for Two Violins in D minor, BWV 1043
+4. Glazunov: Prelude, Winter from The Seasons (Die Jahreszeit)
+5. Strauss: Pizzicato Polka
+6. Bizet: IV. Farandole from l'Arlesienne Suite no. 2
+7. Tchaikovsky: Selections from "The Nutcracker"
+8. Coleridge-Taylor: Christmas Overture
+9. Vaughan Williams (/ arr. Greaves): Fantasia on Greensleeves
+10. arr. Hayman: Carol of the Bells
+11. arr. Custer: Hanukkah Festival Overture
+12. Handel: Messiah: Hallelujah Chorus
+13. Anderson: Sleigh Ride
 
-**December 13th, 2023:** 
-
-Selections TBD
-
-**March 13th, 2024:**
+**Wednesday, March 13th, 2024:**
 
 Selections TBD
 
-**May 15th, 2024:**  
+**Wednesday, May 15th, 2024:**  
 
 Selections TBD
 
