@@ -9,7 +9,7 @@ menu:
 
 **About the JHO**
 
-The Jackson Heights Orchestra (JHO) was established in 2012 by founding Music Director Patricia Glunt in collaboration with the Jackson Heights Beautification Group (JHBG). During her tenure, Glunt grew the ensemble to be one of the premiere orchestras of Queens. The JHO is proud to be sponsored by the JHBG and to serve the Jackson Heights community. Visit jhorchestra.org to learn more. 
+The Jackson Heights Orchestra (JHO) was established in 2012 by founding Music Director Patricia Glunt in collaboration with the Jackson Heights Beautification Group (JHBG). During her tenure from 2012 to 2023, Glunt grew the ensemble to be one of the premiere orchestras of Queens. The JHO is proud to be a program of the JHBG and to serve the Jackson Heights community. Visit https://jhorchestra.org to learn more. 
 
 **Our Mission**
 
