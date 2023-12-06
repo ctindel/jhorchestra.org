@@ -22,19 +22,18 @@ Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
 
 Program:
 
-1. Bach: Jesu, Joy of Man's Desiring
-2. Saint-Saens: IV. March Militaire Française from Suite l'Algérienne, op. 60
-3. Bach: Concerto no. 3 for Two Violins in D minor, BWV 1043
-4. Glazunov: Prelude, Winter from The Seasons (Die Jahreszeit)
-5. Strauss: Pizzicato Polka
-6. Bizet: IV. Farandole from l'Arlesienne Suite no. 2
-7. Tchaikovsky: Selections from "The Nutcracker"
-8. Coleridge-Taylor: Christmas Overture
-9. Vaughan Williams (/ arr. Greaves): Fantasia on Greensleeves
-10. arr. Hayman: Carol of the Bells
-11. arr. Custer: Hanukkah Festival Overture
-12. Handel: Messiah: Hallelujah Chorus
-13. Anderson: Sleigh Ride
+1. Saint-Saens: IV. March Militaire Française from Suite l'Algérienne, op. 60
+2. Bach: Concerto no. 3 for Two Violins in D minor, BWV 1043
+3. Glazunov: Prelude, Winter from The Seasons (Die Jahreszeit)
+4. Strauss: Pizzicato Polka
+5. Bizet: IV. Farandole from l'Arlesienne Suite no. 2
+6. Tchaikovsky: Selections from "The Nutcracker"
+7. Coleridge-Taylor: Christmas Overture
+8. Vaughan Williams (/ arr. Greaves): Fantasia on Greensleeves
+9. arr. Hayman: Carol of the Bells
+10. arr. Custer: Hanukkah Festival Overture
+11. Handel: Messiah: Hallelujah Chorus
+12. Anderson: Sleigh Ride
 
 **Wednesday, March 13th, 2024:**
 
