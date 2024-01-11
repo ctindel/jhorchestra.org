@@ -10,9 +10,9 @@ menu:
 
 ---
 
-**Tuesday, December 12th, 2023:** 
+## Wednesday, March 13th, 2024:
 
-Time: 7pm Eastern
+Time: 7:30pm Eastern
 
 Location: St. Mark’s Episcopal Church
 
@@ -20,26 +20,31 @@ Address: 33-50 82nd Street, Jackson Heights, NY 11372
 
 Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
 
-Program:
+### Program:
 
-1. Saint-Saens: IV. March Militaire Française from Suite l'Algérienne, op. 60
-2. Bach: Concerto no. 3 for Two Violins in D minor, BWV 1043
-3. Glazunov: Prelude, Winter from The Seasons (Die Jahreszeit)
-4. Strauss: Pizzicato Polka
-5. Bizet: IV. Farandole from l'Arlesienne Suite no. 2
-6. Tchaikovsky: Selections from "The Nutcracker"
-7. Coleridge-Taylor: Christmas Overture
-8. Vaughan Williams (/ arr. Greaves): Fantasia on Greensleeves
-9. arr. Hayman: Carol of the Bells
-10. arr. Custer: Hanukkah Festival Overture
-11. Handel: Messiah: Hallelujah Chorus
-12. Anderson: Sleigh Ride
+**A journey through the lineage of an American music tradition**
 
-**Wednesday, March 13th, 2024:**
+1. Copland: Fanfare for the Common Man
+2. Ellington: Selections
+3. Burleigh: Three Spirituals
+4. Dvorak: Biblical Songs
+5. Dvorak: Symphony No. 8
 
-Selections TBD
+## Wednesday, May 15th, 2024:
 
-**Wednesday, May 15th, 2024:**  
+Time: 7:30pm Eastern
 
-Selections TBD
+Location: St. Mark’s Episcopal Church
 
+Address: 33-50 82nd Street, Jackson Heights, NY 11372
+
+Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
+
+### Program:
+
+**An enchanting journey of mesmerizing magic & tales**
+
+1. De Falla: Ritual Fire Dance from El Amor Brujo
+2. Ravel: Mother Goose Suite Selections
+3. Mozart: Clarinet Concerto
+4. Elgar: Enigma Variations
