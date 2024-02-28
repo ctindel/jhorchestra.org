@@ -22,7 +22,7 @@ If you are a local player and would like to be considered for membership in the 
 
 Are you interested in joining the Jackson Heights Orchestra? We are looking to fill out our roster of instruments for all the repertoire we hope to play. But, we are also looking to build our list of available substitutes players as well.
 
-Currently, we are specifically looking for musicians who play string bass, bassoon, French horn, oboe/English horn, trombone, bass trombone, tuba, percussion, piano, electric bass and guitar.
+Currently, we are specifically looking for musicians who play cello, viola, bassoon, French horn, trombone, tuba, and percussion.
 
 If you are a local player and would like to be considered for membership in the
 JHO, please [fill out this google form](https://forms.gle/MbvvevQJM4ubKcUQA).
