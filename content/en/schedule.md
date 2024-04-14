@@ -10,26 +10,6 @@ menu:
 
 ---
 
-## Wednesday, March 13th, 2024:
-
-Time: 7:30pm Eastern
-
-Location: St. Mark’s Episcopal Church
-
-Address: 33-50 82nd Street, Jackson Heights, NY 11372
-
-Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
-
-### Program:
-
-**A journey through the lineage of an American music tradition**
-
-1. Copland: Fanfare for the Common Man
-2. Ellington: Selections
-3. Burleigh: Three Spirituals
-4. Dvorak: Biblical Songs
-5. Dvorak: Symphony No. 8
-
 ## Wednesday, May 15th, 2024:
 
 Time: 7:30pm Eastern
