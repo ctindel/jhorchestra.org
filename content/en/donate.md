@@ -16,7 +16,7 @@ Group](https://www.jhbg.org/), a registered 501(c)(3) non-profit, all donations
 to the Jackson Heights Orchestra are tax deductible.
 
 We rely on contributions from listeners and supporters like you. Please donate
-using the Paypal Button below:
+using the Paypal Button below or by scanning the QR code:
 
 {{< rawhtml >}}
 <form action="https://www.paypal.com/donate" method="post" target="_top">
@@ -26,3 +26,4 @@ using the Paypal Button below:
 </form>
 {{< /rawhtml >}}
 
+![Image Poster](/images/JHO_Paypal_Donate_QR_Code.png)
