@@ -10,21 +10,16 @@ menu:
 
 ---
 
-## Wednesday, May 15th, 2024:
+## Sunday, July 7th, 2024:
 
-Time: 7:30pm Eastern
+Time: 6:00pm Eastern
 
-Location: St. Mark’s Episcopal Church
+Location: Travers Park
 
-Address: 33-50 82nd Street, Jackson Heights, NY 11372
+Address: 76-09 34th Avenue, Jackson Heights, NY 11372
 
-Google Maps Link: https://goo.gl/maps/CdeCWFjU5Go6rAFk6
+Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
 
 ### Program:
 
-**An enchanting journey of mesmerizing magic & tales**
-
-1. De Falla: Ritual Fire Dance from El Amor Brujo
-2. Ravel: Mother Goose Suite Selections
-3. Mozart: Clarinet Concerto
-4. Elgar: Enigma Variations
+**Join us for a festive outdoor concert of pops classics, iconic movie soundtracks, and everything in between!**
