@@ -10,6 +10,10 @@ menu:
 
 ---
 
+**[JHBG Views from the Heights, Summer 2024](https://www.jhbg.org/wp-content/uploads/2024/05/JHBG-Summer2024-ONLINE.pdf)**
+![Image](/images/2024/JHBG_Heights_May_2024.png)
+
+
 **JHBG Podcast Episode 4: May 15th, 2024 Concert Details with Alex Wen, Interim Artistic Director**
 {{< youtube LmRqt97RHx8 >}}
 
