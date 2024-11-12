@@ -9,6 +9,7 @@ frontend:
         - tar -xf hugo_extended_0.137.1_Linux-64bit.tar.gz hugo
         - mv hugo /usr/bin/hugo
         - rm -rf hugo_extended_0.137.1_Linux-64bit.tar.gz
+        - which hugo
         - hugo version
     build:
       commands:
