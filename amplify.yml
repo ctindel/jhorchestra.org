@@ -11,12 +11,13 @@ frontend:
         - rm -rf hugo_extended_0.137.1_Linux-64bit.tar.gz
         - which hugo
         - hugo version
+        - /usr/bin/hugo version
     build:
       commands:
         #- git submodule update --init --recursive --depth 1
         - git clone https://github.com/theNewDynamic/gohugo-theme-ananke themes/ananke
-        - hugo mod graph
-        - hugo
+        - /usr/bin/hugo mod graph
+        - /usr/bin/hugo
   artifacts:
     baseDirectory: public
     files:
