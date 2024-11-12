@@ -5,10 +5,10 @@ frontend:
     # https://github.com/aws-amplify/amplify-hosting/issues/884
     preBuild:
       commands:
-        - wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_extended_0.111.3_Linux-64bit.tar.gz
-        - tar -xf hugo_extended_0.111.3_Linux-64bit.tar.gz hugo
-        - mv hugo /usr/bin/hugo
-        - rm -rf hugo_extended_0.111.3_Linux-64bit.tar.gz
+        #- wget https://github.com/gohugoio/hugo/releases/download/v0.111.3/hugo_extended_0.111.3_Linux-64bit.tar.gz
+        #- tar -xf hugo_extended_0.111.3_Linux-64bit.tar.gz hugo
+        #- mv hugo /usr/bin/hugo
+        #- rm -rf hugo_extended_0.111.3_Linux-64bit.tar.gz
         - hugo version
     build:
       commands:
