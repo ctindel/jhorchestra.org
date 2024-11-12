@@ -10,16 +10,18 @@ menu:
 
 ---
 
-## Sunday, July 7th, 2024:
+## Wednesday, December 11th, 2024:
 
-Time: 6:00pm Eastern
+Time: 7:30pm Eastern
 
-Location: Travers Park
+Location: Trinity Lutheran Church
 
-Address: 76-09 34th Avenue, Jackson Heights, NY 11372
+Address: 31-18 37th Street, Astoria, NY 11103
 
-Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
+Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
 
 ### Program:
 
-**Join us for a festive outdoor concert of pops classics, iconic movie soundtracks, and everything in between!**
+1. Smetana, Ma Vlast: No. 2 Moldau
+2. Vaughan Williams: On Wenlock Edge
+3. Beethoven: Symphony No. 5

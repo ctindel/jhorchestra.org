@@ -15,11 +15,11 @@ The Jackson Heights Orchestra (JHO) was established in 2012 by founding Music Di
 
 The Jackson Heights Orchestra (JHO) is dedicated to enriching and elevating the dynamic cultural landscape of the Jackson Heights community through its live performances. Our ensemble is composed of musicians from diverse backgrounds, united by a shared passion for music-making. We are committed to providing an inclusive and supportive environment where our musicians can hone their skills, collaborate, and continue their artistic journey.
 
-**Alex Wen, Interim Artistic Director (2023-2024)**
+**Alex Wen, Artistic Director (2023-)**
 
 ![Alex Wen Headshot](/images/alexwen.jpg)
 
-Alex Wen, newly appointed as Interim Artistic Director of the Jackson Heights Orchestra, most recently served as assistant conductor of the Massapequa Philharmonic and the Park Avenue Chamber Symphony under the mentorship of Maestro David Bernard, and concluded five seasons as Principal Conductor of the Golden Rose Opera. He has worked with contemporary music groups such as PinkNoise Ensemble and the NYsoundCircuit as their appointed music director. An avid opera conductor, Alex has led performances of La Bohème, Carmen, Suor Angelica, Cavalleria Rusticana, and Madama Butterfly with the Golden Rose Opera, and led the New York premieres of Huang Ruo’s Bound with Fresh Squeezed Opera in 2019 and Eric Moe's Artwork of the Future this spring of 2023.
+Alex Wen, newly appointed as Artistic Director of the Jackson Heights Orchestra, most recently served as assistant conductor of the Massapequa Philharmonic and the Park Avenue Chamber Symphony under the mentorship of Maestro David Bernard, and concluded five seasons as Principal Conductor of the Golden Rose Opera. He has worked with contemporary music groups such as PinkNoise Ensemble and the NYsoundCircuit as their appointed music director. An avid opera conductor, Alex has led performances of La Bohème, Carmen, Suor Angelica, Cavalleria Rusticana, and Madama Butterfly with the Golden Rose Opera, and led the New York premieres of Huang Ruo’s Bound with Fresh Squeezed Opera in 2019 and Eric Moe's Artwork of the Future this spring of 2023.
 
 Alex has conducted performances with Rhymes With Opera, the Queens College Orchestra, Queens College Opera, Litha Symphony Orchestra, and has cover conducted for the Queer Urban Orchestra and Yonkers Philharmonic. Recent engagements also include performances with the Sound Symphony Orchestra and guest clinician and conductor for the All-County Festival Orchestra of the National Music Educators Association (NMEA), with regular guest conducting appearances with the New Amsterdam Symphony Orchestra.
 
