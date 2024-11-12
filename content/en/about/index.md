@@ -15,7 +15,7 @@ The Jackson Heights Orchestra (JHO) was established in 2012 by founding Music Di
 
 The Jackson Heights Orchestra (JHO) is dedicated to enriching and elevating the dynamic cultural landscape of the Jackson Heights community through its live performances. Our ensemble is composed of musicians from diverse backgrounds, united by a shared passion for music-making. We are committed to providing an inclusive and supportive environment where our musicians can hone their skills, collaborate, and continue their artistic journey.
 
-**Alex Wen, Artistic Director (2023-)**
+**Alex Wen, Artistic Director (2023 - Present)**
 
 ![Alex Wen Headshot](/images/alexwen.jpg)
 
