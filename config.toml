@@ -34,18 +34,31 @@ Copyright = "Jackson Heights Orchestra"
   background_color_class = "bg-black"
   recent_posts_number = 3
 
-[[params.ananke_socials]]
-name = "facebook"
-url = "https://www.facebook.com/JacksonHeightsOrchestra"
+[params.ananke.social.share]
+networks = [
+  "youtube",
+  "facebook",
+  "instagram",
+  "twitter",
+]
 
-[[params.ananke_socials]]
-name = "instagram"
-url = "https://www.instagram.com/jhorchestra/"
+[params.ananke.social.follow]
+networks = [
+  "youtube",
+  "facebook",
+  "instagram",
+  "twitter",
+]
 
-[[params.ananke_socials]]
-name = "twitter"
-url = "https://twitter.com/jhorchestra"
+[params.ananke.social.youtube]
+username = "JacksonHeightsOrchestra"
+profilelink = "https://www.youtube.com/channel/UCJulQspTGCpaDdx2wKYfFvQ"
 
-[[params.ananke_socials]]
-name = "youtube"
-url = "https://www.youtube.com/channel/UCJulQspTGCpaDdx2wKYfFvQ"
+[params.ananke.social.facebook]
+username = "JacksonHeightsOrchestra"
+
+[params.ananke.social.instagram]
+username = "jhorchestra"
+
+[params.ananke.social.twitter]
+username = "jhorchestra"
