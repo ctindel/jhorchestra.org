@@ -10,18 +10,18 @@ menu:
 
 ---
 
-## Wednesday, December 11th, 2024:
+## Wednesday, March 19, 2025
 
 Time: 7:30pm Eastern
 
-Location: Trinity Lutheran Church
+Location: Lexington School (Parking Lot is available)
 
-Address: 31-18 37th Street, Astoria, NY 11103
+Address: 25-26 75th Street, East Elmhurst NY 11370
 
-Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
+Google Maps Link: https://maps.app.goo.gl/fSMGyQ4xwgdvCaBN7
 
 ### Program:
 
-1. Smetana, Ma Vlast: No. 2 Moldau
-2. Vaughan Williams: On Wenlock Edge
-3. Beethoven: Symphony No. 5
+1. Boulanger: *D’un matin de printemps*
+2. Bolling: *selections from "Toot Suite"* featuring Julia Cohen on trumpet
+3. Schumann: *Symphony No. 1 in B-flat major, Op. 38* (AKA the **Spring Symphony**)
