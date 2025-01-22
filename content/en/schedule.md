@@ -10,7 +10,7 @@ menu:
 
 ---
 
-## Wednesday, March 19, 2025
+## Wednesday, March 19th, 2025
 
 Time: 7:30pm Eastern
 
