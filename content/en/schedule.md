@@ -25,3 +25,19 @@ Google Maps Link: https://maps.app.goo.gl/fSMGyQ4xwgdvCaBN7
 1. Boulanger: *D’un matin de printemps*
 2. Bolling: *selections from "Toot Suite"* featuring Julia Cohen on trumpet
 3. Schumann: *Symphony No. 1 in B-flat major, Op. 38* (AKA the **Spring Symphony**)
+
+## Wednesday, May 21, 2025
+
+Time: 7:30pm Eastern
+
+Location: Trinity Lutheran Church
+
+Address: 31-18 37th Street, Astoria, NY 11103
+
+Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
+
+### Program:
+
+1. Marquez: Conga del fuego nuevo
+2. Brahms: Variations on a Theme by Haydn
+3. Beach, Symphony in E-minor - "Gaelic"
