@@ -24,4 +24,4 @@ Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
 
 1. Marquez: Conga del fuego nuevo
 2. Brahms: Variations on a Theme by Haydn
-3. Beach, Symphony in E-minor - "Gaelic"
+3. Beach: Symphony in E-minor - "Gaelic"
