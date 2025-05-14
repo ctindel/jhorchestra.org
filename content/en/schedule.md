@@ -25,3 +25,18 @@ Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
 1. Marquez: Conga del fuego nuevo
 2. Brahms: Variations on a Theme by Haydn
 3. Beach: Symphony in E-minor - "Gaelic"
+
+## Sunday, July 6th, 2025:
+
+Time: 6:00pm Eastern
+
+Location: Travers Park
+
+Address: 76-09 34th Avenue, Jackson Heights, NY 11372
+
+Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
+
+### Program:
+
+**Join us for a festive outdoor concert of pops classics, iconic movie
+soundtracks, and everything in between!**
