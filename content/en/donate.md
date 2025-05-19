@@ -45,6 +45,8 @@ PayPal or Venmo QR codes. You can also donate via check to the Jackson Heights B
 
 **Donate via Venmo [\(@jhbg-donate\)](https://venmo.com/u/jhbg-donate):**
 
+Please note "For JHO" in the payment information
+
 {{< rawhtml >}}
 <img src="/images/JHBG_Venmo_Donate_QR_Code.png" width="256" height="256" />
 {{< /rawhtml >}}
