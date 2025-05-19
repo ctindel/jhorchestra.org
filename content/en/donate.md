@@ -28,10 +28,10 @@ reminder of the music and its story.
 6. **Orchestra Insider - $5,000** Delve deep into the orchestra's world with this tier. You and a guest will be invited to join us for a special dinner with the conductor and select members of the orchestra, where you'll get to chat about music, our journey, and the future of Jackson Heights Orchestra. All previous rewards included.
 7. **Symphony Sponsor - $10,000** Sponsor a concert! Your name or business will be prominently featured as a main sponsor for one of our concerts. You will receive accolades during the concert's opening and will also be presented with a special plaque of appreciation. Includes all previous rewards.
 
-For online donations, please use the Paypal Button below or by scanning the QR
-code. You can also donate via check to the Jackson Heights Beautification Group,
-P.O. Box 720253, Jackson Heights, NY 11372 or email pr@jhorchestra.org to ask
-about other donation methods.
+For online donations, please use the PayPal Button below or by scanning the
+PayPal or Venmo QR codes. You can also donate via check to the Jackson Heights Beautification Group, P.O. Box 720253, Jackson Heights, NY 11372 or email pr@jhorchestra.org to ask about other donation methods.
+
+**Donate via PayPal:**
 
 {{< rawhtml >}}
 <form action="https://www.paypal.com/donate" method="post" target="_top">
@@ -42,3 +42,9 @@ about other donation methods.
 {{< /rawhtml >}}
 
 ![Image Poster](/images/JHO_Paypal_Donate_QR_Code.png)
+
+**Donate via Venmo [\(@jhbg-donate\)](https://venmo.com/u/jhbg-donate):**
+
+{{< rawhtml >}}
+<img src="/images/JHBG_Venmo_Donate_QR_Code.png" width="256" height="256" />
+{{< /rawhtml >}}
