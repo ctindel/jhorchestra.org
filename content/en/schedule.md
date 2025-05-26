@@ -10,21 +10,7 @@ menu:
 
 ---
 
-## Wednesday, May 21, 2025
-
-Time: 7:30pm Eastern
-
-Location: Trinity Lutheran Church
-
-Address: 31-18 37th Street, Astoria, NY 11103
-
-Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
-
-### Program:
-
-1. Marquez: Conga del fuego nuevo
-2. Brahms: Variations on a Theme by Haydn
-3. Beach: Symphony in E-minor - "Gaelic"
+# Next Concert
 
 ## Sunday, July 6th, 2025:
 
@@ -40,3 +26,13 @@ Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
 
 **Join us for a festive outdoor concert of pops classics, iconic movie
 soundtracks, and everything in between!**
+
+# Future Concert Dates
+
+## Wednesday, December 10, 2025, 7:30pm
+
+## Wednesday, March 18, 2026, 7:30pm
+
+## Wednesday, May 20, 2026, 7:30pm
+
+## Sunday, July 5, 2026, 6pm
