@@ -10,6 +10,9 @@ menu:
 
 ---
 
+**[JHBG Views from the Heights, Summer 2025](https://www.jhbg.org/wp-content/uploads/2025/05/JHBG-Summer2025-DigitalVersion.pdf)**
+[![Image](/images/2025/JHBG_Heights_May_2025.png)](https://www.jhbg.org/wp-content/uploads/2025/05/JHBG-Summer2025-DigitalVersion.pdf)
+
 **Alex Wen & The Jackson Heights Orchestra, May 15, 2024**
 {{< youtube wUsMhZ1ZFs8 >}}
 

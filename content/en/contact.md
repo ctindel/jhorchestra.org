@@ -10,7 +10,6 @@ menu:
 
 ---
 
-<!--
 **Email**:
 For general inquiries, please email us at:
 [info@jhorchestra.org](mailto:info@jhorchestra.org)
@@ -18,8 +17,6 @@ For general inquiries, please email us at:
 **Auditions**:
 If you are a local player and would like to be considered for membership in the JHO, please email our personnel manager at:
 [personnel@jhorchestra.org](mailto:personnel@jhorchestra.org)
--->
 
-We invite you to follow us on Twitter
-[@jhorchestra](https://twitter.com/jhorchestra) or Facebook [JacksonHeightsOrchestra](https://www.facebook.com/JacksonHeightsOrchestra) to keep up with our latest news.
+We invite you to follow us on Twitter [@jhorchestra](https://twitter.com/jhorchestra), Facebook [JacksonHeightsOrchestra](https://www.facebook.com/JacksonHeightsOrchestra), or Instagram [@jhorchestra](https://instagram.com/jhorchestra)  to keep up with our latest news.
 

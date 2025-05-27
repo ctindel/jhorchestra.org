@@ -10,16 +10,6 @@ menu:
 
 ---
 
-<!--
-**Email**:
-For general inquiries, please email us at:
-[info@jhorchestra.org](mailto:info@jhorchestra.org)
-
-**Auditions**:
-If you are a local player and would like to be considered for membership in the JHO, please email our personnel manager at:
-[personnel@jhorchestra.org](mailto:personnel@jhorchestra.org)
--->
-
 Are you interested in joining the Jackson Heights Orchestra? We are looking to fill out our roster of instruments for all the repertoire we hope to play. But, we are also looking to build our list of available substitutes players as well.
 
 Currently, we are specifically looking for musicians who play cello, viola, bassoon, French horn, trombone, tuba, and percussion.
@@ -27,7 +17,7 @@ Currently, we are specifically looking for musicians who play cello, viola, bass
 If you are a local player and would like to be considered for membership in the
 JHO, please [fill out this google form](https://forms.gle/MbvvevQJM4ubKcUQA).
 
-If you have trouble filling out the google form, please email jho-personnel@gaggle.email with the following information:
+If you have trouble filling out the google form, please email [personnel@jhorchestra.org](mailto:personnel@jhorchestra.org) with the following information:
 
 1. Name
 2. Email
