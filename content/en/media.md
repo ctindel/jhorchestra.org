@@ -16,7 +16,7 @@ menu:
 **Alex Wen & The Jackson Heights Orchestra, May 15, 2024**
 {{< youtube wUsMhZ1ZFs8 >}}
 
-[Sound Engineer Blogpost about recording the JHO in surround sound](https://www.extralarge.nyc/jho)
+[Sound Engineer Blogpost about recording the JHO in surround sound](https://www.extralarge.nyc/writings/2024/6/11/from-stereo-to-immersive-a-case-study-in-modern-orchestral-recording)
 
 [May 15, 2024 Binaural Immersive ATMOS Recording files for Download](https://drive.google.com/drive/folders/1hKwguWRi9amnl9GENufPBbaBsoqfmkYK?usp=sharing)
 
