@@ -16,6 +16,8 @@ menu:
 **Alex Wen & The Jackson Heights Orchestra, May 15, 2024**
 {{< youtube wUsMhZ1ZFs8 >}}
 
+[Sound Engineer Blogpost about recording the JHO in surround sound](https://www.extralarge.nyc/jho)
+
 [May 15, 2024 Binaural Immersive ATMOS Recording files for Download](https://drive.google.com/drive/folders/1hKwguWRi9amnl9GENufPBbaBsoqfmkYK?usp=sharing)
 
 **JHBG Podcast Episode 6: March 19th, 2025 Concert Details with Alex Wen, Interim Artistic Director and Alice Petre, Arranger/Orchestrator**
