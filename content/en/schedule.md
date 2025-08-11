@@ -12,24 +12,31 @@ menu:
 
 # Next Concert
 
-## Sunday, July 6th, 2025:
+## Wednesday, Dec 10th, 2025:
 
-Time: 6:00pm Eastern
+Time: 7:30pm Eastern
 
-Location: Travers Park
+Location: Lexington School
 
-Address: 76-09 34th Avenue, Jackson Heights, NY 11372
+Address: 25-26 75th St, East Elmhurst, NY 11370
 
-Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
+Google Maps Link: https://maps.app.goo.gl/HyTNUsVinfUBiEvV7
 
 ### Program:
 
-**Join us for a festive outdoor concert of pops classics, iconic movie
-soundtracks, and everything in between!**
+**An evening of beloved Masterworks and holiday classics!**
+
+Haydn: Symphony No. 26 in D-minor
+
+Tchaikovsky: “Winter Dreams” from Symphony No. 1
+
+Handel: “Hallelujah” Chorus
+
+“Christmas at the Movies” medley
+
+... and more!
 
 # Future Concert Dates
-
-## Wednesday, December 10, 2025, 7:30pm
 
 ## Wednesday, March 18, 2026, 7:30pm
 
