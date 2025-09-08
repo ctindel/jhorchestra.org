@@ -25,4 +25,4 @@ If you have trouble filling out the google form, please email [personnel@jhorche
 4. Where do you live? We don't need your address, just City/Borough/Neighborhood.
 5. What instrument(s) do you play? (If you have instruments in multiple keys, please be specific)
 6. Musical Background. Please include any music education, number of years playing instrument, personal instrument practice habits/routines; current playing opportunities, and any other relevant information.
-7. Website or link to playing sample (youtube, google drive, etc)
+7. Website or link to video sample of your playing (youtube, google drive, etc).
