@@ -15,7 +15,7 @@ Are you interested in joining the Jackson Heights Orchestra? We are looking to f
 Currently, we are specifically looking for musicians who play cello, viola, bassoon, French horn, trombone, tuba, and percussion.
 
 If you are a local player and would like to be considered for membership in the
-JHO, please [fill out this google form](https://forms.gle/MbvvevQJM4ubKcUQA).
+JHO, please [fill out this google form](https://forms.gle/rUB248pe1DPohw7s8).
 
 If you have trouble filling out the google form, please email [personnel@jhorchestra.org](mailto:personnel@jhorchestra.org) with the following information:
 
