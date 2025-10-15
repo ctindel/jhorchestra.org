@@ -14,6 +14,11 @@ As a subsidiary of the [Jackson Heights Beautification
 Group](https://www.jhbg.org/), a registered 501(c)(3) non-profit, all donations
 to the Jackson Heights Orchestra are tax deductible.
 
+To help sponsor our upcoming December 2025 concert:
+{{< rawhtml >}}
+<script src='https://donorbox.org/widgets.js?language=en-us' type='module' async='async' defer='defer'></script><dbox-widget id='embed-widget' type='event' campaign='816706'></dbox-widget>
+{{< /rawhtml >}}
+
 Jackson Heights Orchestra concerts are made possible only with donations from
 audience and community members. While no donation is too small, we do offer the
 following fundraising levels and associated benefits:

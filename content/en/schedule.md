@@ -22,6 +22,8 @@ Address: 25-26 75th St, East Elmhurst, NY 11370
 
 Google Maps Link: https://maps.app.goo.gl/HyTNUsVinfUBiEvV7
 
+Donations and Sponsorships: https://donorbox.org/events/816706
+
 ### Program:
 
 **An evening of beloved Masterworks and holiday classics!**
