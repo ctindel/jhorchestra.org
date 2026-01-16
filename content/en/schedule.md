@@ -12,35 +12,23 @@ menu:
 
 # Next Concert
 
-## Wednesday, Dec 10th, 2025:
+## Wednesday, March 18, 2026, 7:30pm
 
 Time: 7:30pm Eastern
 
-Location: Lexington School
+Location: Our Lady Queen of Martyrs
 
-Address: 25-26 75th St, East Elmhurst, NY 11370
+Address: 110-06 Queens Blvd, Forest Hills, NY 11375
 
-Google Maps Link: https://maps.app.goo.gl/HyTNUsVinfUBiEvV7
-
-Donations and Sponsorships: https://donorbox.org/events/816706
+Google Maps Link: https://maps.app.goo.gl/RtyunAHgs7rVTJsQA
 
 ### Program:
 
-**An evening of beloved Masterworks and holiday classics!**
+Mozart: Concerto for Flute and Harp
 
-Haydn: Symphony No. 26 in D-minor
-
-Tchaikovsky: “Winter Dreams” from Symphony No. 1
-
-Handel: “Hallelujah” Chorus
-
-“Christmas at the Movies” medley
-
-... and more!
+Brahms: Symphony No. 2
 
 # Future Concert Dates
-
-## Wednesday, March 18, 2026, 7:30pm
 
 ## Wednesday, May 20, 2026, 7:30pm
 
