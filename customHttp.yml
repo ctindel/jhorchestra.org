@@ -1,4 +1,5 @@
 customHeaders:
+  # This is here so that the jhbg.org site can load the jhorchestra.org RSS feed
   - pattern: /index.xml
     headers:
       - key: Access-Control-Allow-Origin
