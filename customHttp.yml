@@ -1,0 +1,7 @@
+customHeaders:
+  - pattern: /index.xml
+    headers:
+      - key: Access-Control-Allow-Origin
+        value: https://www.jhbg.org
+      - key: Access-Control-Allow-Methods
+        value: GET
