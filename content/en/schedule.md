@@ -12,24 +12,24 @@ menu:
 
 # Next Concert
 
-## Wednesday, March 18, 2026, 7:30pm
+## Wednesday, May 20, 2026, 7:30pm
 
 Time: 7:30pm Eastern
 
-Location: Our Lady Queen of Martyrs
+Location: Trinity Lutheran Church
 
-Address: 110-06 Queens Blvd, Forest Hills, NY 11375
+Address: 31-18 37th Street, Astoria, NY 11103
 
-Google Maps Link: https://maps.app.goo.gl/RtyunAHgs7rVTJsQA
+Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
 
 ### Program:
 
-Mozart: Concerto for Flute and Harp
+Mendelssohn-Hensel: Overture in C-Major
 
-Brahms: Symphony No. 2
+Lee: Cognoscent (World Premiere)
+
+Mendelssohn: Symphony No. 5, "Reformation"
 
 # Future Concert Dates
-
-## Wednesday, May 20, 2026, 7:30pm
 
 ## Sunday, July 5, 2026, 6pm
