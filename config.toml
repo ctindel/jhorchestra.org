@@ -52,7 +52,7 @@ networks = [
 
 [params.ananke.social.youtube]
 username = "JacksonHeightsOrchestra"
-profilelink = "https://www.youtube.com/channel/UCJulQspTGCpaDdx2wKYfFvQ"
+profilelink = "https://www.youtube.com/@jhorchestra"
 
 [params.ananke.social.facebook]
 username = "JacksonHeightsOrchestra"
