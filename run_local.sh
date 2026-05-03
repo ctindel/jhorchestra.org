@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f docker-compose.yml up jho
+docker compose -f docker-compose.yml up jho
