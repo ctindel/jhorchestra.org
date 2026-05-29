@@ -12,26 +12,6 @@ menu:
 
 # Next Concert
 
-## Wednesday, May 20, 2026, 7:30pm
-
-Time: 7:30pm Eastern
-
-Location: Trinity Lutheran Church
-
-Address: 31-18 37th Street, Astoria, NY 11103
-
-Google Maps Link: https://maps.app.goo.gl/EQhqgmrgvQ6Y58kGA
-
-### Program:
-
-Mendelssohn-Hensel: Overture in C-Major
-
-Lee: Cognoscent (World Premiere)
-
-Mendelssohn: Symphony No. 5, "Reformation"
-
-# Future Concert Dates
-
 ## Sunday, July 5, 2026, 6pm
 
 Time: 6:00pm Eastern
@@ -46,3 +26,13 @@ Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
 
 **Join us for a festive outdoor concert of pops classics, iconic movie
 soundtracks, and everything in between!**
+
+# Future Concert Dates
+
+## Wednesday, December 9, 2026, 7:30pm
+
+## Sunday, March 7 (Manhattan) and Wednesday, March 10 (Queens), 2027 @7:30pm 
+
+## Wednesday, May 19, 2027, 7:30pm
+
+## Sunday, July 4 or 11 TBD, 2027, 6pm
