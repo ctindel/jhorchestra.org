@@ -1,0 +1,31 @@
+:root{
+  /* Base scale — 2px increments up to 8, then 4/8 steps.
+     Values are the ones the source layouts actually use. */
+  --jho-space-1:4px;
+  --jho-space-2:6px;
+  --jho-space-3:8px;
+  --jho-space-4:10px;
+  --jho-space-5:12px;
+  --jho-space-6:14px;
+  --jho-space-7:18px;
+  --jho-space-8:22px;
+  --jho-space-9:26px;
+  --jho-space-10:30px;
+  --jho-space-11:36px;
+  --jho-space-12:40px;
+  --jho-space-13:60px;
+  --jho-space-14:70px;
+  --jho-space-15:80px;
+
+  /* Page / section gutters */
+  --jho-gutter-site:60px;      /* website sections  */
+  --jho-gutter-slide:120px;    /* 1920×1080 slides  */
+  --jho-gutter-poster:32px;    /* 8.5×11 poster     */
+  --jho-section-y:70px;        /* site section pad-y */
+
+  /* Rule weights */
+  --jho-rule-hairline:1px;
+  --jho-rule-strong:1.5px;
+  --jho-rule-heavy:2px;
+  --jho-mosaic-bar:4px;        /* rainbow rule height */
+}

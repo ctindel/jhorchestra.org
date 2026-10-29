@@ -1,0 +1,10 @@
+{
+  "name": "jho-render",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Render HTML (JHO design-system templates) to PNG and PDF with Playwright",
+  "type": "module",
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  }
+}

@@ -1,0 +1,2076 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=[];var B=false;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here — open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file — visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store — not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read — re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
+</script>
+
+<meta charset="utf-8"/>
+<title>Jackson Heights Orchestra — Brand System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="deck-stage.js"></script>
+
+<!-- EDITMODE tweak defaults -->
+<script>
+window.__TWEAKS__ = /*EDITMODE-BEGIN*/{
+  "palette": "mosaic",
+  "logoVariant": "stacked",
+  "posterLayout": "A",
+  "soloists": "1",
+  "showGriffin": true
+}/*EDITMODE-END*/;
+</script>
+
+<style>
+  :root {    --ink: #141a2a;
+    --paper: #faf6ee;
+    --paper-2: #f3ecdc;
+    --rule: #1d2437;
+    --muted: #6a6555;
+
+    /* Mosaic palette — cultural diversity as color voices */
+    --c1: #e04b2a;   /* chili red */
+    --c2: #f2a93b;   /* saffron */
+    --c3: #3a8f6b;   /* cilantro */
+    --c4: #2a5d8f;   /* subway blue */
+    --c5: #7d3b8f;   /* jacaranda */
+    --c6: #d94a6d;   /* rose */
+    --c7: #0f4c5c;   /* teal */
+    --accent: var(--c1);
+  }
+
+  /* Palette variants */
+  body[data-palette="mosaic"] {
+    --ink:#141a2a; --paper:#faf6ee; --paper-2:#f3ecdc;
+    --c1:#e04b2a; --c2:#f2a93b; --c3:#3a8f6b; --c4:#2a5d8f; --c5:#7d3b8f; --c6:#d94a6d; --c7:#0f4c5c;
+  }
+  body[data-palette="classical"] {
+    --ink:#1a1818; --paper:#efe7d6; --paper-2:#e5dbc3;
+    --c1:#a23b1f; --c2:#c79430; --c3:#3d6b3e; --c4:#1d3a5f; --c5:#5a3a6b; --c6:#a85c5c; --c7:#23413f;
+  }
+  body[data-palette="civic"] {
+    --ink:#0a1422; --paper:#f4f4f2; --paper-2:#e8e6df;
+    --c1:#ff5a36; --c2:#ffc845; --c3:#1e9f6e; --c4:#0066b3; --c5:#8b3ad6; --c6:#ff3b7d; --c7:#0a6b70;
+  }
+  body[data-palette="dusk"] {
+    --ink:#f6efdd; --paper:#191424; --paper-2:#251b38;
+    --c1:#ff7a54; --c2:#ffcb5c; --c3:#5ed19a; --c4:#5ea8ff; --c5:#c77dff; --c6:#ff6b9d; --c7:#2fb5bf;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#0a0a0a; color: var(--ink); font-family: 'Inter', system-ui, sans-serif; }
+  /* ── Straight-leg "J" replacement ────────────────────────────────
+     Playfair's stock capital J has a hooked descender. We render a
+     custom inline-SVG J that matches Playfair's transitional proportions
+     but ends in a flat foot-serif. The "J" letter stays in markup for
+     screen-readers + copy-paste; the visible glyph is the SVG mask. */
+  .jx {
+    display: inline-block;
+    width: 0.56em;
+    height: 1.18em;           /* cap-height + descender slot */
+    vertical-align: -0.20em;  /* drops the bottom of the J below baseline */
+    background-color: currentColor;
+    -webkit-mask: var(--jmask) center / 100% 100% no-repeat;
+            mask: var(--jmask) center / 100% 100% no-repeat;
+  }
+  /* Playfair-flavored J — top cap with bracketed serifs, vertical stem
+     descending below baseline. NO foot serif (that's what made it read as a
+     T earlier). This is the canonical "straight-line J without a hook". */
+  .jx[data-style="playfair"], .jx:not([data-style]) {
+    --jmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140' preserveAspectRatio='xMidYMid meet'><g fill='black'><path d='M 6 0 L 94 0 L 94 13 L 76 13 L 76 6 L 24 6 L 24 13 L 6 13 Z'/><rect x='42' y='0' width='16' height='140'/></g></svg>");
+  }
+  /* Bodoni / didone — ball-terminal foot, very high contrast */
+  .jx[data-style="bodoni"] {
+    --jmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'><g fill='black'><rect x='8' y='0' width='84' height='9'/><rect x='44' y='0' width='12' height='130'/><circle cx='50' cy='132' r='8'/></g></svg>");
+  }
+  /* Playfair — transitional, gentle bracketed cap, stem terminates with tiny foot */
+  .jx[data-style="playfair"] {
+    --jmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'><g fill='black'><path d='M 8 0 L 92 0 L 92 12 L 72 12 L 72 5 L 28 5 L 28 12 L 8 12 Z'/><rect x='42' y='0' width='16' height='134'/><rect x='34' y='130' width='32' height='8'/></g></svg>");
+  }
+  /* DM Serif Display — chunky slab, full width foot */
+  .jx[data-style="dmserif"] {
+    --jmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'><g fill='black'><rect x='2' y='0' width='96' height='15'/><rect x='38' y='0' width='24' height='128'/><rect x='18' y='123' width='64' height='14'/></g></svg>");
+  }
+  /* EB Garamond — humanist, thin proportions */
+  .jx[data-style="garamond"] {
+    --jmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'><g fill='black'><path d='M 16 0 L 84 0 L 84 8 L 60 8 L 60 3 L 40 3 L 40 8 L 16 8 Z'/><rect x='45' y='2' width='10' height='132'/></g></svg>");
+  }
+  /* Cormorant — elegant, narrow stem, light cap */
+  .jx[data-style="cormorant"] {
+    --jmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'><g fill='black'><path d='M 18 0 L 82 0 L 82 7 L 62 7 L 62 3 L 38 3 L 38 7 L 18 7 Z'/><rect x='46' y='2' width='8' height='136'/></g></svg>");
+  }
+  .jx + * { margin-left: 0; }
+
+  /* Global type classes */
+  .serif { font-family: 'Playfair Display', 'Times New Roman', serif; font-optical-sizing: auto; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .eyebrow { font-family: 'Inter', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 600; }
+  .micro { font-family: 'Inter', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; font-weight: 500; }
+
+  /* Slide base */
+  section.slide {
+    background: var(--paper);
+    color: var(--ink);
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+
+  /* Edit mode panel */
+  #tweakPanel {
+    position: fixed;
+    bottom: 72px;
+    right: 24px;
+    width: 280px;
+    background: #111;
+    color: #eee;
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    z-index: 2147483600;
+    display: none;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+  }
+  #tweakPanel.open { display:block; }
+  #tweakPanel.minimized { padding: 0; width: auto; }
+  #tweakPanel.minimized .panel-body { display:none; }
+  #tweakPanel.minimized .panel-head { padding: 9px 14px; border-radius: 14px; cursor:pointer; }
+  #tweakPanel.minimized .panel-head .min-btn { display:none; }
+  #tweakPanel.minimized .panel-head::after { content:'▴'; margin-left:8px; font-size:10px; color:#888; }
+  #tweakPanel .panel-head { display:flex; align-items:center; justify-content:space-between; margin: 0 0 10px 0; }
+  #tweakPanel .panel-head h4 { margin:0; }
+  #tweakPanel .min-btn { background:transparent; border:none; color:#888; font-size:14px; line-height:1; cursor:pointer; padding:4px 6px; border-radius:4px; }
+  #tweakPanel .min-btn:hover { color:#fff; background:#222; }
+  #tweakPanel h4 { font-size:12px; text-transform:uppercase; letter-spacing:0.15em; color:#aaa; font-weight:600; }
+  #tweakPanel .row { margin-bottom: 14px; }
+  #tweakPanel label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:#888; margin-bottom:6px; font-weight:600; }
+  #tweakPanel .seg { display:flex; gap:4px; flex-wrap:wrap; }
+  #tweakPanel .seg button { flex:1; min-width: 60px; padding:7px 8px; background:#222; color:#ccc; border:1px solid #333; border-radius:6px; cursor:pointer; font-size:11px; font-weight:500; }
+  #tweakPanel .seg button.active { background:#fff; color:#000; border-color:#fff; }
+  #tweakPanel .swatches { display:flex; gap:4px; }
+  #tweakPanel .swatches .sw { flex:1; height:20px; border-radius:4px; }
+  #tweakPanel .toggle { display:flex; align-items:center; justify-content:space-between; }
+  #tweakPanel .toggle input { width:36px; height:20px; appearance:none; background:#333; border-radius:999px; position:relative; cursor:pointer; }
+  #tweakPanel .toggle input:checked { background:#fff; }
+  #tweakPanel .toggle input::before { content:''; position:absolute; top:2px; left:2px; width:16px; height:16px; background:#fff; border-radius:50%; transition:left .15s; }
+  #tweakPanel .toggle input:checked::before { left:18px; background:#000; }
+
+  /* (legacy OT-feature attempt removed — replaced by .jx SVG masks above) */
+
+  /* ====================== LOGO MARKS ====================== */
+  /* Logo: Stacked wordmark — single colour, set on parent */
+  .logo-stacked { display:inline-flex; flex-direction:column; line-height:1.06; font-family:'Playfair Display', serif; font-weight:900; letter-spacing:-0.02em; color: var(--c4); }
+  .logo-stacked .l-j, .logo-stacked .l-h, .logo-stacked .l-o { display:block; color: inherit; }
+  .logo-stacked > * + * { margin-top: 0.04em; }
+  .logo-stacked .l-o { line-height:1.12; }
+  .logo-stacked .tag { font-family:'Inter', sans-serif; font-weight:600; font-size:0.12em; text-transform:uppercase; letter-spacing:0.32em; margin-top:0.4em; color: inherit; opacity:0.9; line-height:1; }
+
+  /* Logo: Horizontal wordmark — one line, J·H·O at same scale */
+  .logo-horizontal { display:inline-flex; align-items:baseline; gap: 0.28em; line-height:1.0; font-family:'Playfair Display', serif; font-weight:900; letter-spacing:-0.02em; color: var(--c4); white-space: nowrap; }
+  .logo-horizontal .l-j, .logo-horizontal .l-h, .logo-horizontal .l-o { color: inherit; }
+  .logo-horizontal .tag { font-family:'Inter', sans-serif; font-weight:600; font-size:0.12em; text-transform:uppercase; letter-spacing:0.32em; margin-left:0.4em; align-self:center; color: inherit; opacity:0.7; }
+
+  /* Rainbow rule — the only place the full palette appears together */
+  .mosaic-rule { display:flex; gap: 6px; height: 3px; border-radius: 2px; overflow: hidden; }
+  .mosaic-rule i { flex:1; display:block; }
+  .mosaic-rule i:nth-child(1) { background: var(--c1); }
+  .mosaic-rule i:nth-child(2) { background: var(--c2); }
+  .mosaic-rule i:nth-child(3) { background: var(--c3); }
+  .mosaic-rule i:nth-child(4) { background: var(--c4); }
+  .mosaic-rule i:nth-child(5) { background: var(--c5); }
+  .mosaic-rule i:nth-child(6) { background: var(--c6); }
+  .mosaic-rule i:nth-child(7) { background: var(--c7); }
+
+  /* Logo: Monogram tile */
+  .logo-mono { display:inline-flex; align-items:center; gap:14px; }
+  /* Logo: Monogram — vertical 3-tile stack, word beside each */
+  .logo-mono { display:inline-grid; grid-template-columns: auto auto; gap: 6px 16px; align-items:center; font-family:'Playfair Display', serif; }
+  .logo-mono .tile { width: 56px; height: 56px; border-radius: 8px; display:flex; align-items:center; justify-content:center; color: #fff; font-weight: 900; font-size: 34px; letter-spacing:-0.02em; line-height:1; }
+  .logo-mono .word { font-family:'Playfair Display', serif; font-weight: 800; font-size: 34px; letter-spacing:-0.015em; line-height: 0.95; align-self:center; }
+  .logo-mono .word.italic { font-style: italic; font-weight: 800; }
+  .logo-mono .word small { display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:9px; text-transform:uppercase; letter-spacing:0.22em; margin-top:3px; color: var(--muted); }
+
+  /* Logo: Waveform */
+  .logo-wave { display:inline-flex; flex-direction:column; align-items:stretch; gap:6px; }
+  .logo-wave .wave { display:flex; align-items:flex-end; gap:3px; height:42px; width:100%; }
+  .logo-wave .wave span { flex:1; min-width:0; border-radius:2px; display:block; }
+  .logo-wave .word { font-family:'Playfair Display', serif; font-weight:800; font-size:22px; line-height:1; letter-spacing:-0.01em; color:var(--ink); }
+  .logo-wave .word em { font-style:normal; }
+
+  /* Griffin mark */
+  .griffin {
+    width:56px; height:56px; border-radius:50%;
+    background: var(--paper-2);
+    border: 1.5px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif; font-weight:700; font-size:22px;
+    color: var(--ink);
+    flex-shrink:0;
+    position:relative;
+  }
+  .griffin::before {
+    content:''; position:absolute; inset:4px; border-radius:50%;
+    border: 0.5px solid var(--ink); opacity:0.5;
+  }
+
+  /* Utility */
+  .fill-c1 { background:var(--c1); } .fill-c2 { background:var(--c2); }
+  .fill-c3 { background:var(--c3); } .fill-c4 { background:var(--c4); }
+  .fill-c5 { background:var(--c5); } .fill-c6 { background:var(--c6); }
+  .fill-c7 { background:var(--c7); }
+
+  .txt-c1 { color:var(--c1); } .txt-c2 { color:var(--c2); }
+  .txt-c3 { color:var(--c3); } .txt-c4 { color:var(--c4); }
+  .txt-c5 { color:var(--c5); } .txt-c6 { color:var(--c6); }
+  .txt-c7 { color:var(--c7); }
+
+  /* ==================== SLIDE STYLES ==================== */
+
+  /* Slide: Cover */
+  .s-cover { display:grid; grid-template-rows: 1fr auto; padding: 80px 120px 60px; background: var(--paper); }
+  .s-cover .top { display:flex; flex-direction:column; justify-content:flex-end; }
+  .s-cover .eyebrow-row { display:flex; align-items:center; gap:16px; margin-bottom: 40px; }
+  .s-cover .rule { flex:1; height:1px; background: var(--ink); opacity:0.3; }
+  .s-cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 220px;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  .s-cover h1 .line { display:block; }
+  .s-cover h1 .line:first-of-type { margin-bottom: 0.04em; }
+  .s-cover h1 .orch {
+    display:block;
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 220px;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+  .s-cover .swatches { display:flex; gap:10px; height: 28px; margin-top: 36px; }
+  .s-cover .swatches div { flex:1; border-radius: 4px; }
+  .s-cover .bottom { display:flex; justify-content:space-between; align-items:flex-end; margin-top:40px; }
+  .s-cover .meta { font-family:'Inter',sans-serif; font-size:14px; color:var(--muted); line-height:1.5; }
+  .s-cover .meta strong { color:var(--ink); display:block; font-weight:600; }
+
+  /* Slide: Concept */
+  .s-concept { display:grid; grid-template-columns: 1fr 1fr; padding: 100px 120px; gap: 100px; align-items:center; }
+  .s-concept .lead { font-family:'Playfair Display', serif; font-weight:500; font-size:64px; line-height:1.05; letter-spacing:-0.02em; }
+  .s-concept .lead em { font-style:italic; font-weight:400; }
+  .s-concept .right { display:flex; flex-direction:column; gap:24px; }
+  .s-concept .pillar { border-top: 1px solid var(--ink); padding-top:16px; display:grid; grid-template-columns: 60px 1fr; gap:20px; }
+  .s-concept .pillar .num { font-family:'Playfair Display', serif; font-style:italic; font-size:32px; font-weight:500; line-height:1; }
+  .s-concept .pillar h4 { margin:0 0 8px; font-family:'Inter',sans-serif; font-size:18px; font-weight:600; letter-spacing:-0.01em; }
+  .s-concept .pillar p { margin:0; font-size:15px; line-height:1.55; color:var(--muted); max-width:420px; }
+
+  /* Slide: Logo system */
+  .s-logos { padding: 80px 120px; display:grid; grid-template-rows: auto 1fr; gap: 40px; }
+  .s-logos .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-logos h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-logos .grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+  .s-logos .card { background: var(--paper-2); border-radius:12px; padding: 50px 40px; display:flex; flex-direction:column; justify-content:space-between; gap: 30px; min-height:560px; }
+  .s-logos .card.invert { background: var(--ink); color: var(--paper); }
+  .s-logos .card.invert .cap, .s-logos .card.invert .lbl, .s-logos .card.invert .tag, .s-logos .card.invert .word, .s-logos .card.invert .word small { color: var(--paper); }
+  .s-logos .card.invert .word small { color: rgba(250,246,238,0.6); }
+  .s-logos .card.accent { background: var(--c1); color: var(--paper); }
+  .s-logos .card.accent .cap, .s-logos .card.accent .lbl, .s-logos .card.accent .tag, .s-logos .card.accent .word, .s-logos .card.accent .word small { color: var(--paper); }
+  .s-logos .card .display { flex:1; display:flex; align-items:center; justify-content:center; padding: 20px 0; }
+  .s-logos .card .cap { font-family:'Inter',sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:0.18em; font-weight:600; color:var(--ink); }
+  .s-logos .card .lbl { font-family:'Playfair Display', serif; font-weight:500; font-size:24px; margin-top:8px; line-height:1.1; }
+  .s-logos .card .desc { font-size: 13px; color: var(--muted); line-height:1.5; margin-top:8px; max-width:320px; }
+  .s-logos .card.invert .desc, .s-logos .card.accent .desc { color: rgba(250,246,238,0.7); }
+
+  /* Slide: Primary lockup */
+  .s-lockup { padding: 80px 120px; display:grid; grid-template-rows: auto 1fr auto; gap: 40px; }
+  .s-lockup .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-lockup h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-lockup .main { display:grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items:center; }
+  .s-lockup .stage { background: var(--paper-2); border-radius: 16px; padding: 80px; display:flex; align-items:center; justify-content:center; height: 100%; min-height: 500px; }
+  .s-lockup .variants { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .s-lockup .variant { background: var(--paper-2); border-radius:10px; padding: 30px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; min-height:180px; }
+  .s-lockup .variant.dark { background: var(--ink); }
+  .s-lockup .variant.dark * { color: var(--paper) !important; }
+  .s-lockup .variant .mini-cap { font-family:'Inter',sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:0.18em; color:var(--muted); font-weight:600; }
+  .s-lockup .variant.dark .mini-cap { color: rgba(250,246,238,0.5) !important; }
+  .s-lockup .principles { display:flex; gap: 40px; padding-top: 20px; border-top: 1px solid var(--ink); }
+  .s-lockup .principles div { flex:1; }
+  .s-lockup .principles .eyebrow { color:var(--muted); }
+  .s-lockup .principles p { margin:6px 0 0; font-size:14px; line-height:1.5; }
+
+  /* Big display logo — single colour (defaults to Subway) */
+  .big-logo .logo-stacked { font-size: 120px; line-height: 0.95; color: var(--c4); }
+  .big-logo .logo-stacked .tag { color: var(--c4); opacity:0.75; }
+
+  /* Slide: Color */
+  .s-color { padding: 80px 120px; display:grid; grid-template-rows: auto 1fr; gap: 40px; }
+  .s-color .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-color h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-color .grid { display:grid; grid-template-columns: 1.1fr 1fr; gap: 40px; min-width:0; }
+  .s-color .palette { display:grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 14px; min-width:0; }
+  .s-color .sw { aspect-ratio: auto; height: 180px; border-radius: 12px; padding: 20px; display:flex; flex-direction:column; justify-content:space-between; color: #fff; font-family:'Inter',sans-serif; position:relative; min-width:0; }
+  .s-color .sw .name { font-size: 28px; }
+  .s-color .sw .hex { font-size: 14px; }
+  .s-color .sw .role { font-size: 12px; }
+  .s-color .sw .name { font-family:'Playfair Display', serif; font-weight:600; font-size:18px; line-height:1.1; }
+  .s-color .sw .hex { font-family:'JetBrains Mono',monospace; font-size:11px; opacity:0.85; letter-spacing:0.05em; }
+  .s-color .sw .role { font-size:10px; text-transform:uppercase; letter-spacing:0.18em; opacity:0.8; font-weight:600; }
+  .s-color .sw.light { color: var(--ink); }
+  .s-color .sw.light .hex, .s-color .sw.light .role { opacity:0.6; }
+  .s-color .notes { display:flex; flex-direction:column; gap: 24px; }
+  .s-color .notes .block h3 { font-family:'Playfair Display', serif; font-size:24px; margin:0 0 8px; font-weight:600; letter-spacing:-0.01em; }
+  .s-color .notes .block p { margin:0; font-size:14px; line-height:1.55; color:var(--muted); }
+  .s-color .diversity-grid { display:grid; grid-template-columns: repeat(7, 1fr); gap:4px; height:40px; border-radius:6px; overflow:hidden; }
+  .s-color .diversity-grid div { height:100%; }
+
+  /* Slide: Type */
+  .s-type { padding: 80px 120px; display:grid; grid-template-rows: auto 1fr; gap: 40px; }
+  .s-type .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-type h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-type .grid { display:grid; grid-template-columns: 1.5fr 1fr; gap: 60px; }
+  .s-type .spec { padding: 20px 0; border-bottom: 1px solid rgba(20,26,42,0.15); }
+  .s-type .spec:last-child { border-bottom: none; }
+  .s-type .spec .meta { display:flex; justify-content:space-between; font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.18em; color:var(--muted); font-weight:600; margin-bottom: 14px; }
+  .s-type .spec .sample.h1 { font-family:'Playfair Display', serif; font-weight:900; font-size:110px; line-height:0.9; letter-spacing:-0.03em; }
+  .s-type .spec .sample.h2 { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; font-size:64px; line-height:1; letter-spacing:-0.02em; }
+  .s-type .spec .sample.h3 { font-family:'Inter',sans-serif; font-weight:700; font-size:32px; line-height:1.1; letter-spacing:-0.01em; }
+  .s-type .spec .sample.body { font-family:'Inter',sans-serif; font-weight:400; font-size:18px; line-height:1.55; max-width: 700px; }
+  .s-type .spec .sample.eyebrow { font-family:'Inter',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:0.22em; }
+  .s-type .side { display:flex; flex-direction:column; gap: 28px; }
+  .s-type .font-card { background: var(--paper-2); border-radius: 12px; padding: 28px 24px; }
+  .s-type .font-card .name { font-family:'Playfair Display', serif; font-weight:900; font-size:44px; line-height:1; letter-spacing:-0.02em; margin-bottom: 8px; }
+  .s-type .font-card .name.inter { font-family:'Inter',sans-serif; font-weight:800; }
+  .s-type .font-card .role { font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.2em; color:var(--muted); font-weight:600; margin-bottom:14px; }
+  .s-type .font-card .desc { font-size:13px; line-height:1.5; color:var(--muted); margin:0; }
+  .s-type .font-card .weights { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+  .s-type .font-card .weights span { font-size:11px; padding:3px 8px; background: var(--paper); border-radius: 4px; color:var(--ink); font-weight:500; }
+
+  /* Slide: Poster */
+  .s-poster { padding: 80px 80px; display:grid; grid-template-rows: auto 1fr; gap:30px; }
+  .s-poster .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-poster h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:48px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-poster .body { display:grid; grid-template-columns: auto 1fr; gap: 60px; align-items:center; }
+  .s-poster .poster-stage { display:flex; align-items:center; justify-content:center; padding: 20px; background: var(--paper-2); border-radius:16px; height: 820px; }
+  .s-poster .specs { display:flex; flex-direction:column; gap: 22px; }
+  .s-poster .specs .spec-block h4 { font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.2em; color:var(--muted); margin: 0 0 6px; font-weight:600; }
+  .s-poster .specs .spec-block p { margin:0; font-size:15px; line-height:1.5; max-width: 420px; }
+  .s-poster .layout-swap { display:flex; gap:6px; }
+  .s-poster .layout-swap button { padding:6px 14px; font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.15em; font-weight:600; background: var(--paper-2); border: 1px solid var(--ink); border-radius:999px; cursor:pointer; color:var(--ink); }
+  .s-poster .layout-swap button.active { background: var(--ink); color: var(--paper); }
+
+  /* POSTER ARTWORKS */
+  /* Dimensions: 8.5x11 @ 60px per inch = 510 x 660 */
+  .poster {
+    width: 560px; height: 725px;
+    background: var(--paper);
+    position:relative;
+    overflow:hidden;
+    font-family:'Inter', sans-serif;
+    color: var(--ink);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.18), 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 2px;
+  }
+
+  /* Portrait block — used on posters and IG tiles */
+  .portrait { aspect-ratio: 1/1; border-radius: 6px; overflow:hidden; background: linear-gradient(135deg, var(--c4) 0%, var(--c7) 100%); position:relative; display:flex; align-items:flex-end; padding: 10px; color: #fff; font-family:'Inter', sans-serif; font-size: 9px; text-transform:uppercase; letter-spacing:0.15em; font-weight:600; }
+  .portrait::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.25), transparent 60%); }
+  .portrait .pname { position:relative; z-index:1; }
+  .portrait.alt { background: linear-gradient(135deg, var(--c4) 0%, var(--c7) 100%); }
+  .portrait.alt2 { background: linear-gradient(135deg, var(--c3) 0%, var(--c4) 100%); }
+
+  /* Poster A — Big Type, Mosaic stripe */
+  .poster-a { padding: 0; display:flex; flex-direction:column; }
+  .poster-a .presents-bar { padding: 10px 28px; text-align:center; font-size: 9px; line-height:1.3; color: var(--muted); border-bottom: 1px solid var(--ink); letter-spacing: 0.16em; text-transform:uppercase; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .poster-a .masthead { padding: 22px 32px 10px; display:grid; grid-template-columns: 1fr auto; gap: 24px; align-items:center; }
+  .poster-a .wordmark { font-family:'Playfair Display', serif; font-weight:900; line-height:1.02; letter-spacing:-0.035em; font-size: 56px; color: var(--c4); }
+  .poster-a .wordmark .j, .poster-a .wordmark .h, .poster-a .wordmark .o { color: inherit; display:block; }
+  .poster-a .wordmark > * + * { margin-top: 0.04em; }
+  .poster-a .portraits { display:flex; flex-direction:column; gap: 10px; align-self:center; }
+  .poster-a .portraits .person { display:flex; flex-direction:row; align-items:center; gap: 12px; }
+  .poster-a .portraits .person:nth-child(n+2) { display:none; }
+  .poster-a.two-soloists .portraits .person:nth-child(2) { display:flex !important; }
+  .poster-a .portraits .portrait { width: 96px; height: 96px; aspect-ratio:1/1; border-radius: 4px; overflow:hidden; flex-shrink:0; background:none; }
+  .poster-a .portraits .portrait::before { display:none; }
+  .poster-a .portraits .portrait img { width:100%; height:100%; object-fit:cover; display:block; }
+  .poster-a .portraits .pname { font-family:'Playfair Display', serif; font-weight:700; font-size:15px; line-height:1.15; color: var(--ink); white-space:nowrap; }
+  .poster-a .portraits .pname em { display:block; font-family:'Inter',sans-serif; font-style:normal; font-weight:600; font-size:8px; letter-spacing:0.16em; text-transform:uppercase; color: var(--muted); margin-top:3px; }
+  .poster-a .mosaic { display:flex; gap: 3px; margin: 0 32px; height: 4px; }
+  .poster-a .mosaic div { flex:1; }
+  .poster-a .meta-row { display:grid; grid-template-columns: auto 1fr; gap: 16px 40px; padding: 18px 32px 16px; border-bottom: 1px solid rgba(28,27,38,0.15); }
+  .poster-a .meta-row .block h5 { margin:0 0 4px; font-size: 9px; text-transform:uppercase; letter-spacing:0.2em; color:var(--muted); font-weight:600; }
+  .poster-a .meta-row .block p { margin:0; font-size:11px; font-weight:500; line-height:1.35; color: var(--muted); }
+  .poster-a .meta-row .block p strong { display:block; font-family:'Playfair Display', serif; font-weight:800; font-size:17px; letter-spacing:-0.01em; color: var(--ink); margin-bottom:1px; line-height:1.2; white-space:nowrap; }
+  .poster-a .meta-row .block p strong.time-line { font-size: 14px; font-weight:600; margin-top: 3px; color: var(--muted); }
+  .poster-a .meta-row .datetime { display:grid; grid-template-columns: auto auto; gap: 24px; align-items:start; }
+  .poster-a .program { padding: 18px 32px 16px; display:flex; flex-direction:column; gap: 18px; flex: 1 1 auto; }
+  .poster-a .program .program-header { display:flex; flex-direction:column; gap: 4px; }
+  .poster-a .program .eyebrow-p { font-family:'Playfair Display', serif; font-weight:800; font-size: 22px; letter-spacing:-0.02em; color:var(--c1); line-height:1; text-transform:none; }
+  .poster-a .program .program-sub { font-family:'Playfair Display', serif; font-style:italic; font-weight:400; font-size: 13px; color:var(--muted); line-height:1.3; letter-spacing:-0.005em; }
+  .poster-a .program .work .composer { font-family:'Playfair Display', serif; font-weight:700; font-size:19px; letter-spacing:-0.01em; line-height:1.15; }
+  .poster-a .program .work .piece { font-family:'Playfair Display', serif; font-style:italic; font-size: 15px; color:var(--muted); font-weight:400; line-height:1.25; margin-top: 2px; }
+  .poster-a .program .work .sub-tag { display:inline-block; margin-top: 6px; font-size: 9px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; background: rgba(224,75,42,0.1); padding: 3px 8px; border-radius: 3px; }
+  .poster-a .footer { padding: 12px 32px 18px; border-top: 1px solid rgba(28,27,38,0.15); display:flex; justify-content:space-between; align-items:center; gap: 16px; }
+  .poster-a .footer .site { font-family:'Playfair Display', serif; font-weight:700; font-size: 17px; letter-spacing:-0.01em; color: var(--ink); }
+  .poster-a .footer .site small { display:block; font-family:'Inter', sans-serif; font-weight:500; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color: var(--muted); margin-top:2px; }
+  .poster-a .footer .give { font-family:'Playfair Display', serif; font-weight:700; font-size: 15px; letter-spacing:-0.01em; color: var(--c1); text-align:center; }
+  .poster-a .footer .give small { display:block; font-family:'Inter', sans-serif; font-weight:500; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color: var(--muted); margin-top:2px; }
+  .poster-a .footer .jhbg-logo { width: 52px; height: 52px; flex-shrink:0; object-fit:contain; }
+
+  /* Poster B — Full color block top */
+  .poster-b { display:grid; grid-template-rows: 330px 1fr; position:relative; }
+  .poster-b .top { background: var(--c4); color: var(--paper); padding: 36px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; }
+  .poster-b .top .presents { font-size: 10px; line-height:1.5; color: rgba(250,246,238,0.8); text-transform:uppercase; letter-spacing:0.15em; font-weight:500; max-width: 340px; }
+  .poster-b .top .wordmark { font-family:'Playfair Display', serif; font-weight:900; line-height:1.02; letter-spacing:-0.035em; font-size: 62px; color: var(--paper); }
+  .poster-b .top .wordmark > span { display:block; }
+  .poster-b .top .wordmark > * + * { margin-top: 0.04em; }
+  .poster-b .top .wordmark em { font-style:italic; font-weight:500; font-size: 50px; color: var(--c2); }
+  .poster-b .top .orbs { position:absolute; right: -60px; top: -60px; width: 260px; height: 260px; border-radius:50%; background: var(--c1); opacity:0.7; }
+  .poster-b .top .orbs::after { content:''; position:absolute; right: 80px; top:120px; width: 120px; height: 120px; border-radius:50%; background: var(--c2); opacity: 0.9; }
+  .poster-b .top .meta-strip { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:12px; margin-top: 20px; position:relative; z-index:2; }
+  .poster-b .top .meta-strip div h5 { margin:0 0 2px; font-size:9px; text-transform:uppercase; letter-spacing:0.18em; color: rgba(250,246,238,0.7); font-weight:600; }
+  .poster-b .top .meta-strip div p { margin:0; font-family:'Playfair Display', serif; font-weight:700; font-size:15px; letter-spacing:-0.01em; line-height:1.2; }
+  .poster-b .bot { padding: 30px 36px 30px; display:grid; grid-template-rows: auto 1fr auto; gap: 18px; }
+  .poster-b .program { display:flex; flex-direction:column; gap:0; }
+  .poster-b .program .eyebrow-p { font-size:10px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; margin-bottom: 10px; }
+  .poster-b .program .work { display:grid; grid-template-columns: 40px 1fr; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(20,26,42,0.2); align-items:baseline; }
+  .poster-b .program .work:last-child { border-bottom: 1px solid rgba(20,26,42,0.2); }
+  .poster-b .program .work .num { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; font-size:22px; color: var(--c1); line-height:1; }
+  .poster-b .program .work .body h4 { margin:0 0 2px; font-family:'Playfair Display', serif; font-weight:700; font-size:15px; letter-spacing:-0.01em; }
+  .poster-b .program .work .body p { margin:0; font-size:12px; color:var(--muted); font-style:italic; }
+  .poster-b .footer { display:flex; justify-content:space-between; align-items:center; }
+  .poster-b .footer .seal { display:flex; align-items:center; gap:10px; }
+  .poster-b .footer .txt { text-align:left; font-size:9px; line-height:1.35; color:var(--muted); max-width: 160px; }
+  .poster-b .footer .site { font-family:'Playfair Display', serif; font-weight:700; font-size:16px; letter-spacing:-0.01em; text-align:right; }
+  .poster-b .footer .site small { display:block; font-family:'Inter', sans-serif; font-weight:500; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color: var(--muted); margin-top:2px; }
+
+  /* Poster C — Editorial serif */
+  .poster-c { background: var(--paper); padding: 40px 36px; display:grid; grid-template-rows: auto auto auto 1fr auto; gap: 18px; }
+  .poster-c .header-row { display:flex; justify-content:space-between; align-items:flex-start; gap: 20px; }
+  .poster-c .header-row .presents { font-size:10px; text-transform:uppercase; letter-spacing:0.18em; color:var(--muted); font-weight:600; line-height:1.5; max-width:280px; }
+  .poster-c .date-stamp { text-align:right; }
+  .poster-c .date-stamp .dayname { font-size:10px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; }
+  .poster-c .date-stamp .date { font-family:'Playfair Display', serif; font-weight:900; font-size: 40px; line-height:0.9; letter-spacing:-0.02em; }
+  .poster-c .date-stamp .year { font-size:11px; letter-spacing:0.2em; margin-top:2px; color:var(--muted); font-weight:600; }
+  .poster-c .title-mark { text-align:center; padding: 10px 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+  .poster-c .title-mark .small { font-size:10px; text-transform:uppercase; letter-spacing:0.3em; color:var(--muted); font-weight:600; margin-bottom:6px; }
+  .poster-c .title-mark h1 { font-family:'Playfair Display', serif; font-weight:900; font-size: 58px; line-height:0.9; letter-spacing:-0.03em; margin:0; }
+  .poster-c .title-mark h1 .j{ color: var(--c1); display:block;} .poster-c .title-mark h1 .h{ color:var(--c4); display:block;} .poster-c .title-mark h1 .o{ color:var(--c3);}
+  .poster-c .title-mark h1 > * + * { margin-top: 0.04em; }
+  .poster-c .title-mark em { display:block; font-style:italic; font-weight:500; font-size:34px; margin-top:4px; color: var(--ink); }
+  .poster-c .hero-cite { text-align:center; font-family:'Playfair Display', serif; font-style:italic; font-weight:400; font-size:17px; line-height:1.35; color: var(--ink); padding: 8px 40px; }
+  .poster-c .hero-cite::before { content:'“'; font-size: 28px; color: var(--c1); margin-right: 2px; }
+  .poster-c .hero-cite::after { content:'”'; font-size: 28px; color: var(--c1); margin-left: 2px; }
+  .poster-c .middle { display:grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 14px 0; border-top: 1px solid rgba(20,26,42,0.25); border-bottom: 1px solid rgba(20,26,42,0.25); }
+  .poster-c .middle .col h5 { margin:0 0 6px; font-size:9px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; }
+  .poster-c .middle .col p { margin:0; font-family:'Playfair Display', serif; font-size:14px; line-height:1.4; }
+  .poster-c .middle .col p strong { display:block; font-weight:800; font-size:16px; margin-bottom:2px; }
+  .poster-c .program { display:flex; flex-direction:column; gap: 10px; }
+  .poster-c .program .eyebrow-p { font-size:9px; text-transform:uppercase; letter-spacing:0.3em; color:var(--muted); font-weight:600; text-align:center; margin-bottom:2px; }
+  .poster-c .program .work { text-align:center; padding: 6px 0; }
+  .poster-c .program .work h4 { margin:0 0 2px; font-family:'Playfair Display', serif; font-weight:700; font-size:14px; letter-spacing:0.02em; text-transform:uppercase; }
+  .poster-c .program .work p { margin:0; font-family:'Playfair Display', serif; font-style:italic; font-size:13px; color:var(--muted); font-weight:400; }
+  .poster-c .footer { display:flex; justify-content:space-between; align-items:center; padding-top: 10px; border-top: 1px solid var(--ink); }
+  .poster-c .footer .site { font-family:'Playfair Display', serif; font-weight:700; font-size:15px; letter-spacing:-0.01em; }
+  .poster-c .footer .site small { display:block; font-family:'Inter', sans-serif; font-weight:500; font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color: var(--muted); margin-top:2px; }
+  .poster-c .footer .seal { display:flex; align-items:center; gap:10px; }
+  .poster-c .footer .txt { text-align:right; font-size:8.5px; line-height:1.35; color:var(--muted); max-width:160px; }
+
+  /* Slide: IG Square */
+  .s-ig { padding: 80px 120px; display:grid; grid-template-rows: auto 1fr; gap: 40px; }
+  .s-ig .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-ig h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-ig .body { display:grid; grid-template-columns: 700px 700px 1fr; gap: 40px; align-items:start; }
+  .s-ig .ig-tile { width: 700px; height: 700px; position:relative; overflow:hidden; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); font-family:'Inter',sans-serif; color:var(--ink); background: var(--paper); }
+  .s-ig .specs { display:flex; flex-direction:column; gap: 18px; padding-top: 12px; }
+  .s-ig .specs h4 { font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.2em; color:var(--muted); margin:0 0 4px; font-weight:600; }
+  .s-ig .specs p { margin:0; font-size:14px; line-height:1.5; max-width: 300px; }
+
+  /* IG Tile — Concert */
+  .ig-concert { padding: 34px 40px 26px; display:grid; grid-template-rows: auto 1fr auto auto; gap: 12px; background: var(--paper); }
+  .ig-concert .top .presents { font-size:12px; color:var(--muted); line-height:1.4; font-weight:500; margin-bottom:10px; }
+  .ig-concert .wm { font-family:'Playfair Display', serif; font-weight:900; line-height:1.02; letter-spacing:-0.035em; font-size: 64px; }
+  .ig-concert .wm .j { color:var(--c4); display:block; }
+  .ig-concert .wm .h { color:var(--c4); display:block; }
+  .ig-concert .wm .o { color:var(--c4); display:block; }
+  .ig-concert .wm > * + * { margin-top: 0.04em; }
+  .ig-concert .mosaic-bar { display:flex; gap:3px; margin-top:10px; height:4px; }
+  .ig-concert .mosaic-bar span { flex:1; }
+  .ig-concert .mid { display:grid; grid-template-columns: 1fr auto; gap: 18px; align-items:center; }
+  .ig-concert .mid .works-col { display:flex; flex-direction:column; gap: 8px; }
+  .ig-concert .mid .works-col .eyebrow-p { font-size:12px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; margin-bottom:2px; line-height:1.5; }
+  .ig-concert .mid .works-col .eyebrow-p span { display:block; letter-spacing:0.14em; color:var(--muted); font-weight:600; font-size:10px; }
+  .ig-concert .mid .works-col .w { display:flex; flex-direction:column; gap:1px; padding-top:6px; border-top:1px solid rgba(20,26,42,0.12); }
+  .ig-concert .mid .works-col .w:first-of-type { border-top:none; padding-top:0; }
+  .ig-concert .mid .works-col .w strong { font-family:'Playfair Display', serif; font-weight:700; font-size:18px; letter-spacing:-0.005em; color:var(--ink); }
+  .ig-concert .mid .works-col .w span { font-family:'Playfair Display', serif; font-style:italic; font-size:15px; color:var(--muted); line-height:1.3; }
+  .ig-concert .mid .works-col .w span em { font-style:normal; color:var(--c1); font-weight:600; letter-spacing:0.02em; }
+  .ig-concert .ppl { display:flex; flex-direction:column; gap:12px; align-self:center; }
+  .ig-concert .ppl .person { display:flex; flex-direction:row; align-items:center; gap: 12px; }
+  .ig-concert .ppl .portrait { width:110px; height:110px; aspect-ratio:1/1; border-radius:5px; overflow:hidden; background:none; flex-shrink:0; }
+  .ig-concert .ppl .portrait::before { display:none; }
+  .ig-concert .ppl .portrait img { width:100%; height:100%; object-fit:cover; display:block; }
+  .ig-concert .ppl .pname { font-family:'Playfair Display', serif; font-weight:700; font-size:15px; line-height:1.15; color:var(--ink); white-space:nowrap; }
+  .ig-concert .ppl .pname em { display:block; font-family:'Inter',sans-serif; font-style:normal; font-weight:600; font-size:8px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+  .ig-concert .info-grid { display:grid; grid-template-columns: 1fr 1fr 1fr; gap:14px; padding: 12px 0 0; border-top: 2px solid var(--ink); }
+  .ig-concert .info-grid .b h5 { margin:0 0 4px; font-size:10px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; }
+  .ig-concert .info-grid .b strong { display:block; font-family:'Playfair Display', serif; font-weight:800; font-size:18px; letter-spacing:-0.01em; line-height:1.1; }
+  .ig-concert .info-grid .b p { margin:3px 0 0; font-size:11px; color:var(--muted); line-height:1.3; }
+  .ig-concert .footer { display:flex; justify-content:space-between; align-items:center; padding-top: 10px; border-top: 1px solid rgba(20,26,42,0.15); }
+  .ig-concert .footer .site { font-family:'Playfair Display', serif; font-weight:800; font-size:20px; letter-spacing:-0.01em; }
+  .ig-concert .footer .site small { display:block; font-family:'Inter', sans-serif; font-weight:500; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+  .ig-concert .footer .handle { font-family:'Inter',sans-serif; font-size:14px; font-weight:600; color: var(--c1); }
+
+  /* IG Tile — Brand */
+  .s-ig .ig-brand { background: var(--ink); color: var(--paper); padding: 50px 48px; display:grid; grid-template-rows: auto 1fr auto; position:relative; overflow:hidden; gap: 20px; }
+  .ig-brand .mosaic { position:absolute; top:0; right:0; display:grid; grid-template-columns: 54px 54px 54px; grid-template-rows: 54px 54px 54px; gap:0; opacity: 0.9; }
+  .ig-brand .mosaic div { width:54px; height:54px; }
+  .ig-brand .brand-eyebrow { font-size:12px; text-transform:uppercase; letter-spacing:0.22em; font-weight:600; color: rgba(250,246,238,0.6); max-width: 400px; }
+  .ig-brand .brand-body { display:flex; flex-direction:column; gap: 18px; }
+  .ig-brand .wm { font-family:'Playfair Display', serif; font-weight:900; line-height:1.02; letter-spacing:-0.035em; font-size: 72px; margin-top: 4px; }
+  .ig-brand .wm .j { color:var(--c1); display:block; }
+  .ig-brand .wm .h { color:var(--c1); display:block; }
+  .ig-brand .wm .o { color:var(--c1); display:block; }
+  .ig-brand .wm > * + * { margin-top: 0.04em; }
+  .ig-brand .tagline { font-family:'Playfair Display', serif; font-style:italic; font-size: 20px; line-height:1.35; max-width: 480px; color: var(--paper); font-weight:400; }
+  .ig-brand .season { display:flex; flex-direction:column; gap: 0; padding-top: 14px; border-top: 1px solid rgba(250,246,238,0.25); }
+  .ig-brand .season .row { display:grid; grid-template-columns: 118px 1fr; gap: 16px; align-items:baseline; padding: 9px 0; border-bottom: 1px solid rgba(250,246,238,0.14); }
+  .ig-brand .season .row:last-child { border-bottom: none; }
+  .ig-brand .season .row .dt { font-family:'Playfair Display', serif; font-weight:800; font-size: 19px; letter-spacing:-0.01em; color: var(--c2); line-height:1.1; }
+  .ig-brand .season .row .dt span { display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color: rgba(250,246,238,0.5); margin-top:2px; }
+  .ig-brand .season .row .ttl { font-family:'Playfair Display', serif; font-weight:700; font-size: 16px; line-height:1.2; color: var(--paper); }
+  .ig-brand .season .row .ttl span { display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:11px; letter-spacing:0.04em; color: rgba(250,246,238,0.65); margin-top:2px; }
+  .ig-brand .stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 16px 0; border-top: 1px solid rgba(250,246,238,0.25); border-bottom: 1px solid rgba(250,246,238,0.25); max-width: 480px; }
+  .ig-brand .stats > div { display:flex; flex-direction:column; gap: 2px; }
+  .ig-brand .stats strong { font-family:'Playfair Display', serif; font-weight:800; font-size: 26px; letter-spacing:-0.01em; color: var(--c2); }
+  .ig-brand .stats span { font-size: 10px; text-transform:uppercase; letter-spacing:0.2em; color: rgba(250,246,238,0.6); font-weight:600; }
+  .ig-brand .brand-meta { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 560px; }
+  .ig-brand .meta-block h5 { margin:0 0 5px; font-size:10px; text-transform:uppercase; letter-spacing:0.22em; color: var(--c2); font-weight:700; }
+  .ig-brand .meta-block p { margin:0; font-family:'Playfair Display', serif; font-size: 13px; line-height:1.4; color: rgba(250,246,238,0.88); }
+  .ig-brand .footer { display:flex; justify-content:space-between; align-items:center; padding-top: 14px; border-top: 1px solid rgba(250,246,238,0.25); }
+  .ig-brand .footer .site { font-family:'Playfair Display', serif; font-weight:700; font-size:18px; }
+  .ig-brand .footer .handle { font-family:'Inter',sans-serif; font-size:14px; color: var(--c2); font-weight:600; }
+
+  /* Slide: IG Story + set */
+  .s-socialset { padding: 80px 100px; display:grid; grid-template-rows: auto 1fr; gap: 40px; }
+  .s-socialset .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-socialset h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-socialset .set { display:flex; gap: 22px; align-items:flex-start; justify-content:center; }
+  .s-socialset .lbl { text-align:center; margin-top: 14px; font-size:11px; text-transform:uppercase; letter-spacing:0.18em; color:var(--muted); font-weight:600; }
+
+  .ig-story { width: 340px; height: 604px; background: var(--paper); border-radius: 6px; overflow:hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); position:relative; padding: 36px 28px; display:grid; grid-template-rows: auto 1fr auto; gap: 16px; }
+  .ig-story .tag-top { font-size:10px; text-transform:uppercase; letter-spacing:0.25em; color:var(--muted); font-weight:600; }
+  .ig-story .wm { font-family:'Playfair Display', serif; font-weight:900; line-height:1.02; letter-spacing:-0.035em; font-size: 44px; margin-top: 14px; }
+  .ig-story .wm .j{color:var(--c4);display:block;} .ig-story .wm .h{color:var(--c4);display:block;} .ig-story .wm .o{color:var(--c4);display:block;}
+  .ig-story .wm > * + * { margin-top: 0.04em; }
+  .ig-story .pull { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; font-size: 22px; line-height:1.2; letter-spacing:-0.01em; margin-top: 18px; }
+  .ig-story .works { margin-top: 14px; display:flex; flex-direction:column; gap: 5px; padding-top: 12px; border-top: 1px solid rgba(20,26,42,0.2); }
+  .ig-story .works > div { font-family:'Playfair Display', serif; font-weight:700; font-size: 14px; line-height:1.35; color: var(--ink); }
+  .ig-story .works > div em { font-style:italic; font-weight:400; color: var(--muted); }
+  .ig-story .details { border-top: 1.5px solid var(--ink); padding-top:10px; }
+  .ig-story .details p { margin:0; font-size: 12px; line-height:1.4; }
+  .ig-story .details p strong { font-family:'Playfair Display', serif; font-weight:800; font-size:16px; display:block; margin-bottom:2px; }
+  .ig-story .cta { display:inline-block; margin-top: 14px; background: var(--c1); color: var(--paper); font-size: 11px; font-weight:700; padding: 9px 16px; border-radius: 999px; text-transform:uppercase; letter-spacing:0.15em; width:fit-content; }
+  .ig-story.variant2 { background: var(--c4); color: var(--paper); }
+  .ig-story.variant2 .tag-top { color: rgba(250,246,238,0.7); }
+  .ig-story.variant2 .wm .j{ color: var(--paper);} .ig-story.variant2 .wm .h{ color: var(--paper);} .ig-story.variant2 .wm .o{ color: var(--paper);}
+  .ig-story.variant2 .works { border-top-color: rgba(250,246,238,0.35); }
+  .ig-story.variant2 .works > div { color: var(--paper); }
+  .ig-story.variant2 .works > div em { color: rgba(250,246,238,0.75); }
+  .ig-story.variant2 .pull { color: var(--paper); }
+  .ig-story.variant2 .details { border-color: rgba(250,246,238,0.4); }
+  .ig-story.variant2 .details p { color: rgba(250,246,238,0.85); }
+  .ig-story.variant2 .details p strong { color: var(--paper); }
+  .ig-story.variant2 .cta { background: var(--c2); color: var(--ink); }
+  .ig-story.variant3 { background: var(--paper-2); }
+  .ig-story.variant3 .pull-big { font-family:'Playfair Display', serif; font-weight:900; font-size: 44px; line-height: 0.98; letter-spacing:-0.03em; }
+  .ig-story.variant3 .pull-big em { font-style:italic; font-weight:500; color: var(--c1); }
+  .ig-story .headshot-row { display:flex; align-items:center; gap: 14px; margin-bottom: 14px; }
+  .ig-story .headshot { width: 88px; height: 88px; border-radius: 50%; flex-shrink:0; overflow:hidden; position:relative; }
+  .ig-story .headshot img { width:100%; height:100%; object-fit:cover; display:block; }
+  .ig-story .headshot-row .who { display:flex; flex-direction:column; gap:2px; }
+  .ig-story .headshot-row .who strong { font-family:'Playfair Display', serif; font-weight:800; font-size: 22px; line-height:1.1; letter-spacing:-0.01em; color: var(--ink); }
+  .ig-story .headshot-row .who span { font-family:'Inter',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color: var(--c1); }
+  .ig-story.variant4 { background: #0e1422; color: var(--paper); }
+  .ig-story.variant4 .tag-top { color: rgba(250,246,238,0.6); }
+  .ig-story.variant4 .wm .j, .ig-story.variant4 .wm .h, .ig-story.variant4 .wm .o { color: var(--c1); }
+  .ig-story .season-list { display:flex; flex-direction:column; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(250,246,238,0.25); }
+  .ig-story .season-list .row { display:grid; grid-template-columns: 78px 1fr; gap: 10px; align-items:baseline; padding: 7px 0; border-bottom: 1px solid rgba(250,246,238,0.12); }
+  .ig-story .season-list .row:last-child { border-bottom:none; }
+  .ig-story .season-list .dt { font-family:'Playfair Display', serif; font-weight:800; font-size: 15px; color: var(--c2); line-height:1.15; }
+  .ig-story .season-list .dt span { display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color: rgba(250,246,238,0.45); margin-top:1px; }
+  .ig-story .season-list .ttl { font-family:'Playfair Display', serif; font-weight:700; font-size: 13px; line-height:1.2; color: var(--paper); }
+  .ig-story .season-list .ttl span { display:block; font-family:'Inter',sans-serif; font-weight:500; font-size:9px; color: rgba(250,246,238,0.6); margin-top:1px; }
+  .ig-story.variant4 .details { border-top-color: rgba(250,246,238,0.4); }
+  .ig-story.variant4 .details p { color: rgba(250,246,238,0.85); }
+  .ig-story.variant4 .details p strong { color: var(--paper); }
+  .ig-story.variant4 .cta { background: var(--c2); color: var(--ink); }
+
+  /* Slide: Squarespace home */
+  .s-web { padding: 60px 80px; display:grid; grid-template-rows: auto 1fr; gap: 30px; }
+  .s-web .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-web h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-web .browser { background:#fff; border-radius: 12px; overflow:hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.25); max-width: 1500px; margin: 0 auto; width: 100%; height: 100%; display:grid; grid-template-rows: auto 1fr; }
+  .s-web .chrome { background: #f3f2ee; padding: 10px 16px; display:flex; align-items:center; gap: 10px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .s-web .chrome .dots { display:flex; gap:6px; }
+  .s-web .chrome .dots span { width: 11px; height:11px; border-radius:50%; background:#ccc; }
+  .s-web .chrome .dots span:nth-child(1){ background:#ff5f57;}
+  .s-web .chrome .dots span:nth-child(2){ background:#febc2e;}
+  .s-web .chrome .dots span:nth-child(3){ background:#28c840;}
+  .s-web .chrome .url { flex:1; background:#fff; border-radius:6px; padding: 5px 12px; font-family:'Inter',sans-serif; font-size:12px; color:#666; border: 1px solid rgba(0,0,0,0.08); text-align:center; }
+  .s-web .viewport { overflow-y: auto; background: #fff; max-height: 870px; }
+  .s-web2 .viewport { overflow-y: auto; background: #fff; max-height: 870px; }
+
+  /* Squarespace nav */
+  .sq-nav { display:flex; justify-content:space-between; align-items:center; padding: 20px 60px; background:#fff; border-bottom: 1px solid rgba(0,0,0,0.08); gap: 24px; }
+  .sq-nav .sq-logo { font-family:'Playfair Display', serif; font-weight:900; font-size: 22px; letter-spacing:-0.01em; color: var(--ink); display:flex; align-items:center; gap:10px; flex-shrink:0; }
+  .sq-nav .sq-logo .mini { display:flex; gap:2px; }
+  .sq-nav .sq-logo .mini span { width:4px; height:22px; border-radius:1px; }
+  .sq-nav .links { display:flex; gap: 22px; align-items:center; }
+  .sq-nav .links a { font-family:'Inter',sans-serif; font-size: 12px; font-weight:600; color: var(--ink); text-decoration:none; text-transform:uppercase; letter-spacing:0.16em; }
+  .sq-nav .links a.donate { background: var(--c1); color: var(--paper); padding: 9px 16px; border-radius: 999px; font-weight:700; font-size:11px; }
+  .sq-nav .socials { display:flex; gap: 8px; align-items:center; flex-shrink:0; }
+  .sq-nav .socials a { display:flex; align-items:center; justify-content:center; width:24px; height:24px; color: var(--ink); opacity:0.55; }
+  .sq-nav .socials a:hover { opacity:1; color: var(--c1); }
+  .sq-nav .socials svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* Schedule page (slide 11) */
+  .sch-header { padding: 60px 60px 28px; background: var(--paper); border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .sch-header .eyebrow-sq { font-size:11px; text-transform:uppercase; letter-spacing:0.28em; color: var(--c1); font-weight:700; margin-bottom:8px; }
+  .sch-header h1 { font-family:'Playfair Display', serif; font-weight:900; font-size: 64px; letter-spacing:-0.03em; margin: 0 0 14px; color: var(--ink); line-height:1.02; }
+  .sch-header h1 em { font-style:italic; font-weight:500; color: var(--c1); }
+  .sch-header p { margin:0 0 22px; font-size: 16px; line-height:1.55; color: var(--muted); max-width: 640px; }
+  .sch-tabs { display:flex; gap: 6px; flex-wrap:wrap; padding-top: 4px; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 14px; }
+  .sch-tabs button, .sch-tabs a { font-family:'Inter',sans-serif; font-size: 12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.15); background: transparent; color: var(--ink); cursor:pointer; text-decoration:none; }
+  .sch-tabs .active { background: var(--c4); color: var(--paper); border-color: var(--c4); }
+
+  .sch-body { padding: 36px 60px 60px; background: var(--paper); }
+  .sch-section-label { font-family:'Inter',sans-serif; font-size: 11px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color: var(--muted); margin: 0 0 14px; }
+
+  /* Featured upcoming concert card (slide 11) */
+  .sch-upcoming { display:grid; grid-template-columns: 280px 1fr; gap: 40px; padding: 28px; background: var(--ink); color: var(--paper); border-radius: 14px; align-items:center; margin-bottom: 36px; }
+  .sch-upcoming .poster-thumb { background: var(--paper); aspect-ratio: 8.5/11; border-radius: 6px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding: 28px 22px; color: var(--c4); font-family:'Playfair Display', serif; font-weight:900; font-size: 26px; line-height:1.04; letter-spacing:-0.02em; box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+  .sch-upcoming .poster-thumb small { display:block; font-family:'Inter', sans-serif; font-weight:600; font-size: 9px; letter-spacing:0.22em; text-transform:uppercase; color: var(--muted); margin-top: 14px; }
+  .sch-upcoming .info .eyebrow-sq { font-size:10px; letter-spacing:0.28em; color: var(--c2); font-weight:700; text-transform:uppercase; margin-bottom: 6px; }
+  .sch-upcoming .info h3 { font-family:'Playfair Display', serif; font-weight:700; font-size:30px; margin: 0 0 4px; letter-spacing:-0.01em; line-height:1.1; }
+  .sch-upcoming .info .meta { font-size: 13px; color: rgba(250,246,238,0.75); line-height:1.5; }
+  .sch-upcoming .info .works { margin-top: 14px; display:flex; flex-wrap:wrap; gap: 6px; }
+  .sch-upcoming .info .works span { font-family:'Playfair Display', serif; font-style:italic; font-size:13px; color: rgba(250,246,238,0.9); padding: 4px 10px; border: 1px solid rgba(250,246,238,0.3); border-radius:999px; }
+  .sch-upcoming .info .cta { display:flex; gap:10px; margin: 14px 0; }
+  .sch-upcoming .info .cta a { font-family:'Inter',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; padding: 10px 20px; border-radius: 999px; text-decoration:none; }
+  .sch-upcoming .info .cta a.primary { background: var(--c1); color: var(--paper); }
+  .sch-upcoming .info .cta a.secondary { border: 1px solid rgba(250,246,238,0.35); color: var(--paper); }
+
+  /* Past concert list — one row per concert */
+  .sch-grid { display:flex; flex-direction:column; gap: 12px; }
+  .sch-card { display:grid; grid-template-columns: 90px 1fr auto; gap: 24px; padding: 18px 22px; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 10px; align-items:center; }
+  .sch-card .date { display:flex; flex-direction:column; align-items:flex-start; gap: 2px; }
+  .sch-card .date .d { font-family:'Playfair Display', serif; font-weight:900; font-size: 36px; line-height:0.95; letter-spacing:-0.02em; color: var(--ink); }
+  .sch-card .date .my { font-family:'Inter',sans-serif; font-size: 10px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color: var(--c1); }
+  .sch-card .date .y { font-family:'Inter',sans-serif; font-size: 10px; letter-spacing:0.18em; color: var(--muted); font-weight:600; }
+  .sch-card .body { display:flex; flex-direction:column; gap: 4px; min-width:0; }
+  .sch-card h4 { font-family:'Playfair Display', serif; font-weight:700; font-size: 18px; line-height:1.2; letter-spacing:-0.01em; margin: 0; color: var(--ink); }
+  .sch-card .venue { font-size: 12px; color: var(--muted); line-height:1.45; margin: 0; }
+  .sch-card .works { font-family:'Playfair Display', serif; font-style:italic; font-size: 12px; color: var(--ink); line-height:1.4; margin-top: 2px; }
+  .sch-card .media { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width: 320px; }
+  .sch-card .media .chip { display:inline-flex; align-items:center; gap:5px; font-family:'Inter',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding: 6px 10px; border-radius: 4px; text-decoration:none; cursor:pointer; }
+  .sch-card .media .chip svg { width:11px; height:11px; }
+  .sch-card .media .chip.poster  { background: rgba(42,93,143,0.10);   color: var(--c4); }
+  .sch-card .media .chip.program { background: rgba(224,75,42,0.10);   color: var(--c1); }
+  .sch-card .media .chip.video   { background: rgba(217,74,109,0.10);  color: var(--c6); }
+  .sch-card .media .chip.audio   { background: rgba(58,143,107,0.10);  color: var(--c3); }
+  .sch-card .media .chip.photos  { background: rgba(125,59,143,0.10);  color: var(--c5); }
+  .sch-card .media .chip.notes   { background: rgba(15,76,92,0.10);    color: var(--c7); }
+  .sch-card .media .chip.none    { background: transparent; color: var(--muted); font-weight:500; padding-left:0; font-style:italic; text-transform:none; letter-spacing: 0.02em; }
+
+  /* Hero */
+  .sq-hero { padding: 80px 60px 70px; display:grid; grid-template-columns: 1.3fr 1fr; gap: 60px; align-items:center; background: var(--paper); }
+  .sq-hero .eyebrow-sq { font-size:11px; text-transform:uppercase; letter-spacing:0.28em; color: var(--c1); font-weight:700; margin-bottom: 14px; }
+  .sq-hero h1 { font-family:'Playfair Display', serif; font-weight:900; font-size: 80px; line-height:1.02; letter-spacing:-0.03em; margin:0 0 18px; color: var(--ink); }
+  .sq-hero h1 em { font-style: italic; font-weight:500; color: var(--c1); }
+  .sq-hero p { font-size: 17px; line-height:1.55; color: var(--muted); max-width: 480px; margin: 0 0 26px; }
+  .sq-hero .btns { display:flex; gap:12px; }
+  .sq-hero .btns a { padding: 12px 24px; border-radius: 999px; font-size:12px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; text-decoration:none; }
+  .sq-hero .btns .primary { background: var(--ink); color: var(--paper); }
+  .sq-hero .btns .secondary { border: 1.5px solid var(--ink); color: var(--ink); }
+  .sq-hero .visual { aspect-ratio: 1/1; border-radius: 12px; display:grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr; gap: 6px; padding: 6px; background: var(--paper-2); }
+  .sq-hero .visual div { border-radius: 6px; }
+  .sq-hero .visual .photo { background: linear-gradient(135deg, var(--c4), var(--c7)); grid-column: span 2; grid-row: span 2; position:relative; overflow:hidden; }
+  .sq-hero .visual .photo::after { content:'♪'; position:absolute; right:20px; bottom:12px; color: rgba(255,255,255,0.3); font-size: 80px; font-family:'Playfair Display', serif; }
+
+  /* Upcoming concert card */
+  .sq-concert { padding: 70px 60px; background: var(--ink); color: var(--paper); }
+  .sq-concert .section-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 34px; }
+  .sq-concert .section-head h2 { font-family:'Playfair Display', serif; font-weight:500; font-style:italic; font-size: 44px; margin:0; line-height:1; }
+  .sq-concert .section-head .eyebrow-sq { font-size:10px; text-transform:uppercase; letter-spacing:0.3em; color: var(--c2); font-weight:700; margin-bottom:6px; }
+  .sq-concert .view-all { color: var(--c2); font-size: 12px; text-transform:uppercase; letter-spacing:0.18em; font-weight:700; text-decoration:none; border-bottom: 1px solid var(--c2); padding-bottom:2px; }
+  .sq-concert .next { display:grid; grid-template-columns: 140px 1fr auto; gap: 40px; align-items:center; padding: 30px 0; border-top: 1px solid rgba(250,246,238,0.2); border-bottom: 1px solid rgba(250,246,238,0.2); }
+  .sq-concert .next .date .m { font-size:11px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c2); font-weight:700; }
+  .sq-concert .next .date .d { font-family:'Playfair Display', serif; font-weight:900; font-size: 66px; line-height:0.9; letter-spacing:-0.03em; }
+  .sq-concert .next .date .y { font-size:11px; letter-spacing:0.22em; color: rgba(250,246,238,0.5); font-weight:600; }
+  .sq-concert .next .info h3 { font-family:'Playfair Display', serif; font-weight:700; font-size:28px; margin: 0 0 4px; line-height:1.1; letter-spacing:-0.01em; }
+  .sq-concert .next .info p { margin:0; font-size: 14px; color: rgba(250,246,238,0.7); line-height:1.5; }
+  .sq-concert .next .info .works { margin-top: 10px; display:flex; flex-wrap:wrap; gap: 8px; }
+  .sq-concert .next .info .works span { font-family:'Playfair Display', serif; font-style:italic; font-size:13px; color: rgba(250,246,238,0.85); padding: 3px 10px; border: 1px solid rgba(250,246,238,0.3); border-radius:999px; }
+  .sq-concert .next .cta { padding: 14px 24px; background: var(--c1); color: var(--paper); text-decoration:none; border-radius:999px; font-size:12px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; }
+
+  /* About / mosaic grid */
+  .sq-about { padding: 70px 60px; background: var(--paper); }
+  .sq-about .head-row { display:grid; grid-template-columns: 1fr 2fr; gap: 60px; margin-bottom: 34px; }
+  .sq-about .head-row .eyebrow-sq { font-size:11px; text-transform:uppercase; letter-spacing:0.28em; color: var(--c1); font-weight:700; margin-bottom:10px; }
+  .sq-about .head-row h2 { font-family:'Playfair Display', serif; font-weight:500; font-size: 44px; margin:0; line-height:1.05; letter-spacing:-0.02em; }
+  .sq-about .head-row h2 em { font-style:italic; font-weight:400; color: var(--c1); }
+  .sq-about .head-row p { font-size:16px; line-height: 1.6; color: var(--muted); margin:0; }
+  .sq-about .tiles { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .sq-about .tile { aspect-ratio: 1.1/1; border-radius: 10px; padding: 24px; color: var(--paper); display:flex; flex-direction:column; justify-content:space-between; }
+  .sq-about .tile .tile-num { font-family:'Playfair Display', serif; font-weight:900; font-size:64px; line-height:1; letter-spacing:-0.03em; }
+  .sq-about .tile h4 { margin:0; font-family:'Playfair Display', serif; font-style:italic; font-weight:500; font-size:22px; line-height:1.15; }
+  .sq-about .tile p { margin:6px 0 0; font-size:12px; line-height:1.5; opacity:0.85; }
+
+  /* Footer */
+  .sq-foot { padding: 50px 60px; background: var(--paper-2); }
+  .sq-foot .inner { display:flex; justify-content:space-between; align-items:center; }
+  .sq-foot .brand { font-family:'Playfair Display', serif; font-weight:900; font-size:24px; letter-spacing:-0.01em; color: var(--ink); }
+  .sq-foot .brand small { display:block; font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.2em; font-weight:500; color: var(--muted); margin-top:3px; }
+  .sq-foot .copy { font-size:12px; color: var(--muted); }
+
+  /* Slide: Squarespace interior (concerts page) */
+  .s-web2 { padding: 60px 80px; display:grid; grid-template-rows: auto 1fr; gap: 30px; }
+  .s-web2 .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-web2 h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+
+  .sq-concert-header { padding: 60px 60px 40px; background: var(--paper); border-bottom:1px solid rgba(0,0,0,0.08); }
+  .sq-concert-header h1 { font-family:'Playfair Display', serif; font-weight:900; font-size: 80px; letter-spacing:-0.035em; margin: 10px 0 14px; color: var(--ink); line-height:0.95; }
+  .sq-concert-header h1 em { font-style:italic; font-weight:500; color: var(--c1); }
+  .sq-concert-header .eyebrow-sq { font-size:11px; text-transform:uppercase; letter-spacing:0.28em; color: var(--c1); font-weight:700; }
+  .sq-concert-header p { margin: 0; font-size: 17px; line-height:1.6; color: var(--muted); max-width: 620px; }
+
+  .sq-list { padding: 20px 60px 60px; background: var(--paper); }
+  .sq-list .item { display:grid; grid-template-columns: 120px 1fr auto; gap: 40px; padding: 28px 0; border-bottom: 1px solid rgba(0,0,0,0.1); align-items:center; }
+  .sq-list .item:first-child { border-top: 1px solid rgba(0,0,0,0.1); }
+  .sq-list .item .date .m { font-size:11px; text-transform:uppercase; letter-spacing:0.22em; color:var(--c1); font-weight:700; }
+  .sq-list .item .date .d { font-family:'Playfair Display', serif; font-weight:900; font-size: 52px; line-height:0.9; letter-spacing:-0.02em; color: var(--ink); }
+  .sq-list .item .date .y { font-size:11px; letter-spacing:0.22em; color: var(--muted); font-weight:600; }
+  .sq-list .item .info h3 { font-family:'Playfair Display', serif; font-weight:700; font-size:22px; margin: 0 0 4px; line-height:1.2; letter-spacing:-0.01em; color: var(--ink); }
+  .sq-list .item .info p { margin:0; font-size: 13px; color: var(--muted); line-height:1.5; }
+  .sq-list .item .info .works { margin-top: 8px; font-family:'Playfair Display', serif; font-style:italic; font-size:13px; color: var(--ink); }
+  .sq-list .item .info .works span { color: var(--muted); font-style:normal; }
+  .sq-list .item .status { font-size:10px; text-transform:uppercase; letter-spacing:0.22em; padding: 6px 12px; border-radius:999px; font-weight:700; align-self:center; }
+  .sq-list .item .status.up { background: var(--c3); color: #fff; }
+  .sq-list .item .status.past { background: var(--paper-2); color: var(--muted); }
+
+  /* Slide: System summary */
+  .s-summary { padding: 80px 120px; display:grid; grid-template-rows: auto 1fr; gap: 40px; }
+  .s-summary .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:20px; }
+  .s-summary h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:56px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-summary .grid { display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
+  .s-summary .card { background: var(--paper-2); border-radius: 14px; padding: 34px 30px; display:flex; flex-direction:column; gap: 10px; }
+  .s-summary .card .icon-row { display:flex; align-items:center; gap:10px; margin-bottom: 12px; }
+  .s-summary .card .dot { width: 20px; height: 20px; border-radius:50%; }
+  .s-summary .card .num { font-family:'Playfair Display', serif; font-style:italic; font-weight:500; font-size:20px; color: var(--muted); }
+  .s-summary .card h3 { font-family:'Playfair Display', serif; font-size: 32px; font-weight:700; letter-spacing:-0.02em; margin:0 0 6px; line-height:1.05; }
+  .s-summary .card p { font-size:13px; line-height:1.55; color: var(--muted); margin:0; }
+  .s-summary .next { display:grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--ink); }
+  .s-summary .next h4 { font-family:'Playfair Display', serif; font-weight:600; font-size:20px; margin: 0 0 8px; letter-spacing:-0.01em; }
+  .s-summary .next ul { margin: 0; padding-left: 18px; font-size:14px; line-height:1.7; color: var(--muted); }
+
+  .page-num { position:absolute; top: 40px; right: 60px; font-family:'Inter',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color: var(--muted); }
+
+  /* Slide: Wordmark colour variants (stacked) */
+  .s-wmcolor { padding: 70px 110px 60px; display:grid; grid-template-rows: auto auto 1fr; gap: 28px; background: var(--paper); }
+  .s-wmcolor .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:18px; }
+  .s-wmcolor h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:52px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-wmcolor .intro { display:flex; justify-content:space-between; gap: 40px; align-items:flex-start; }
+  .s-wmcolor .intro .lead { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size: 24px; line-height:1.3; color: var(--ink); max-width: 56ch; }
+  .s-wmcolor .intro .legend { display:flex; gap: 8px; align-items:center; font-family:'Inter',sans-serif; font-size: 11px; letter-spacing: 0.18em; text-transform:uppercase; color: var(--muted); font-weight: 600; }
+  .s-wmcolor .grid { display:grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 18px; min-height: 0; }
+  .s-wmcolor .cell { border-radius: 10px; padding: 28px 28px 22px; display:flex; flex-direction:column; justify-content:space-between; gap: 18px; position:relative; overflow:hidden; min-height: 0; }
+  .s-wmcolor .cell .mark { flex: 1; display:flex; align-items:center; justify-content:center; }
+  .s-wmcolor .cell .mark .logo-stacked { font-size: 56px; line-height: 1.12; }
+  .s-wmcolor .cell .mark .logo-stacked > span { display:block; }
+  .s-wmcolor .cell .lbl { display:flex; justify-content:space-between; align-items:flex-end; gap: 14px; }
+  .s-wmcolor .cell .lbl .name { font-family:'Playfair Display',serif; font-weight: 700; font-size: 18px; letter-spacing:-0.01em; line-height:1; }
+  .s-wmcolor .cell .lbl .hex { font-family:'JetBrains Mono',monospace; font-size: 10px; letter-spacing: 0.06em; opacity: 0.7; }
+  .s-wmcolor .cell .role { font-family:'Inter',sans-serif; font-size: 10px; text-transform:uppercase; letter-spacing:0.2em; font-weight:600; opacity:0.7; }
+  .s-wmcolor .cell.light { background: var(--paper); border: 1px solid #00000010; }
+  .s-wmcolor .cell.lighter { background: #ffffff; border: 1px solid #00000010; }
+  .s-wmcolor .cell.dark { background: #0e1422; color: #fff; }
+  .s-wmcolor .cell.dark .lbl .name, .s-wmcolor .cell.dark .role { color: #fff; }
+  .s-wmcolor .cell .ord { position:absolute; top: 18px; right: 22px; font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing: 0.1em; opacity: 0.5; }
+
+  /* Slide: Wordmark horizontal variants */
+  .s-wmhoriz { padding: 70px 110px 60px; display:grid; grid-template-rows: auto auto 1fr; gap: 28px; background: var(--paper); }
+  .s-wmhoriz .head { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--ink); padding-bottom:18px; }
+  .s-wmhoriz h2 { font-family:'Playfair Display', serif; font-weight:600; font-size:52px; letter-spacing:-0.02em; margin:0; line-height:1; }
+  .s-wmhoriz .intro { display:flex; justify-content:space-between; gap: 40px; align-items:flex-start; }
+  .s-wmhoriz .intro .lead { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size: 24px; line-height:1.3; color: var(--ink); max-width: 64ch; }
+  .s-wmhoriz .stack { display:flex; flex-direction:column; gap: 0; }
+  .s-wmhoriz .row { display:grid; grid-template-columns: 80px 1fr 160px; gap: 32px; align-items:center; padding: 22px 28px; border-radius: 8px; }
+  .s-wmhoriz .row .ord { font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing: 0.1em; opacity: 0.55; }
+  .s-wmhoriz .row .mark { display:flex; align-items:center; justify-content:flex-start; }
+  .s-wmhoriz .row .mark .logo-horizontal { font-size: 44px; line-height: 1; }
+  .s-wmhoriz .row .meta { display:flex; flex-direction:column; gap: 4px; text-align:right; align-items:flex-end; }
+  .s-wmhoriz .row .meta .name { font-family:'Playfair Display',serif; font-weight:700; font-size:16px; letter-spacing:-0.01em; line-height:1; }
+  .s-wmhoriz .row .meta .hex { font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.06em; opacity:0.7; }
+  .s-wmhoriz .row.light { background: var(--paper); }
+  .s-wmhoriz .row.lighter { background: #ffffff; border: 1px solid #00000010; }
+  .s-wmhoriz .row.dark { background: #0e1422; }
+  .s-wmhoriz .row.dark .meta .name, .s-wmhoriz .row.dark .ord { color: #fff; opacity: 0.85; }
+
+</style>
+</head>
+<body data-palette="mosaic">
+
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 Cover -->
+  <section class="slide s-cover">
+    <span class="page-num">01 / Cover</span>
+    <div class="top">
+      <div class="eyebrow-row">
+        <span class="eyebrow">Brand System — v1.0</span>
+        <span class="rule"></span>
+        <span class="eyebrow">April 2026</span>
+      </div>
+      <h1>
+        <span class="line txt-c4">Jackson</span>
+        <span class="line txt-c4">Heights</span>
+        <span class="orch txt-c4">Orchestra</span>
+      </h1>
+      <div class="mosaic-rule" style="margin-top:36px;"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="bottom">
+      <div class="meta">
+        <strong>A community orchestra for Queens' most diverse zip code.</strong>
+        New identity · Color system · Poster templates · Squarespace site
+      </div>
+      <div class="meta" style="text-align:right">
+        <strong>jhorchestra.org</strong>
+        @jhorchestra
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Concept -->
+  <section class="slide s-concept">
+    <span class="page-num">02 / Concept</span>
+    <div class="left">
+      <div class="eyebrow txt-c1" style="margin-bottom:30px;">The Idea</div>
+      <h3 class="lead">An orchestra as <em>many voices</em> — tuned to the rhythm of <em>Jackson Heights</em>.</h3>
+    </div>
+    <div class="right">
+      <div class="pillar">
+        <div class="num txt-c1">01</div>
+        <div><h4>Neighborhood, not institution</h4><p>Warm, civic, human. The brand feels like a block in Queens — not a concert hall lobby. Serif display + honest sans.</p></div>
+      </div>
+      <div class="pillar">
+        <div class="num txt-c4">02</div>
+        <div><h4>A two-color spine, a mosaic chorus</h4><p>Subway blue and Tandoor red lead every layout. Cilantro and Saffron join on dark grounds. The rest of the palette appears only as a thin rainbow rule — the mosaic of the neighborhood.</p></div>
+      </div>
+      <div class="pillar">
+        <div class="num txt-c3">03</div>
+        <div><h4>One mark, single colour</h4><p>The wordmark sets in one colour at a time — Subway or Tandoor on paper, Cilantro or Saffron on ink, Black or White as needed. Never multi-toned.</p></div>
+      </div>
+      <div class="pillar">
+        <div class="num txt-c5">04</div>
+        <div><h4>Built for Squarespace</h4><p>Everything designed in blocks a volunteer can rearrange — sections, color swaps, Google Fonts, nothing exotic.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Logo system -->
+  <section class="slide s-logos">
+    <span class="page-num">03 / Logo System</span>
+    <div class="head">
+      <h2>Logo directions.</h2>
+      <div class="eyebrow txt-c1">Three marks, one system</div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div>
+          <div class="cap">01 — Primary</div>
+          <div class="lbl">The Wordmark</div>
+          <p class="desc">Three stacked words in a single brand colour. The full palette stays out of the logo — it shows up underneath, as a rainbow rule, so the mark always reads clean.</p>
+        </div>
+        <div class="display">
+          <span class="logo-stacked" style="font-size:64px; line-height:1; color: var(--c4);">
+            <span class="l-j">Jackson</span>
+            <span class="l-h">Heights</span>
+            <span class="l-o">Orchestra</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="card invert">
+        <div>
+          <div class="cap">02 — Monogram</div>
+          <div class="lbl">The Tile</div>
+          <p class="desc">A compact monogram built from four colored squares spelling JHO. Works as a favicon, avatar, lapel pin, or social thumbnail.</p>
+        </div>
+        <div class="display">
+          <span class="logo-mono">
+            <span class="tile fill-c4">J</span>
+            <span class="word">Jackson</span>
+            <span class="tile fill-c4">H</span>
+            <span class="word">Heights</span>
+            <span class="tile fill-c4">O</span>
+            <span class="word">Orchestra</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="card accent">
+        <div>
+          <div class="cap">03 — Secondary</div>
+          <div class="lbl">The Waveform</div>
+          <p class="desc">A layered waveform built from three colored lines, paired with a lightweight wordmark. Used on programs, letterhead, and editorial layouts.</p>
+        </div>
+        <div class="display">
+          <span class="logo-wave">
+            <span class="wave">
+              <span class="fill-c2" style="height:60%"></span>
+              <span class="fill-c2" style="height:80%"></span>
+              <span class="fill-c2" style="height:45%"></span>
+              <span class="fill-c2" style="height:90%"></span>
+              <span class="fill-c2" style="height:35%"></span>
+              <span class="fill-c3" style="height:70%"></span>
+              <span class="fill-c3" style="height:95%"></span>
+              <span class="fill-c3" style="height:50%"></span>
+              <span class="fill-c3" style="height:75%"></span>
+              <span class="fill-c4" style="height:40%"></span>
+              <span class="fill-c4" style="height:85%"></span>
+              <span class="fill-c4" style="height:60%"></span>
+              <span class="fill-c4" style="height:30%"></span>
+            </span>
+            <span class="word">Jackson Heights <em>Orchestra</em></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 Primary lockup -->
+  <section class="slide s-lockup">
+    <span class="page-num">04 / Primary Lockup</span>
+    <div class="head">
+      <h2>The primary wordmark.</h2>
+      <div class="eyebrow txt-c1">Use this 80% of the time</div>
+    </div>
+    <div class="main">
+      <div class="stage">
+        <div class="big-logo">
+          <span class="logo-stacked">
+            <span class="l-j">Jackson</span>
+            <span class="l-h">Heights</span>
+            <span class="l-o">Orchestra</span>
+            <span class="tag">Community Orchestra · Jackson Heights, Queens</span>
+          </span>
+        </div>
+      </div>
+      <div class="variants">
+        <div class="variant">
+          <span class="logo-stacked" style="font-size:40px; color: var(--c4);">
+            <span>Jackson</span>
+            <span>Heights</span>
+            <span>Orchestra</span>
+          </span>
+          <span class="mini-cap">Subway · on paper</span>
+        </div>
+        <div class="variant">
+          <span class="logo-stacked" style="font-size:40px; color: var(--c1);">
+            <span>Jackson</span>
+            <span>Heights</span>
+            <span>Orchestra</span>
+          </span>
+          <span class="mini-cap">Tandoor · on paper</span>
+        </div>
+        <div class="variant dark">
+          <span class="logo-stacked" style="font-size:40px; color: var(--c3);">
+            <span>Jackson</span>
+            <span>Heights</span>
+            <span>Orchestra</span>
+          </span>
+          <span class="mini-cap">Cilantro · reversed</span>
+        </div>
+        <div class="variant dark">
+          <span class="logo-stacked" style="font-size:40px; color: var(--c2);">
+            <span>Jackson</span>
+            <span>Heights</span>
+            <span>Orchestra</span>
+          </span>
+          <span class="mini-cap">Saffron · reversed</span>
+        </div>
+      </div>
+    </div>
+    <div class="principles">
+      <div><span class="eyebrow">Minimum size</span><p>48 px / 0.75 in — below that, use the monogram tile.</p></div>
+      <div><span class="eyebrow">Clear space</span><p>Half the cap-height of "J" on every side. Treat it generously.</p></div>
+      <div><span class="eyebrow">Never</span><p>Reorder colors, skew letters, apply effects, or set on a busy photo.</p></div>
+      <div><span class="eyebrow">File formats</span><p>SVG primary; PNG fallbacks at 1x/2x/3x; single-color EPS for print vendors.</p></div>
+    </div>
+  </section>
+
+  <!-- 05 Color -->
+  <section class="slide s-color">
+    <span class="page-num">05 / Color</span>
+    <div class="head">
+      <h2>The mosaic palette.</h2>
+      <div class="eyebrow txt-c1">Seven voices, one chord</div>
+    </div>
+    <div class="grid">
+      <div class="palette">
+        <div class="sw fill-c1"><div class="role">Primary · Red</div><div><div class="name">Tandoor</div><div class="hex">#E04B2A</div></div></div>
+        <div class="sw fill-c2"><div class="role">Primary · Amber</div><div><div class="name">Saffron</div><div class="hex">#F2A93B</div></div></div>
+        <div class="sw fill-c3"><div class="role">Primary · Green</div><div><div class="name">Cilantro</div><div class="hex">#3A8F6B</div></div></div>
+        <div class="sw fill-c4"><div class="role">Primary · Blue</div><div><div class="name">Subway</div><div class="hex">#2A5D8F</div></div></div>
+        <div class="sw fill-c5"><div class="role">Accent · Violet</div><div><div class="name">Jacaranda</div><div class="hex">#7D3B8F</div></div></div>
+        <div class="sw fill-c6"><div class="role">Accent · Rose</div><div><div class="name">Hibiscus</div><div class="hex">#D94A6D</div></div></div>
+        <div class="sw fill-c7"><div class="role">Accent · Teal</div><div><div class="name">Roosevelt</div><div class="hex">#0F4C5C</div></div></div>
+        <div class="sw light" style="background:var(--paper-2);"><div class="role">Neutral · Paper</div><div><div class="name">Newsprint</div><div class="hex">#F3ECDC</div></div></div>
+      </div>
+      <div class="notes">
+        <div class="block">
+          <h3>Diversity as chord</h3>
+          <p>Seven colors named for the neighborhood: the spices on 74th, the subway line overhead, the jacarandas in spring, the hibiscus on a fruit cart. The palette is a chorus, not a stack — it only appears together as a mosaic rule or grid, never inside the wordmark itself.</p>
+        </div>
+        <div class="diversity-grid">
+          <div style="background:var(--c1)"></div>
+          <div style="background:var(--c2)"></div>
+          <div style="background:var(--c3)"></div>
+          <div style="background:var(--c4)"></div>
+          <div style="background:var(--c5)"></div>
+          <div style="background:var(--c6)"></div>
+          <div style="background:var(--c7)"></div>
+        </div>
+        <div class="block">
+          <h3>Rules of use</h3>
+          <p><strong style="color:var(--ink)">Wordmark.</strong> Always one color — Subway, Tandoor, Cilantro, Saffron, Ink, or Paper. Never multi-toned.<br>
+          <strong style="color:var(--ink)">Primary.</strong> Subway and Tandoor lead every layout — wordmark colour, headlines, paper grounds, the dominant accent.<br>
+          <strong style="color:var(--ink)">Highlights.</strong> Cilantro and Saffron carry the brand on dark or black backgrounds, and pop as callout colour on light.<br>
+          <strong style="color:var(--ink)">Accents.</strong> Jacaranda, Hibiscus, Roosevelt only inside the full mosaic rule or accent grid — never alone.<br>
+          <strong style="color:var(--ink)">Neutral.</strong> Newsprint is paper; Ink (#141A2A) is text. No pure black, no pure white.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 Type -->
+  <section class="slide s-type">
+    <span class="page-num">06 / Typography</span>
+    <div class="head">
+      <h2>Two voices.</h2>
+      <div class="eyebrow txt-c1">Display serif + workhorse sans</div>
+    </div>
+    <div class="grid">
+      <div class="specs">
+        <div class="spec">
+          <div class="meta"><span>Playfair Display · 900</span><span>Display / Headline</span></div>
+          <div class="sample h1 txt-c1">Jackson Heights</div>
+        </div>
+        <div class="spec">
+          <div class="meta"><span>Playfair Italic · 500</span><span>Feature / Accent</span></div>
+          <div class="sample h2 txt-c4">a community chord</div>
+        </div>
+        <div class="spec">
+          <div class="meta"><span>Inter · 700</span><span>Subhead / Section</span></div>
+          <div class="sample h3">Upcoming concerts & news</div>
+        </div>
+        <div class="spec">
+          <div class="meta"><span>Inter · 400</span><span>Body / Long-form</span></div>
+          <div class="sample body">The Jackson Heights Orchestra is a community ensemble rooted in the neighborhood. Each season brings new voices, new programming, and free admission — with a suggested donation to keep the music going.</div>
+        </div>
+        <div class="spec">
+          <div class="meta"><span>Inter · 600 · all caps</span><span>Eyebrow / Tag</span></div>
+          <div class="sample eyebrow txt-c1">Wed · May 20 · 7:30 PM · Astoria</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="font-card">
+          <div class="name">Playfair Display</div>
+          <div class="role">Display · Google Fonts</div>
+          <p class="desc">A transitional serif with high contrast and a confident, editorial voice. Used at 900 for the wordmark and 500 italic for flourishes. Free on Google Fonts and already in Squarespace's picker.</p>
+          <div class="weights"><span>400</span><span>500</span><span>700</span><span>900</span><span>Italic</span></div>
+        </div>
+        <div class="font-card">
+          <div class="name inter">Inter</div>
+          <div class="role">Text · Google Fonts</div>
+          <p class="desc">Clear, neutral sans for every word of body copy, UI, and captions. Legible on flyers and concert programs at small sizes.</p>
+          <div class="weights"><span>400</span><span>500</span><span>600</span><span>700</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Poster 8.5x11 -->
+  <section class="slide s-poster">
+    <span class="page-num">07 / Concert Poster · 8.5 × 11</span>
+    <div class="head">
+      <h2>Concert poster.</h2>
+      <div class="layout-swap">
+        <button data-poster="A" class="active">Layout A · Big Type</button>
+        <button data-poster="B">Layout B · Color Block</button>
+        <button data-poster="C">Layout C · Editorial</button>
+      </div>
+    </div>
+    <div class="body">
+      <div class="poster-stage">
+        <!-- Poster A -->
+        <div class="poster poster-a two-soloists" id="posterA">
+          <div class="presents-bar">
+            Jackson Heights Beautification Group &nbsp;presents
+          </div>
+          <div class="masthead">
+            <div class="wordmark">
+              <span class="j">Jackson</span>
+              <span class="h">Heights</span>
+              <span class="o">Orchestra</span>
+            </div>
+            <div class="portraits">
+              <div class="person">
+                <div class="portrait"><img src="assets/alex-wen.jpg" alt="Alex Wen" /></div>
+                <div class="pname">Alex Wen<em>Artistic Director</em></div>
+              </div>
+              <div class="person">
+                <div class="portrait"><img src="assets/michael-lee.jpg" alt="Michael A. Lee" /></div>
+                <div class="pname">Michael A. Lee<em>Composer</em></div>
+              </div>
+            </div>
+          </div>
+          <div class="mosaic">
+            <div style="background:var(--c1)"></div>
+            <div style="background:var(--c2)"></div>
+            <div style="background:var(--c3)"></div>
+            <div style="background:var(--c4)"></div>
+            <div style="background:var(--c5)"></div>
+            <div style="background:var(--c6)"></div>
+            <div style="background:var(--c7)"></div>
+          </div>
+          <div class="meta-row">
+            <div class="block"><h5>When</h5><p><strong>Wed · May 20, 2026</strong><strong class="time-line">7:30pm (Doors at 7:00)</strong></p></div>
+            <div class="block"><h5>Where</h5><p><strong>Trinity Lutheran Church</strong>31-18 37th St · Astoria, Queens</p></div>
+          </div>
+          <div class="program">
+            <div class="program-header">
+              <span class="eyebrow-p">Program</span>
+              <div class="program-sub">Celebrating the 100-year anniversary of the Trinity Lutheran Church Building</div>
+            </div>
+            <div class="work">
+              <div class="composer">Fanny Mendelssohn-Hensel</div>
+              <div class="piece">Overture in C Major</div>
+            </div>
+            <div class="work">
+              <div class="composer">Michael A. Lee</div>
+              <div class="piece">Cognōscent</div>
+              <div class="sub-tag">World Premiere</div>
+            </div>
+            <div class="work">
+              <div class="composer">Felix Mendelssohn</div>
+              <div class="piece">Symphony No. 5 "Reformation"</div>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="site">jhorchestra.org<small>@jhorchestra</small></div>
+            <div class="give">Free admission<small>$20 suggested donation</small></div>
+            <img src="assets/jhbg_logo.webp" alt="Jackson Heights Beautification Group" class="jhbg-logo" />
+          </div>
+        </div>
+
+        <!-- Poster B -->
+        <div class="poster poster-b" id="posterB" style="display:none;">
+          <div class="top">
+            <div class="orbs"></div>
+            <div style="position:relative;z-index:2">
+              <div class="presents">Jackson Heights Beautification Group presents</div>
+            </div>
+            <div style="position:relative;z-index:2">
+              <div class="wordmark">
+                <span>Jackson</span>
+                <span>Heights</span>
+                <em>Orchestra</em>
+              </div>
+              <div class="meta-strip">
+                <div><h5>Date</h5><p>Wed · May 20</p></div>
+                <div><h5>Time</h5><p>7:30 PM</p></div>
+                <div><h5>Venue</h5><p>Trinity Lutheran<br>Astoria, Queens</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="bot">
+            <div class="program">
+              <span class="eyebrow-p">Program · 100 Years of Trinity Lutheran</span>
+              <div class="work">
+                <div class="num">I.</div>
+                <div class="body">
+                  <h4>Fanny Mendelssohn-Hensel</h4>
+                  <p>Overture in C Major</p>
+                </div>
+              </div>
+              <div class="work">
+                <div class="num">II.</div>
+                <div class="body">
+                  <h4>Michael A. Lee · World Premiere</h4>
+                  <p>Cognōscent</p>
+                </div>
+              </div>
+              <div class="work">
+                <div class="num">III.</div>
+                <div class="body">
+                  <h4>Felix Mendelssohn</h4>
+                  <p>Symphony No. 5 “Reformation”</p>
+                </div>
+              </div>
+            </div>
+            <div class="footer">
+              <div>
+                <div class="seal" style="margin-bottom:4px;"><div class="griffin">✦</div></div>
+                <div class="txt">Public funds, Queens Arts Fund · NYC Dept of Cultural Affairs · NYS Foundation for the Arts</div>
+              </div>
+              <div class="site">jhorchestra.org<small>@jhorchestra</small></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Poster C -->
+        <div class="poster poster-c" id="posterC" style="display:none;">
+          <div class="header-row">
+            <div class="presents">Jackson Heights Beautification Group presents</div>
+            <div class="date-stamp">
+              <div class="dayname">Wednesday</div>
+              <div class="date">May 20</div>
+              <div class="year">2026 · 7:30 PM</div>
+            </div>
+          </div>
+          <div class="title-mark">
+            <div class="small">presenting the</div>
+            <h1>
+              <span class="j">Jackson</span>
+              <span class="h">Heights</span>
+              <em class="o">Orchestra</em>
+            </h1>
+          </div>
+          <div class="hero-cite">A community orchestra, a neighborhood chord — one evening, three works, one hundred years of Trinity Lutheran.</div>
+          <div class="middle">
+            <div class="col">
+              <h5>Venue</h5>
+              <p><strong>Trinity Lutheran Church</strong>31-18 37th Street<br>Astoria, Queens</p>
+            </div>
+            <div class="col">
+              <h5>Admission</h5>
+              <p><strong>Free &amp; open</strong>$20 suggested donation<br>jhorchestra.org/donate</p>
+            </div>
+          </div>
+          <div class="program">
+            <span class="eyebrow-p">The Program</span>
+            <div class="work"><h4>Mendelssohn-Hensel</h4><p>Overture in C Major</p></div>
+            <div class="work"><h4>Michael A. Lee · World Premiere</h4><p>Cognōscent</p></div>
+            <div class="work"><h4>Felix Mendelssohn</h4><p>Symphony No. 5 “Reformation”</p></div>
+          </div>
+          <div class="footer">
+            <div class="site">jhorchestra.org<small>@jhorchestra</small></div>
+            <div class="seal">
+              <div class="txt">Public funds, Queens Arts Fund · NYC Dept of Cultural Affairs</div>
+              <div class="griffin">✦</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec-block"><h4>Size</h4><p>8.5 × 11 in · 300 DPI · CMYK for print, RGB for screen</p></div>
+        <div class="spec-block"><h4>Bleed</h4><p>0.125 in on all sides where color touches the edge (Layout B).</p></div>
+        <div class="spec-block"><h4>Typography</h4><p>Wordmark: Playfair Display 900 · Body: Inter 400/600 · Program: Playfair 700/italic.</p></div>
+        <div class="spec-block"><h4>Editable fields</h4><p>Three works, date, venue, presenter line, suggested donation, World Premiere tag.</p></div>
+        <div class="spec-block"><h4>File</h4><p>Supplied as InDesign template + editable PDF. Canva version for quick monthly swaps.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 IG Square -->
+  <section class="slide s-ig">
+    <span class="page-num">08 / Instagram · 1:1</span>
+    <div class="head">
+      <h2>Instagram posts.</h2>
+      <div class="eyebrow txt-c1">1080 × 1080 · two templates</div>
+    </div>
+    <div class="body">
+      <div class="ig-tile ig-concert">
+        <div class="top">
+          <div class="presents">Jackson Heights Beautification Group presents</div>
+          <div class="wm">
+            <span class="j">Jackson</span>
+            <span class="h">Heights</span>
+            <span class="o">Orchestra</span>
+          </div>
+          <div class="mosaic-bar">
+            <span style="background:var(--c1)"></span><span style="background:var(--c2)"></span><span style="background:var(--c3)"></span><span style="background:var(--c4)"></span><span style="background:var(--c5)"></span><span style="background:var(--c6)"></span><span style="background:var(--c7)"></span>
+          </div>
+        </div>
+
+        <div class="mid">
+          <div class="works-col">
+            <div class="eyebrow-p">Program<span>100 Years of Trinity Lutheran</span></div>
+            <div class="w"><strong>Mendelssohn-Hensel</strong><span>Overture in C Major</span></div>
+            <div class="w"><strong>Michael A. Lee</strong><span>Cognōscent <em>· World Premiere</em></span></div>
+            <div class="w"><strong>F. Mendelssohn</strong><span>Symphony No. 5 "Reformation"</span></div>
+          </div>
+          <div class="ppl">
+            <div class="person">
+              <div class="portrait"><img src="assets/alex-wen.jpg" alt="Alex Wen" /></div>
+              <div class="pname">Alex Wen<em>Artistic Director</em></div>
+            </div>
+            <div class="person">
+              <div class="portrait"><img src="assets/michael-lee.jpg" alt="Michael A. Lee" /></div>
+              <div class="pname">Michael A. Lee<em>Composer</em></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="b"><h5>When</h5><strong>Wed · May 20, 2026</strong><p>7:30 PM · Doors 7:00</p></div>
+          <div class="b"><h5>Where</h5><strong>Trinity Lutheran</strong><p>31-18 37th St · Astoria</p></div>
+          <div class="b"><h5>Admission</h5><strong>Free</strong><p>$20 suggested donation</p></div>
+        </div>
+
+        <div class="footer">
+          <div class="site">jhorchestra.org</div>
+          <div class="handle">@jhorchestra</div>
+        </div>
+      </div>
+
+      <div class="ig-tile ig-brand">
+        <div class="mosaic">
+          <div class="fill-c1"></div><div class="fill-c2"></div><div class="fill-c3"></div>
+          <div class="fill-c4"></div><div class="fill-c5"></div><div class="fill-c6"></div>
+          <div class="fill-c7"></div><div class="fill-c1"></div><div class="fill-c2"></div>
+        </div>
+        <div class="brand-eyebrow">Save the dates · Season 2026–27</div>
+        <div class="brand-body">
+          <div class="wm">
+            <span class="j">Jackson</span>
+            <span class="h">Heights</span>
+            <span class="o">Orchestra</span>
+          </div>
+          <div class="season">
+            <div class="row">
+              <div class="dt">Dec 9<span>Wed · 2026</span></div>
+              <div class="ttl">Season Opener<span>Queens · 7:30 PM</span></div>
+            </div>
+            <div class="row">
+              <div class="dt">Mar 7 &amp; 10<span>2027</span></div>
+              <div class="ttl">Winter Concert<span>Mar 7 Manhattan · Mar 10 Queens</span></div>
+            </div>
+            <div class="row">
+              <div class="dt">May 19<span>Wed · 2027</span></div>
+              <div class="ttl">Spring Concert<span>Queens · 7:30 PM</span></div>
+            </div>
+            <div class="row">
+              <div class="dt">Jul 11<span>Sun · 2027</span></div>
+              <div class="ttl">Summer Pops<span>Travers Park · Outdoor</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="site">jhorchestra.org</div>
+          <div class="handle">@jhorchestra</div>
+        </div>
+      </div>
+
+      <div class="specs">
+        <h4 style="color:var(--c1)">Template A · Concert</h4>
+        <p>Used for every concert announcement. Swap: date, venue, presenter line. Keep the wordmark and mosaic stripe.</p>
+
+        <h4 style="color:var(--c1); margin-top:10px;">Template B · Season</h4>
+        <p>Save-the-date for the whole season. Dark ground, wordmark in Tandoor, full date list. Swap once a year.</p>
+
+        <h4 style="color:var(--c1); margin-top:10px;">Safe area</h4>
+        <p>Keep the wordmark and critical copy inside a 960 × 960 center — IG's UI crops the edges in the feed preview.</p>
+
+        <h4 style="color:var(--c1); margin-top:10px;">Caption voice</h4>
+        <p>Warm, direct, second person. Lead with the date, then the works, then the why. Avoid hashtags soup.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 Social set (stories) -->
+  <section class="slide s-socialset">
+    <span class="page-num">09 / Instagram Stories · 9:16</span>
+    <div class="head">
+      <h2>Stories & takeovers.</h2>
+      <div class="eyebrow txt-c1">1080 × 1920 · four variants</div>
+    </div>
+    <div class="set">
+      <div>
+        <div class="ig-story">
+          <div class="tag-top">Save the date</div>
+          <div>
+            <div class="wm"><span class="j">Jackson</span><span class="h">Heights</span><span class="o">Orchestra</span></div>
+            <div class="pull">Three works, one night, one neighborhood.</div>
+            <div class="works">
+              <div>Mendelssohn-Hensel <em>· Overture in C</em></div>
+              <div>Michael A. Lee <em>· Cognōscent (Premiere)</em></div>
+              <div>F. Mendelssohn <em>· Symphony No. 5</em></div>
+            </div>
+          </div>
+          <div>
+            <div class="details">
+              <p><strong>Wed · May 20, 2026 · 7:30 PM</strong>Trinity Lutheran Church<br>31-18 37th St · Astoria, Queens</p>
+            </div>
+            <div class="cta">Link in bio · RSVP</div>
+          </div>
+        </div>
+        <div class="lbl">01 · Save the date</div>
+      </div>
+      <div>
+        <div class="ig-story variant2">
+          <div class="tag-top">Tonight · May 20</div>
+          <div>
+            <div class="wm"><span class="j">Jackson</span><span class="h">Heights</span><span class="o">Orchestra</span></div>
+            <div class="pull">Mendelssohn, Mendelssohn-Hensel &amp; a <span style="text-transform:uppercase; color: var(--c2); font-style: normal;">World Premiere</span>.</div>
+            <div class="works">
+              <div>Mendelssohn-Hensel <em>· Overture in C</em></div>
+              <div>Michael A. Lee <em>· Cognōscent (Premiere)</em></div>
+              <div>F. Mendelssohn <em>· Symphony No. 5</em></div>
+            </div>
+          </div>
+          <div>
+            <div class="details">
+              <p><strong>Doors 7:00 · Concert 7:30 PM</strong>Trinity Lutheran Church<br>31-18 37th St · Astoria, Queens</p>
+            </div>
+            <div class="cta">Directions</div>
+          </div>
+        </div>
+        <div class="lbl">02 · Day-of reminder</div>
+      </div>
+      <div>
+        <div class="ig-story variant3">
+          <div class="tag-top">Musician spotlight</div>
+          <div>
+            <div class="headshot-row">
+              <div class="headshot"><img src="assets/alex-wen.jpg" alt="Alex Wen" /></div>
+              <div class="who"><strong>Alex Wen</strong><span>Artistic Director</span></div>
+            </div>
+            <div class="pull-big">Meet <em>Alex</em>, our artistic director.</div>
+            <div class="works">
+              <div>With JHO since <em>2018</em></div>
+              <div>Conductor <em>· violist · teacher</em></div>
+              <div>Lives in <em>Jackson Heights</em></div>
+            </div>
+          </div>
+          <div>
+            <div class="details">
+              <p><strong>"For the neighborhood, by the neighborhood."</strong>A new spotlight every month — musicians, composers, volunteers.</p>
+            </div>
+            <div class="cta" style="background:var(--c4)">Read the Q&amp;A</div>
+          </div>
+        </div>
+        <div class="lbl">03 · Spotlight / editorial</div>
+      </div>
+      <div>
+        <div class="ig-story variant4">
+          <div class="tag-top">Save the dates</div>
+          <div>
+            <div class="wm"><span class="j">Jackson</span><span class="h">Heights</span><span class="o">Orchestra</span></div>
+            <div class="season-list">
+              <div class="row"><div class="dt">Dec 9<span>Wed · 2026</span></div><div class="ttl">Season Opener<span>Queens · 7:30 PM</span></div></div>
+              <div class="row"><div class="dt">Mar 7 &amp; 10<span>2027</span></div><div class="ttl">Winter Concert<span>Mar 7 Manhattan · Mar 10 Queens</span></div></div>
+              <div class="row"><div class="dt">May 19<span>Wed · 2027</span></div><div class="ttl">Spring Concert<span>Queens · 7:30 PM</span></div></div>
+              <div class="row"><div class="dt">Jul 11<span>Sun · 2027</span></div><div class="ttl">Summer Pops<span>Travers Park · Outdoor</span></div></div>
+            </div>
+          </div>
+          <div>
+            <div class="details">
+              <p><strong>Season 2026–27</strong>Free admission · $20 suggested donation<br>jhorchestra.org · @jhorchestra</p>
+            </div>
+            <div class="cta">Link in bio · Full schedule</div>
+          </div>
+        </div>
+        <div class="lbl">04 · Season save-the-date</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 Squarespace home -->
+  <section class="slide s-web">
+    <span class="page-num">10 / Website · Home</span>
+    <div class="head">
+      <h2>Squarespace · home.</h2>
+      <div class="eyebrow txt-c1">Built from native blocks a volunteer can rearrange</div>
+    </div>
+    <div class="browser">
+      <div class="chrome">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="url">🔒 jhorchestra.org</div>
+      </div>
+      <div class="viewport">
+        <div class="sq-nav">
+          <div class="sq-logo">
+            <div class="mini">
+              <span class="fill-c1"></span>
+              <span class="fill-c2"></span>
+              <span class="fill-c3"></span>
+              <span class="fill-c4"></span>
+              <span class="fill-c5"></span>
+              <span class="fill-c6"></span>
+              <span class="fill-c7"></span>
+            </div>
+            JHO
+          </div>
+          <div class="links">
+            <a>About</a><a>Join</a><a>Schedule</a><a>Media</a><a>Contact</a><a class="donate">Donate</a>
+          </div>
+          <div class="socials">
+            <a aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+            <a aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.5 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+            <a aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.06 1.9.25 2.3.42.6.23 1 .5 1.5 1s.77.9 1 1.5c.17.4.36 1.1.42 2.3.05 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.06 1.2-.25 1.9-.42 2.3-.23.6-.5 1-1 1.5s-.9.77-1.5 1c-.4.17-1.1.36-2.3.42-1.2.05-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.06-1.9-.25-2.3-.42-.6-.23-1-.5-1.5-1s-.77-.9-1-1.5c-.17-.4-.36-1.1-.42-2.3-.05-1.2-.07-1.6-.07-4.8s0-3.6.07-4.8c.06-1.2.25-1.9.42-2.3.23-.6.5-1 1-1.5s.9-.77 1.5-1c.4-.17 1.1-.36 2.3-.42C8.4 2.22 8.8 2.2 12 2.2zm0 1.8c-3.2 0-3.5 0-4.7.07-1.1.05-1.7.23-2.1.4-.5.2-.9.45-1.3.85s-.65.8-.85 1.3c-.16.4-.34 1-.4 2.1C2.62 8.5 2.6 8.8 2.6 12s0 3.5.07 4.7c.06 1.1.24 1.7.4 2.1.2.5.46.9.86 1.3s.8.66 1.3.86c.4.16 1 .34 2.1.4 1.2.06 1.5.07 4.7.07s3.5 0 4.7-.07c1.1-.06 1.7-.24 2.1-.4.5-.2.9-.46 1.3-.86s.66-.8.86-1.3c.16-.4.34-1 .4-2.1.06-1.2.07-1.5.07-4.7s0-3.5-.07-4.7c-.06-1.1-.24-1.7-.4-2.1-.2-.5-.46-.9-.86-1.3s-.8-.66-1.3-.86c-.4-.16-1-.34-2.1-.4C15.5 4 15.2 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 16.94 4.94 4.94 0 0 1 12 7.06zm0 8.14A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4zm6.3-8.36a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0z"/></svg></a>
+            <a aria-label="Twitter / X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2H21l-6.4 7.3L22 22h-6.1l-4.8-6.3L5.6 22H2.8l6.9-7.9L2 2h6.2l4.3 5.7L18.2 2zm-1 18h1.7L7 4H5.2l12 16z"/></svg></a>
+          </div>
+        </div>
+        <div class="sq-hero">
+          <div>
+            <div class="eyebrow-sq">Community Orchestra · Queens, NY</div>
+            <h1>A neighborhood <em>chord</em>, played in Jackson Heights.</h1>
+            <p>Since 2013, a community orchestra of Queens neighbors has been performing for free, or pay-what-you-can, across some of the most beloved venues in the borough.</p>
+            <div class="btns">
+              <a class="primary">Upcoming Concert</a>
+              <a class="secondary">About the Orchestra</a>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="photo"></div>
+            <div class="fill-c2"></div>
+            <div class="fill-c3"></div>
+            <div class="fill-c4"></div>
+            <div class="fill-c1"></div>
+            <div class="fill-c5"></div>
+          </div>
+        </div>
+        <div class="sq-concert">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow-sq">Next up</div>
+              <h2>Wed · May 20 · 7:30 PM</h2>
+            </div>
+            <a class="view-all">All concerts →</a>
+          </div>
+          <div class="next">
+            <div class="date">
+              <div class="m">May</div>
+              <div class="d">20</div>
+              <div class="y">2026</div>
+            </div>
+            <div class="info">
+              <h3>100 Years of Trinity Lutheran</h3>
+              <p>Trinity Lutheran Church · 31-18 37th St, Astoria · Free admission, $20 suggested donation.</p>
+              <div class="works">
+                <span>Mendelssohn-Hensel — Overture in C</span>
+                <span>Michael A. Lee — Cognōscent (Premiere)</span>
+                <span>F. Mendelssohn — Sym. 5 "Reformation"</span>
+              </div>
+            </div>
+            <a class="cta">Reserve →</a>
+          </div>
+        </div>
+        <div class="sq-about">
+          <div class="head-row">
+            <div>
+              <div class="eyebrow-sq">The Orchestra</div>
+              <h2>Seven <em>voices</em>, one community.</h2>
+            </div>
+            <p>Jackson Heights is one of the most linguistically diverse places on earth. Our orchestra reflects that — amateurs, pros, first-chair students, retired pit musicians — everyone who wants to play.</p>
+          </div>
+          <div class="tiles">
+            <div class="tile fill-c1"><div class="tile-num">50+</div><div><h4>Musicians</h4><p>from across Queens &amp; Brooklyn.</p></div></div>
+            <div class="tile fill-c4"><div class="tile-num">4</div><div><h4>Concerts a year</h4><p>always free or pay-what-you-can.</p></div></div>
+            <div class="tile fill-c3"><div class="tile-num">13</div><div><h4>Years</h4><p>making music in the neighborhood.</p></div></div>
+          </div>
+        </div>
+        <div class="sq-foot">
+          <div class="inner">
+            <div class="brand">Jackson Heights Orchestra<small>Queens, New York · 501(c)(3)</small></div>
+            <div class="copy">© 2026 Jackson Heights Orchestra · jhorchestra.org · @jhorchestra</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 Squarespace interior -->
+  <section class="slide s-web2">
+    <span class="page-num">11 / Website · Concerts</span>
+    <div class="head">
+      <h2>Squarespace · schedule.</h2>
+      <div class="eyebrow txt-c1">Year selector · per-concert media archive</div>
+    </div>
+    <div class="browser">
+      <div class="chrome">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="url">🔒 jhorchestra.org/schedule</div>
+      </div>
+      <div class="viewport">
+        <div class="sq-nav">
+          <div class="sq-logo">
+            <div class="mini">
+              <span class="fill-c1"></span>
+              <span class="fill-c2"></span>
+              <span class="fill-c3"></span>
+              <span class="fill-c4"></span>
+              <span class="fill-c5"></span>
+              <span class="fill-c6"></span>
+              <span class="fill-c7"></span>
+            </div>
+            JHO
+          </div>
+          <div class="links">
+            <a>About</a><a>Join</a><a style="color:var(--c1)">Schedule</a><a>Media</a><a>Contact</a><a class="donate">Donate</a>
+          </div>
+          <div class="socials">
+            <a aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg></a>
+            <a aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.5 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg></a>
+            <a aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.07 1.2.06 1.9.25 2.3.42.6.23 1 .5 1.5 1s.77.9 1 1.5c.17.4.36 1.1.42 2.3.05 1.2.07 1.6.07 4.8s0 3.6-.07 4.8c-.06 1.2-.25 1.9-.42 2.3-.23.6-.5 1-1 1.5s-.9.77-1.5 1c-.4.17-1.1.36-2.3.42-1.2.05-1.6.07-4.8.07s-3.6 0-4.8-.07c-1.2-.06-1.9-.25-2.3-.42-.6-.23-1-.5-1.5-1s-.77-.9-1-1.5c-.17-.4-.36-1.1-.42-2.3-.05-1.2-.07-1.6-.07-4.8s0-3.6.07-4.8c.06-1.2.25-1.9.42-2.3.23-.6.5-1 1-1.5s.9-.77 1.5-1c.4-.17 1.1-.36 2.3-.42C8.4 2.22 8.8 2.2 12 2.2zm0 1.8c-3.2 0-3.5 0-4.7.07-1.1.05-1.7.23-2.1.4-.5.2-.9.45-1.3.85s-.65.8-.85 1.3c-.16.4-.34 1-.4 2.1C2.62 8.5 2.6 8.8 2.6 12s0 3.5.07 4.7c.06 1.1.24 1.7.4 2.1.2.5.46.9.86 1.3s.8.66 1.3.86c.4.16 1 .34 2.1.4 1.2.06 1.5.07 4.7.07s3.5 0 4.7-.07c1.1-.06 1.7-.24 2.1-.4.5-.2.9-.46 1.3-.86s.66-.8.86-1.3c.16-.4.34-1 .4-2.1.06-1.2.07-1.5.07-4.7s0-3.5-.07-4.7c-.06-1.1-.24-1.7-.4-2.1-.2-.5-.46-.9-.86-1.3s-.8-.66-1.3-.86c-.4-.16-1-.34-2.1-.4C15.5 4 15.2 4 12 4zm0 3.06A4.94 4.94 0 1 1 12 16.94 4.94 4.94 0 0 1 12 7.06zm0 8.14A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4zm6.3-8.36a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0z"/></svg></a>
+            <a aria-label="Twitter / X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2H21l-6.4 7.3L22 22h-6.1l-4.8-6.3L5.6 22H2.8l6.9-7.9L2 2h6.2l4.3 5.7L18.2 2zm-1 18h1.7L7 4H5.2l12 16z"/></svg></a>
+          </div>
+        </div>
+        <div class="sch-header">
+          <div class="eyebrow-sq">Schedule · Concerts</div>
+          <h1>Every concert, <em>past &amp; present</em>.</h1>
+          <p>Four concerts a year across Queens. Free admission, $20 suggested donation. Each past concert keeps an archive of whatever was recorded — programs, photos, video, audio — when we have them.</p>
+          <div class="sch-tabs">
+            <button class="active">Upcoming</button>
+            <button>Season 25–26</button>
+            <button>Season 24–25</button>
+            <button>Season 23–24</button>
+            <button>2022 &amp; earlier</button>
+          </div>
+        </div>
+
+        <div class="sch-body">
+          <div class="sch-section-label">Next on the calendar</div>
+          <div class="sch-upcoming">
+            <div class="poster-thumb">100 Years of Trinity Lutheran<small>May 20, 2026 · poster</small></div>
+            <div class="info">
+              <div class="eyebrow-sq">Wed · May 20, 2026 · 7:30 PM</div>
+              <h3>100 Years of Trinity Lutheran</h3>
+              <p class="meta">Trinity Lutheran Church · 31-18 37th St, Astoria · Free, $20 suggested donation</p>
+              <div class="cta">
+                <a class="primary">Help sponsor →</a>
+                <a class="secondary">Directions</a>
+              </div>
+              <div class="works">
+                <span>Mendelssohn-Hensel — Overture in C</span>
+                <span>Michael A. Lee — Cognōscent (Premiere)</span>
+                <span>F. Mendelssohn — Sym. 5 "Reformation"</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sch-section-label" style="margin-top:8px;">Recent concerts</div>
+          <div class="sch-grid">
+
+            <div class="sch-card">
+              <div class="date"><div class="d">18</div><div class="my">Mar</div><div class="y">2026</div></div>
+              <div class="body">
+                <h4>Spring in Forest Hills</h4>
+                <p class="venue">Wed · 7:30 PM · Our Lady Queen of Martyrs, Forest Hills</p>
+                <div class="works">Mozart, Concerto for Flute &amp; Harp · Brahms, Symphony No. 2</div>
+              </div>
+              <div class="media">
+                <a class="chip poster">▦ Poster</a>
+                <a class="chip program">⛁ Program (PDF)</a>
+                <a class="chip video">▶ 2 videos</a>
+                <a class="chip photos">◉ Photos (28)</a>
+              </div>
+            </div>
+
+            <div class="sch-card">
+              <div class="date"><div class="d">10</div><div class="my">Dec</div><div class="y">2025</div></div>
+              <div class="body">
+                <h4>Winter Dreams</h4>
+                <p class="venue">Wed · 7:30 PM · Lexington School, East Elmhurst</p>
+                <div class="works">Haydn No. 26 · Tchaikovsky "Winter Dreams" · Handel "Hallelujah"</div>
+              </div>
+              <div class="media">
+                <a class="chip poster">▦ Poster</a>
+                <a class="chip program">⛁ Program</a>
+                <a class="chip notes">✎ Program notes</a>
+              </div>
+            </div>
+
+            <div class="sch-card">
+              <div class="date"><div class="d">06</div><div class="my">Jul</div><div class="y">2025</div></div>
+              <div class="body">
+                <h4>Summer Pops · Travers Park</h4>
+                <p class="venue">Sun · 6:00 PM · 76-09 34th Ave, Jackson Heights · Outdoor</p>
+                <div class="works">Movie themes, pops classics, neighborhood favorites</div>
+              </div>
+              <div class="media">
+                <a class="chip photos">◉ Photos (54)</a>
+                <span class="chip none">no recording</span>
+              </div>
+            </div>
+
+            <div class="sch-card">
+              <div class="date"><div class="d">21</div><div class="my">May</div><div class="y">2025</div></div>
+              <div class="body">
+                <h4>Bernstein &amp; Beethoven</h4>
+                <p class="venue">Wed · 7:30 PM · Trinity Lutheran Church, Astoria</p>
+                <div class="works">Bernstein, Candide Overture · Beethoven, Symphony No. 7</div>
+              </div>
+              <div class="media">
+                <a class="chip program">⛁ Program</a>
+                <a class="chip audio">♪ Audio (3)</a>
+              </div>
+            </div>
+
+            <div class="sch-card">
+              <div class="date"><div class="d">12</div><div class="my">Mar</div><div class="y">2025</div></div>
+              <div class="body">
+                <h4>French Connections</h4>
+                <p class="venue">Wed · 7:30 PM · Trinity Lutheran Church, Astoria</p>
+                <div class="works">Debussy, Petite Suite · Ravel, Pavane · Bizet, L'Arlésienne</div>
+              </div>
+              <div class="media">
+                <a class="chip poster">▦ Poster</a>
+                <a class="chip program">⛁ Program</a>
+                <a class="chip video">▶ 4 videos</a>
+                <a class="chip photos">◉ Photos</a>
+              </div>
+            </div>
+
+            <div class="sch-card">
+              <div class="date"><div class="d">11</div><div class="my">Dec</div><div class="y">2024</div></div>
+              <div class="body">
+                <h4>Mostly Brahms</h4>
+                <p class="venue">Wed · 7:30 PM · Our Lady Queen of Martyrs, Forest Hills</p>
+                <div class="works">Brahms, Academic Festival Overture · Sym. No. 1</div>
+              </div>
+              <div class="media">
+                <span class="chip none">no archive yet</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 System summary -->
+  <section class="slide s-summary">
+    <span class="page-num">12 / Handoff</span>
+    <div class="head">
+      <h2>The system, at a glance.</h2>
+      <div class="eyebrow txt-c1">What you ship on day one</div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c1"></div><span class="num">01</span></div>
+        <h3>Logo.</h3>
+        <p>Primary stacked wordmark, monogram tile (JHO), secondary waveform mark. SVG + PNG + single-color EPS.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c4"></div><span class="num">02</span></div>
+        <h3>Palette.</h3>
+        <p>Seven named colors: Tandoor, Saffron, Cilantro, Subway, Jacaranda, Hibiscus, Roosevelt. Hex + CMYK + Pantone near-match.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c3"></div><span class="num">03</span></div>
+        <h3>Type.</h3>
+        <p>Playfair Display for headlines, Inter for body. Both free on Google Fonts — available directly in Squarespace.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c5"></div><span class="num">04</span></div>
+        <h3>Posters.</h3>
+        <p>Three 8.5 × 11 layouts (Big Type, Color Block, Editorial). Canva + InDesign templates for monthly swaps.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c2"></div><span class="num">05</span></div>
+        <h3>Instagram.</h3>
+        <p>Square concert + brand templates · three story variants · caption voice guide.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c6"></div><span class="num">06</span></div>
+        <h3>Website.</h3>
+        <p>Squarespace home + concerts page · native blocks · one-click color swap via CSS variables in Design panel.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot fill-c7"></div><span class="num">07</span></div>
+        <h3>Griffin.</h3>
+        <p>Kept as a heritage seal in the footer — a quiet nod to the current identity, redrawn as a simple mark.</p>
+      </div>
+      <div class="card">
+        <div class="icon-row"><div class="dot" style="background:var(--ink)"></div><span class="num">08</span></div>
+        <h3>Voice.</h3>
+        <p>Warm, direct, second person. Literal titles, honest copy. No exclamation points except in genuine welcomes.</p>
+      </div>
+    </div>
+    <div class="next">
+      <div>
+        <h4 class="txt-c1">What happens next.</h4>
+        <ul>
+          <li>Approve logo direction + final palette (open in Tweaks →).</li>
+          <li>Order business cards, letterhead, and program covers.</li>
+          <li>Migrate jhorchestra.org to Squarespace using this layout.</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="txt-c4">Try the Tweaks panel.</h4>
+        <ul>
+          <li>Swap palettes: Mosaic · Classical · Civic · Dusk.</li>
+          <li>Toggle the griffin heritage seal on/off.</li>
+          <li>Cycle poster layouts A / B / C from slide 07.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 Wordmark colour variants — stacked -->
+  <section class="slide s-wmcolor" data-screen-label="13 Wordmark · Stacked">
+    <span class="page-num">13 / Wordmark · Stacked</span>
+    <div class="head">
+      <h2>Six wordmarks, one shape.</h2>
+      <div class="eyebrow txt-c4">Stacked lockup · single colour</div>
+    </div>
+    <div class="intro">
+      <div class="lead">Pick one colour per surface — never mix. Subway and Tandoor lead on paper; Cilantro and Saffron carry on dark. Black and white cover everything else.</div>
+      <div class="legend"><span>Download:</span>&nbsp;<span style="color:var(--ink);font-weight:700">/assets/logos/*.png</span></div>
+    </div>
+    <div class="grid">
+      <div class="cell lighter">
+        <span class="ord">01 · Subway</span>
+        <div class="mark"><span class="logo-stacked" style="color: var(--c4);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="lbl"><span class="role">Primary · on white</span><div style="text-align:right"><div class="name">Subway</div><div class="hex">#2A5D8F</div></div></div>
+      </div>
+      <div class="cell lighter">
+        <span class="ord">02 · Tandoor</span>
+        <div class="mark"><span class="logo-stacked" style="color: var(--c1);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="lbl"><span class="role">Primary · on white</span><div style="text-align:right"><div class="name">Tandoor</div><div class="hex">#E04B2A</div></div></div>
+      </div>
+      <div class="cell lighter">
+        <span class="ord">03 · Black</span>
+        <div class="mark"><span class="logo-stacked" style="color: #000;"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="lbl"><span class="role">Mono · on white</span><div style="text-align:right"><div class="name">Ink</div><div class="hex">#000000</div></div></div>
+      </div>
+      <div class="cell dark">
+        <span class="ord">04 · Cilantro</span>
+        <div class="mark"><span class="logo-stacked" style="color: var(--c3);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="lbl"><span class="role">Reversed · on ink</span><div style="text-align:right"><div class="name">Cilantro</div><div class="hex">#3A8F6B</div></div></div>
+      </div>
+      <div class="cell dark">
+        <span class="ord">05 · Saffron</span>
+        <div class="mark"><span class="logo-stacked" style="color: var(--c2);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="lbl"><span class="role">Reversed · on ink</span><div style="text-align:right"><div class="name">Saffron</div><div class="hex">#F2A93B</div></div></div>
+      </div>
+      <div class="cell dark">
+        <span class="ord">06 · White</span>
+        <div class="mark"><span class="logo-stacked" style="color: #fff;"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="lbl"><span class="role">Mono · on ink</span><div style="text-align:right"><div class="name">Paper</div><div class="hex">#FFFFFF</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 Wordmark colour variants — horizontal -->
+  <section class="slide s-wmhoriz" data-screen-label="14 Wordmark · Horizontal">
+    <span class="page-num">14 / Wordmark · Horizontal</span>
+    <div class="head">
+      <h2>Horizontal lockup.</h2>
+      <div class="eyebrow txt-c4">One-line variant · single colour</div>
+    </div>
+    <div class="intro">
+      <div class="lead">For headers, footers, t-shirt rows and any surface where vertical space is tight. Same six colours.</div>
+      <div class="legend"><span>Download:</span>&nbsp;<span style="color:var(--ink);font-weight:700">/assets/logos/horizontal/*.png</span></div>
+    </div>
+    <div class="stack">
+      <div class="row lighter">
+        <span class="ord">01</span>
+        <div class="mark"><span class="logo-horizontal" style="color: var(--c4);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="meta"><div class="name">Subway</div><div class="hex">#2A5D8F · on white</div></div>
+      </div>
+      <div class="row lighter">
+        <span class="ord">02</span>
+        <div class="mark"><span class="logo-horizontal" style="color: var(--c1);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="meta"><div class="name">Tandoor</div><div class="hex">#E04B2A · on white</div></div>
+      </div>
+      <div class="row lighter">
+        <span class="ord">03</span>
+        <div class="mark"><span class="logo-horizontal" style="color: #000;"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="meta"><div class="name">Ink</div><div class="hex">#000000 · on white</div></div>
+      </div>
+      <div class="row dark">
+        <span class="ord">04</span>
+        <div class="mark"><span class="logo-horizontal" style="color: var(--c3);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="meta"><div class="name">Cilantro</div><div class="hex">#3A8F6B · on ink</div></div>
+      </div>
+      <div class="row dark">
+        <span class="ord">05</span>
+        <div class="mark"><span class="logo-horizontal" style="color: var(--c2);"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="meta"><div class="name">Saffron</div><div class="hex">#F2A93B · on ink</div></div>
+      </div>
+      <div class="row dark">
+        <span class="ord">06</span>
+        <div class="mark"><span class="logo-horizontal" style="color: #fff;"><span>Jackson</span><span>Heights</span><span>Orchestra</span></span></div>
+        <div class="meta"><div class="name">Paper</div><div class="hex">#FFFFFF · on ink</div></div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+
+<!-- TWEAKS PANEL -->
+<div id="tweakPanel">
+  <div class="panel-head">
+    <h4>Brand Tweaks</h4>
+    <button class="min-btn" id="tweakMinBtn" title="Minimize">–</button>
+  </div>
+  <div class="panel-body">
+
+  <div class="row">
+    <label>Palette</label>
+    <div class="seg" data-key="palette">
+      <button data-v="mosaic" class="active">Mosaic</button>
+      <button data-v="classical">Classical</button>
+      <button data-v="civic">Civic</button>
+      <button data-v="dusk">Dusk</button>
+    </div>
+    <div class="swatches" style="margin-top:6px">
+      <div class="sw fill-c1"></div><div class="sw fill-c2"></div><div class="sw fill-c3"></div>
+      <div class="sw fill-c4"></div><div class="sw fill-c5"></div><div class="sw fill-c6"></div><div class="sw fill-c7"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Poster layout (slide 07)</label>
+    <div class="seg" data-key="posterLayout">
+      <button data-v="A" class="active">A · Big Type</button>
+      <button data-v="B">B · Block</button>
+      <button data-v="C">C · Editorial</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Soloists on poster A</label>
+    <div class="seg" data-key="soloists">
+      <button data-v="0">Director only</button>
+      <button data-v="1" class="active">+ Composer/Soloist</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Griffin heritage seal</label>
+    <div class="toggle">
+      <span style="font-size:12px;color:#ccc">Show on posters</span>
+      <input type="checkbox" id="griffinToggle" checked>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const state = { ...window.__TWEAKS__ };
+
+  function applyPalette(p){
+    document.body.setAttribute('data-palette', p);
+    state.palette = p;
+  }
+  function applyPoster(l){
+    ['A','B','C'].forEach(x => {
+      const el = document.getElementById('poster'+x);
+      if (el) el.style.display = (x === l) ? '' : 'none';
+    });
+    // update slide-level swap buttons
+    document.querySelectorAll('.s-poster .layout-swap button').forEach(b => {
+      b.classList.toggle('active', b.dataset.poster === l);
+    });
+    state.posterLayout = l;
+  }
+  function applyGriffin(show){
+    document.querySelectorAll('.griffin').forEach(g => g.style.display = show ? '' : 'none');
+    state.showGriffin = show;
+  }
+  function applySoloists(n){
+    const p = document.getElementById('posterA');
+    if (!p) return;
+    const portraits = p.querySelectorAll('.portraits .person');
+    // portrait[0] = director (always shown), portrait[1] = soloist(s)
+    portraits.forEach((el, i) => {
+      if (i === 0) { el.style.display = ''; return; }
+      el.style.display = (i <= Number(n)) ? '' : 'none';
+    });
+    state.soloists = n;
+  }
+
+  // Apply initial
+  applyPalette(state.palette || 'mosaic');
+  applyPoster(state.posterLayout || 'A');
+  applyGriffin(state.showGriffin !== false);
+  applySoloists(state.soloists != null ? state.soloists : '1');
+
+  // Slide-level poster buttons
+  document.querySelectorAll('.s-poster .layout-swap button').forEach(b => {
+    b.addEventListener('click', () => {
+      applyPoster(b.dataset.poster);
+      persist();
+    });
+  });
+
+  // Tweak panel
+  const panel = document.getElementById('tweakPanel');
+  panel.querySelectorAll('.seg').forEach(seg => {
+    const key = seg.dataset.key;
+    seg.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        seg.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        const v = btn.dataset.v;
+        if (key === 'palette') applyPalette(v);
+        if (key === 'posterLayout') applyPoster(v);
+        if (key === 'soloists') applySoloists(v);
+        persist();
+      });
+    });
+  });
+  document.getElementById('griffinToggle').addEventListener('change', (e) => {
+    applyGriffin(e.target.checked);
+    persist();
+  });
+
+  // Minimize / restore
+  const minBtn = document.getElementById('tweakMinBtn');
+  const head = panel.querySelector('.panel-head');
+  function setMinimized(m){
+    panel.classList.toggle('minimized', m);
+    if (minBtn) minBtn.textContent = m ? '+' : '\u2013';
+  }
+  if (minBtn) minBtn.addEventListener('click', (e) => { e.stopPropagation(); setMinimized(!panel.classList.contains('minimized')); });
+  if (head) head.addEventListener('click', () => { if (panel.classList.contains('minimized')) setMinimized(false); });
+
+  function persist(){
+    try {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: state }, '*');
+    } catch(e){}
+  }
+
+  // Edit mode handshake
+  window.addEventListener('message', (e) => {
+    const d = e.data || {};
+    if (d.type === '__activate_edit_mode') panel.classList.add('open');
+    if (d.type === '__deactivate_edit_mode') panel.classList.remove('open');
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e){}
+
+  // Sync panel state with initial values
+  document.querySelectorAll('#tweakPanel .seg').forEach(seg => {
+    const key = seg.dataset.key;
+    const v = state[key];
+    seg.querySelectorAll('button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.v === v);
+    });
+  });
+  document.getElementById('griffinToggle').checked = state.showGriffin !== false;
+})();
+</script>
+
+</body>
+</html>

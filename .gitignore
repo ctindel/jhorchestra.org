@@ -7,3 +7,9 @@
 dev_publish
 public
 themes
+
+# Rendered concert assets (jho-concert-poster / jho-render)
+out/
+
+# Skill dependencies (jho-render, jho-program-notes)
+node_modules/

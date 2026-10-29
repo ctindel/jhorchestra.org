@@ -1,0 +1,17 @@
+:root{
+  --jho-radius-xs:4px;    /* chips, small swatches   */
+  --jho-radius-sm:6px;    /* portraits, tiles        */
+  --jho-radius-md:10px;   /* list cards              */
+  --jho-radius-lg:12px;   /* content cards, browser  */
+  --jho-radius-xl:16px;   /* stages, feature blocks  */
+  --jho-radius-pill:999px;/* every button + tab      */
+  --jho-radius-paper:2px; /* printed sheets          */
+
+  /* Shadows exist only for objects pretending to be physical:
+     printed sheets, phone/browser mockups. UI cards use borders. */
+  --jho-shadow-sheet:0 30px 60px rgba(0,0,0,0.18),0 4px 12px rgba(0,0,0,0.08);
+  --jho-shadow-tile:0 20px 40px rgba(0,0,0,0.20);
+  --jho-shadow-browser:0 30px 60px rgba(0,0,0,0.25);
+  --jho-shadow-thumb:0 4px 12px rgba(0,0,0,0.18);
+  --jho-shadow-none:none;
+}

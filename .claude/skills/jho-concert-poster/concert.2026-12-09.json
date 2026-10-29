@@ -1,0 +1,21 @@
+{
+  "title": "Masks & Revelations",
+  "blurb": "Mystery, celebration, longing, and renewal.",
+  "dayname": "Wednesday",
+  "date": "December 9",
+  "iso": "2026-12-09",
+  "time": "7:30 PM",
+  "doors": "Doors 7:00 PM",
+  "venue": "Blessed Sacrament Church",
+  "address": "34-43 93rd St, Jackson Heights (parking available)",
+  "works": [
+    { "composer": "Mozart", "work": "The Magic Flute — Overture" },
+    { "composer": "Amy Beach", "work": "Bal Masqué" },
+    { "composer": "Chausson", "work": "Poème" },
+    { "composer": "Beethoven", "work": "Symphony No. 1" }
+  ],
+  "conductor": { "name": "Alex Wen" },
+  "soloists": [
+    { "name": "Nicholas Pappone", "instrument": "Violin" }
+  ]
+}

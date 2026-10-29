@@ -1,0 +1,34 @@
+:root{
+  --jho-font-display:'Playfair Display','Times New Roman',serif;
+  --jho-font-text:'Inter',system-ui,-apple-system,sans-serif;
+  --jho-font-mono:'JetBrains Mono',ui-monospace,monospace;
+
+  /* Weights actually used */
+  --jho-w-display:900; /* @kind other */   /* wordmark, hero, big numerals */
+  --jho-w-feature:500; /* @kind other */   /* Playfair italic flourishes   */
+  --jho-w-serif-mid:700; /* @kind other */ /* serif subheads, card titles  */
+  --jho-w-bold:700; /* @kind other */      /* Inter subheads               */
+  --jho-w-eyebrow:600; /* @kind other */   /* Inter all-caps eyebrows      */
+  --jho-w-body:400; /* @kind other */
+
+  /* Display scale — Playfair, tight negative tracking */
+  --jho-size-hero:80px;      --jho-lh-hero:1.02;/* @kind other */   --jho-ls-hero:-0.03em;/* @kind other */
+  --jho-size-display:64px;   --jho-lh-display:1.0;/* @kind other */  --jho-ls-display:-0.03em;/* @kind other */
+  --jho-size-h1:56px;        --jho-lh-h1:1.0;/* @kind other */       --jho-ls-h1:-0.02em;/* @kind other */
+  --jho-size-h2:44px;        --jho-lh-h2:1.0;/* @kind other */       --jho-ls-h2:-0.02em;/* @kind other */
+  --jho-size-h3:30px;        --jho-lh-h3:1.1;/* @kind other */       --jho-ls-h3:-0.01em;/* @kind other */
+  --jho-size-h4:18px;        --jho-lh-h4:1.2;/* @kind other */       --jho-ls-h4:-0.01em;/* @kind other */
+
+  /* Text scale — Inter */
+  --jho-size-lead:17px;      --jho-lh-lead:1.55;/* @kind other */
+  --jho-size-body:15px;      --jho-lh-body:1.55;/* @kind other */
+  --jho-size-small:13px;     --jho-lh-small:1.5;/* @kind other */
+  --jho-size-caption:12px;   --jho-lh-caption:1.45;/* @kind other */
+  --jho-size-micro:11px;     --jho-lh-micro:1.4;/* @kind other */
+
+  /* Eyebrows / tags — the brand's signature all-caps run */
+  --jho-size-eyebrow:11px;
+  --jho-ls-eyebrow:0.22em;/* @kind other */
+  --jho-ls-eyebrow-tight:0.18em;/* @kind other */
+  --jho-ls-tag:0.15em;/* @kind other */
+}

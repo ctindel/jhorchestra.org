@@ -1,0 +1,57 @@
+:root{
+  /* ── Mosaic palette — seven named voices ───────────────────── */
+  --jho-tandoor:#E04B2A;      /* c1 · primary red   */
+  --jho-saffron:#F2A93B;      /* c2 · primary amber */
+  --jho-cilantro:#3A8F6B;     /* c3 · primary green */
+  --jho-subway:#2A5D8F;       /* c4 · primary blue  */
+  --jho-jacaranda:#7D3B8F;    /* c5 · accent violet */
+  --jho-hibiscus:#D94A6D;     /* c6 · accent rose   */
+  --jho-roosevelt:#0F4C5C;    /* c7 · accent teal   */
+
+  /* Positional aliases — mirror the deck's --c1…--c7 authoring names */
+  --jho-c1:var(--jho-tandoor);--jho-c2:var(--jho-saffron);--jho-c3:var(--jho-cilantro);
+  --jho-c4:var(--jho-subway);--jho-c5:var(--jho-jacaranda);--jho-c6:var(--jho-hibiscus);
+  --jho-c7:var(--jho-roosevelt);
+
+  /* ── Neutrals — no pure black, no pure white as ground ─────── */
+  --jho-ink:#141A2A;          /* text + dark grounds */
+  --jho-ink-rule:#1D2437;
+  --jho-paper:#FAF6EE;        /* page ground */
+  --jho-newsprint:#F3ECDC;    /* card / stage ground */
+  --jho-muted:#6A6555;        /* secondary text */
+  --jho-white:#FFFFFF;        /* browser/site chrome only */
+  --jho-black:#000000;        /* single-color logo lockup only */
+
+  /* ── Semantic aliases ──────────────────────────────────────── */
+  --jho-text:var(--jho-ink);
+  --jho-text-muted:var(--jho-muted);
+  --jho-text-invert:var(--jho-paper);
+  --jho-text-accent:var(--jho-tandoor);
+  --jho-link:var(--jho-subway);
+  --jho-link-hover:var(--jho-tandoor);
+
+  --jho-surface-page:var(--jho-paper);
+  --jho-surface-card:var(--jho-newsprint);
+  --jho-surface-raised:var(--jho-white);
+  --jho-surface-invert:var(--jho-ink);
+  --jho-surface-accent:var(--jho-tandoor);
+
+  --jho-border:rgba(20,26,42,0.15);
+  --jho-border-strong:var(--jho-ink);
+  --jho-border-invert:rgba(250,246,238,0.25);
+
+  --jho-action:var(--jho-tandoor);        /* donate / primary CTA */
+  --jho-action-text:var(--jho-paper);
+  --jho-action-secondary:var(--jho-ink);
+  --jho-on-dark-highlight:var(--jho-saffron);
+  --jho-on-dark-accent:var(--jho-cilantro);
+
+  /* Tinted chip grounds — 10% of the hue over paper */
+  --jho-tint-tandoor:rgba(224,75,42,0.10);
+  --jho-tint-subway:rgba(42,93,143,0.10);
+  --jho-tint-cilantro:rgba(58,143,107,0.10);
+  --jho-tint-saffron:rgba(242,169,59,0.10);
+  --jho-tint-jacaranda:rgba(125,59,143,0.10);
+  --jho-tint-hibiscus:rgba(217,74,109,0.10);
+  --jho-tint-roosevelt:rgba(15,76,92,0.10);
+}

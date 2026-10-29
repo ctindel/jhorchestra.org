@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=[];var B=false;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here — open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file — visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store — not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read — re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
+</script>
+
+<meta charset="utf-8"/>
+<meta name="omelette-print-source" content="v1785988338743108 JHO Program Booklet.html">
+<title>Jackson Heights Orchestra — Concert Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="doc-page.js"></script>
+<style>
+doc-page:not(:defined){visibility:hidden}
+:root{
+  --ink:#000;
+  --g80:#333;
+  --g60:#5c5c5c;
+  --g45:#8a8a8a;
+  --g25:#c4c4c4;
+  --g12:#e2e2e2;
+  --paper:#fff;
+  --desk:#3a3a3a;
+  /* half-letter page: 5.5 x 8.5in at 96dpi = 528 x 816 */
+  --pw:528px;
+  --ph:816px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--desk);font-family:'Inter',system-ui,sans-serif;color:var(--ink)}
+a{color:var(--ink)}a:hover{color:var(--g60)}
+
+/* ---------- page geometry ---------- */
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+*{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}
+section.page{display:grid;grid-template-columns:1fr 1fr;background:var(--paper);container-type:size}
+.leaf{background:var(--paper);position:relative;overflow:hidden;padding:44px 40px 38px;display:flex;flex-direction:column}
+.leaf.left{border-right:1px dashed var(--g25)}
+.folio{position:absolute;bottom:20px;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:0.24em;color:var(--g45);font-weight:600}
+.leaf.left .folio{left:40px}
+.leaf.right .folio{right:40px}
+
+/* ---------- shared type ---------- */
+.rule{height:1px;background:var(--ink);width:100%}
+.rule.thin{background:var(--g25)}
+.sec{font-family:'Inter',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:12px;margin:0 0 14px}
+.sec::after{content:'';flex:1;height:1px;background:var(--g25)}
+.body-txt{font-family:'Inter',sans-serif;font-size:9.6px;line-height:1.62;color:var(--g80);margin:0 0 9px}
+.byline{font-family:'Playfair Display',serif;font-style:italic;font-size:10.5px;color:var(--ink);text-align:right;margin-top:6px}
+
+/* grayscale mosaic — stands in for the 7-color rule in B&W */
+.mosaic{display:flex;gap:3px;height:5px;width:100%}
+.mosaic i{flex:1;display:block}
+.mosaic i:nth-child(1){background:#111}
+.mosaic i:nth-child(2){background:#3a3a3a}
+.mosaic i:nth-child(3){background:#606060}
+.mosaic i:nth-child(4){background:#000}
+.mosaic i:nth-child(5){background:#7d7d7d}
+.mosaic i:nth-child(6){background:#4a4a4a}
+.mosaic i:nth-child(7){background:#9a9a9a}
+
+/* ---------- COVER ---------- */
+.leaf.cover{justify-content:space-between;padding:52px 44px 40px}
+.cover .presenter{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--g60);text-align:center;line-height:1.7}
+.cover .wm{font-family:'Playfair Display',serif;font-weight:900;font-size:70px;line-height:1.04;letter-spacing:-0.035em;color:var(--ink);text-align:center}
+.cover .wm span{display:block}
+.cover .wm span + span{margin-top:0.04em}
+.cover .occasion{text-align:center;margin-top:22px}
+.cover .occasion .lead-in{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--g60);margin-bottom:8px}
+.cover .occasion h2{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:23px;line-height:1.28;letter-spacing:-0.01em;margin:0;color:var(--ink)}
+.cover .when{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;padding:18px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center}
+.cover .when .d{font-family:'Playfair Display',serif;font-weight:800;font-size:17px;letter-spacing:-0.01em;line-height:1.2}
+.cover .when .d small{display:block;font-family:'Inter',sans-serif;font-weight:600;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--g60);margin-top:3px}
+.cover .when .div{width:1px;height:34px;background:var(--g25)}
+.cover .conductor{text-align:center;font-family:'Playfair Display',serif;font-weight:700;font-size:15px;letter-spacing:-0.005em}
+.cover .conductor small{display:block;font-family:'Inter',sans-serif;font-weight:600;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--g60);margin-top:4px}
+.cover .foot{display:flex;justify-content:space-between;align-items:flex-end;font-family:'Inter',sans-serif;font-size:7.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--g60);line-height:1.7}
+
+/* ---------- WELCOME ---------- */
+.leaf.welcome{justify-content:center;gap:20px;padding:64px 46px}
+.welcome .mark{font-family:'Playfair Display',serif;font-size:44px;line-height:1;color:var(--g25);text-align:center}
+.welcome p{font-family:'Playfair Display',serif;font-size:14.5px;line-height:1.62;color:var(--ink);text-align:center;margin:0}
+.welcome .sig{text-align:center;margin-top:8px}
+.welcome .sig strong{display:block;font-family:'Playfair Display',serif;font-weight:700;font-size:13px}
+.welcome .sig span{display:block;font-family:'Inter',sans-serif;font-size:8px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--g60);margin-top:4px}
+
+/* ---------- PROGRAM ---------- */
+.prog-list{display:flex;flex-direction:column;gap:22px;flex:1}
+.work{display:grid;grid-template-columns:1fr;gap:3px}
+.work .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.work .title{font-family:'Playfair Display',serif;font-weight:700;font-size:16.5px;line-height:1.24;letter-spacing:-0.01em}
+.work .title em{font-style:italic;font-weight:500;display:block;font-size:13.5px;color:var(--g60);margin-top:2px}
+.work .composer{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:13px;text-align:right;white-space:nowrap;line-height:1.25}
+.work .composer small{display:block;font-family:'Inter',sans-serif;font-style:normal;font-size:8px;font-weight:500;letter-spacing:0.08em;color:var(--g60);margin-top:2px}
+.work .tag{display:inline-block;font-family:'Inter',sans-serif;font-size:7.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;border:1px solid var(--ink);padding:3px 7px;margin-top:6px}
+.work .mvts{margin-top:8px;display:grid;grid-template-columns:22px 1fr;gap:2px 8px;font-family:'Inter',sans-serif;font-size:9.4px;line-height:1.55;color:var(--g80)}
+.work .mvts .n{color:var(--g45);font-variant-numeric:tabular-nums;font-weight:600}
+.work .mvts .m{font-style:italic}
+.intermission{display:flex;align-items:center;gap:12px;font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--g45);margin:2px 0}
+.intermission::before,.intermission::after{content:'';flex:1;height:1px;background:var(--g25)}
+
+/* ---------- NOTES ---------- */
+.note-head{margin-bottom:10px}
+.note-head h3{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;line-height:1.22;letter-spacing:-0.01em;margin:0}
+.note-head h3 em{font-style:italic;font-weight:500}
+.note-head .who{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--g60);margin-top:5px}
+.dropcap::first-letter{font-family:'Playfair Display',serif;font-weight:900;font-size:34px;line-height:0.82;float:left;padding:3px 7px 0 0;color:var(--ink)}
+.pull{font-family:'Playfair Display',serif;font-style:italic;font-size:12.5px;line-height:1.45;color:var(--ink);border-left:2px solid var(--ink);padding-left:12px;margin:12px 0}
+.contd{font-family:'Inter',sans-serif;font-size:8px;font-style:italic;letter-spacing:0.1em;color:var(--g45);text-align:right;margin-top:auto;padding-top:8px}
+
+/* ---------- ROSTER ---------- */
+.roster{columns:2;column-gap:26px;font-family:'Inter',sans-serif;font-size:8.6px;line-height:1.5;color:var(--g80)}
+.roster .grp{break-inside:avoid;margin-bottom:11px}
+.roster .grp h5{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);margin:0 0 4px;padding-bottom:3px;border-bottom:1px solid var(--g25)}
+.roster .grp div{line-height:1.5}
+.roster .grp .pr{font-weight:600;color:var(--ink)}
+.roster .grp .chair{font-style:italic;color:var(--g45);font-size:7.8px;display:block;line-height:1.35}
+.lead-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--ink)}
+.lead-pair .l h4{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;margin:0;letter-spacing:-0.01em}
+.lead-pair .l span{font-family:'Inter',sans-serif;font-size:7.6px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--g60);display:block;margin-top:3px}
+
+/* ---------- DONORS ---------- */
+.tier{margin-bottom:11px;break-inside:avoid}
+.tier h5{display:flex;align-items:baseline;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:12px;letter-spacing:-0.005em;margin:0 0 4px}
+.tier h5 span{font-family:'Inter',sans-serif;font-size:7.6px;font-weight:600;letter-spacing:0.14em;color:var(--g60);white-space:nowrap}
+.tier h5::after{content:'';flex:1;height:1px;background:var(--g25)}
+.tier .names{font-family:'Inter',sans-serif;font-size:8.8px;line-height:1.6;color:var(--g80);columns:2;column-gap:20px}
+.tier.top .names{columns:1;font-size:9.6px}
+.support-note{font-family:'Inter',sans-serif;font-size:7.6px;line-height:1.6;color:var(--g60);border-top:1px solid var(--g25);padding-top:9px;margin-top:auto}
+
+/* ---------- GIVING ---------- */
+.give-intro{font-family:'Playfair Display',serif;font-style:italic;font-size:12px;line-height:1.5;color:var(--ink);margin:0 0 12px}
+.tiers{display:flex;flex-direction:column;flex:1}
+.tiers .row{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:7px 0;border-top:1px solid var(--g12);align-items:baseline}
+.tiers .row:first-child{border-top:1px solid var(--ink)}
+.tiers .row .amt{font-family:'Playfair Display',serif;font-weight:800;font-size:13px;letter-spacing:-0.01em;text-align:right;font-variant-numeric:tabular-nums}
+.tiers .row .who{min-width:0}
+.tiers .row .who strong{display:block;font-family:'Inter',sans-serif;font-size:8.8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink)}
+.tiers .row .who p{margin:2px 0 0;font-family:'Inter',sans-serif;font-size:8.4px;line-height:1.5;color:var(--g60)}
+.give-cta{display:grid;grid-template-columns:1fr 68px;gap:14px;align-items:center;border:1px solid var(--ink);padding:12px 14px;margin-top:12px}
+.give-cta .t{font-family:'Inter',sans-serif;font-size:8.6px;line-height:1.55;color:var(--g80)}
+.give-cta .t strong{display:block;font-family:'Playfair Display',serif;font-weight:700;font-size:13px;color:var(--ink);margin-bottom:3px;letter-spacing:-0.01em}
+.qr{width:68px;height:68px;background:
+  repeating-linear-gradient(0deg,#000 0 6px,#fff 6px 12px),
+  repeating-linear-gradient(90deg,#000 0 6px,transparent 6px 12px);
+  background-blend-mode:multiply;border:3px solid #fff;outline:1px solid var(--ink)}
+
+/* ---------- ACKNOWLEDGMENTS ---------- */
+.ack{display:flex;flex-direction:column;gap:12px;flex:1}
+.ack .blk h5{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 5px;padding-bottom:3px;border-bottom:1px solid var(--g25)}
+.ack .blk .names{font-family:'Inter',sans-serif;font-size:8.4px;line-height:1.55;color:var(--g80);columns:2;column-gap:20px}
+.ack .blk .names.one{columns:1}
+.ack .blk .names em{font-style:italic;color:var(--g45)}
+
+/* ---------- BACK COVER ---------- */
+.leaf.back{justify-content:space-between;padding:52px 44px 40px}
+.back .std{text-align:center;border:1px solid var(--ink);padding:22px 20px}
+.back .std .kicker{font-family:'Inter',sans-serif;font-size:8px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--g60);margin-bottom:10px}
+.back .std h3{font-family:'Playfair Display',serif;font-weight:800;font-size:26px;line-height:1.1;letter-spacing:-0.02em;margin:0 0 4px}
+.back .std .dt{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;margin-bottom:10px}
+.back .std p{font-family:'Inter',sans-serif;font-size:9px;line-height:1.6;color:var(--g80);margin:0}
+.back .mission h4{font-family:'Inter',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;margin:0 0 7px}
+.back .mission p{font-family:'Inter',sans-serif;font-size:8.6px;line-height:1.6;color:var(--g80);margin:0 0 9px}
+.back .wm-sm{font-family:'Playfair Display',serif;font-weight:900;font-size:26px;line-height:1.06;letter-spacing:-0.03em;text-align:center}
+.back .wm-sm span{display:block}
+.back .contact{display:flex;justify-content:center;gap:22px;font-family:'Inter',sans-serif;font-size:8px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--g60)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:#111;border:1px solid #333;border-radius:999px;padding:5px;z-index:50}
+.nav button{appearance:none;background:transparent;border:0;color:rgba(255,255,255,.72);font:inherit;font-size:12px;height:30px;min-width:30px;padding:0 10px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.nav button:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav .count{color:#fff;font-size:11.5px;font-weight:500;padding:0 10px;font-variant-numeric:tabular-nums;min-width:96px;text-align:center}
+.nav .count b{font-weight:600}
+.nav .count span{color:rgba(255,255,255,.45)}
+.nav .divider{width:1px;height:14px;background:rgba(255,255,255,.18);margin:0 2px}
+
+@media print{ .leaf.left{border-right:none} }
+</style>
+</head>
+<body>
+
+<doc-page orientation="landscape">
+
+    <!-- SPREAD 1 — closed book: front cover (right), back cover (left) -->
+    <section class="page">
+      <!-- BACK COVER -->
+      <div class="leaf left back">
+        <div class="mission">
+          <h4>Our Mission</h4>
+          <p>The Jackson Heights Orchestra is dedicated to enriching and elevating the dynamic cultural landscape of the Jackson Heights community through live performance. Our ensemble is composed of musicians from diverse backgrounds, united by a shared passion for music-making.</p>
+          <h4 style="margin-top:14px">About the JHO</h4>
+          <p>Established in 2012 by founding Music Director Patricia Glunt in collaboration with the Jackson Heights Beautification Group. During her tenure from 2012 to 2023, Glunt grew the ensemble into one of the premiere orchestras of Queens.</p>
+        </div>
+        <div class="mosaic"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="wm-sm">
+          <span>Jackson</span><span>Heights</span><span>Orchestra</span>
+        </div>
+        <div class="contact">
+          <span>jhorchestra.org</span>
+          <span>@jhorchestra</span>
+        </div>
+      </div>
+
+      <!-- FRONT COVER -->
+      <div class="leaf right cover">
+        <div class="presenter">The Jackson Heights<br>Beautification Group presents</div>
+        <div>
+          <div class="wm">
+            <span>Jackson</span>
+            <span>Heights</span>
+            <span>Orchestra</span>
+          </div>
+          <div class="mosaic" style="margin-top:16px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="occasion">
+            <div class="lead-in">In celebration of the 100th anniversary of</div>
+            <h2>Trinity Lutheran Church<br>of Long Island City &amp; Astoria</h2>
+          </div>
+        </div>
+        <div class="when">
+          <div class="d">May 20, 2026<small>Wednesday</small></div>
+          <div class="div"></div>
+          <div class="d">7:30 p.m.<small>Astoria, NY</small></div>
+        </div>
+        <div class="conductor">Alex Wen<small>Artistic Director</small></div>
+        <div class="foot">
+          <div>jhbg.org<br>@jhbgny</div>
+          <div style="text-align:right">jhorchestra.org<br>@jhorchestra</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPREAD 2 — welcome / program -->
+    <section class="page">
+      <div class="leaf left welcome">
+        <div class="mark">“</div>
+        <p>Trinity Lutheran Church building is 100 years old — and we welcome you. We are so pleased to have our friends of the Jackson Heights Orchestra here to celebrate this milestone.</p>
+        <p style="font-style:italic;color:var(--g60);font-size:13px">Enjoy the concert.</p>
+        <div class="sig">
+          <strong>Pastor Paul B. Milholland</strong>
+          <span>Trinity Lutheran Church</span>
+        </div>
+        <div class="folio">Welcome</div>
+      </div>
+
+      <div class="leaf right">
+        <div class="sec">Program</div>
+        <div class="prog-list">
+          <div class="work">
+            <div class="top">
+              <div class="title">Overture in C Major</div>
+              <div class="composer">Fanny Mendelssohn-Hensel<small>1805–1847</small></div>
+            </div>
+          </div>
+
+          <div class="work">
+            <div class="top">
+              <div class="title">Cognōscent</div>
+              <div class="composer">Michael A. Lee<small>b. 1975</small></div>
+            </div>
+            <div class="tag">World Premiere · JHO Commission</div>
+            <div class="mvts">
+              <div class="n">I.</div><div class="m">Prelude</div>
+              <div class="n">II.</div><div class="m">Media Vita</div>
+              <div class="n">III.</div><div class="m">Militans Scurrilis</div>
+              <div class="n">IV.</div><div class="m">Chorale Mortis</div>
+              <div class="n">V.</div><div class="m">Kenosis Purificans</div>
+              <div class="n">VI.</div><div class="m">Benediction</div>
+            </div>
+          </div>
+
+          <div class="intermission">Intermission</div>
+
+          <div class="work">
+            <div class="top">
+              <div class="title">Symphony No. 5 in D Minor, Op. 107<em>“Reformation”</em></div>
+              <div class="composer">Felix Mendelssohn<small>1809–1847</small></div>
+            </div>
+            <div class="mvts">
+              <div class="n">I.</div><div class="m">Andante — Allegro con fuoco</div>
+              <div class="n">II.</div><div class="m">Allegro vivace</div>
+              <div class="n">III.</div><div class="m">Andante</div>
+              <div class="n">IV.</div><div class="m">Andante con moto</div>
+            </div>
+          </div>
+        </div>
+        <div class="mosaic" style="margin-top:14px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="folio">2</div>
+      </div>
+    </section>
+
+    <!-- SPREAD 3 — notes: Hensel / Lee -->
+    <section class="page">
+      <div class="leaf left">
+        <div class="sec">Notes on the Program</div>
+        <div class="note-head">
+          <h3><em>Overture in C Major</em> (1832)</h3>
+          <div class="who">Fanny Mendelssohn-Hensel</div>
+        </div>
+        <p class="body-txt dropcap">Fanny Mendelssohn-Hensel's Overture in C Major is one of those pieces that makes you wonder what we lost because the 19th century was so wrong about women.</p>
+        <p class="body-txt">Born into the brilliant Mendelssohn family, Fanny was every bit as musically gifted as her younger brother Felix. A formidable pianist, composer, conductor, and musical organizer, she was also the gravitational center of an extraordinary artistic circle in Berlin. Unlike Felix, she was not encouraged toward a public career. She composed over 300 lieder and piano works, performed largely in private salons.</p>
+        <p class="body-txt">The Overture is her only surviving orchestral work. Probably written between 1830 and 1832, it was discovered over 100 years after her death. Opening with poise and expectancy, the music quickly reveals her grasp of orchestral color, structure, and drama. There is brightness, but also muscle; grace, but also momentum.</p>
+        <div class="pull">It arrives with energy, craft, and elegance — making its case in the most convincing way possible: by being excellent.</div>
+        <p class="body-txt">The piece moves with the clarity associated with the Mendelssohn sound world: quicksilver strings, buoyant rhythms, lyrical wind writing, a controlled exuberance that never spills into chaos. But Fanny's voice is not an echo of Felix's. Her writing has its own confidence, architecture, and dramatic pacing.</p>
+        <div class="byline">— Melissa Minkow</div>
+        <div class="folio">3</div>
+      </div>
+
+      <div class="leaf right">
+        <div class="sec">Notes on the Program</div>
+        <div class="note-head">
+          <h3><em>Cognōscent</em> (2026)</h3>
+          <div class="who">Michael A. Lee</div>
+        </div>
+        <p class="body-txt dropcap">I was invited to write a piece specifically for this program, sandwiched between Fanny and Felix. As I marinated for a bit in both pieces, I reflected on the history of the Christian faith and the Christian church, and the ways in which these are sometimes in conflict.</p>
+        <p class="body-txt">Cognōscent builds on two primary motifs: one poses a question, the other proposes an answer. The first is drawn from the 13th-century chant <em>Media Vita in Morte Sumus</em> — in the midst of life we are in death — asking, "How should we who are dying then live?"</p>
+        <p class="body-txt">The second movement offers one possible answer: the Church Militant, seizing political and cultural power in the face of mortality, building kingdoms here on earth. But the pursuit grows both buffoonish and menacing, and ultimately fails to resolve.</p>
+        <p class="body-txt">It decays into the Chorale Mortis, a woodwind choir developing the Media Vita until it yields a different answer: the three-note motif (E–G–A) first introduced by the high bassoon. Derived from the folk hymn "They Will Know We Are Christians by Our Love," it repeats relentlessly in the low brass and strings, insistent even as the harmony stretches into bitonality.</p>
+        <div class="pull">How shall we who are dying then live? By love.</div>
+        <div class="byline">— Michael A. Lee</div>
+        <div class="folio">4</div>
+      </div>
+    </section>
+
+    <!-- SPREAD 4 — notes: Mendelssohn / roster -->
+    <section class="page">
+      <div class="leaf left">
+        <div class="sec">Notes on the Program</div>
+        <div class="note-head">
+          <h3>Symphony No. 5, Op. 107<em>“Reformation” (1830)</em></h3>
+          <div class="who">Felix Mendelssohn</div>
+        </div>
+        <p class="body-txt dropcap">Felix Mendelssohn was only 20 when he embarked on his "Reformation" Symphony, intended for the 300th anniversary of the Augsburg Confession, a defining document of Lutheran theology presented in 1530.</p>
+        <p class="body-txt">Although numbered as his Fifth, the "Reformation" was actually one of Mendelssohn's earlier symphonic works — the numbering reflects publication history, not composition. He completed it in 1830; it was not published until after his death.</p>
+        <p class="body-txt">The symphony opens with a solemn, church-like introduction including the famous "Dresden Amen," a rising liturgical phrase later made famous by Wagner in <em>Parsifal</em>. Mendelssohn uses it not as an accent but as an entire theme. From there the first movement breaks into a fiery Allegro, full of urgency and contrapuntal drive.</p>
+        <p class="body-txt">The second movement brings contrast — nimble, bright, classically balanced. The third turns inward, singing with lyrical restraint. The finale brings the central symbol into full view: Luther's chorale <em>“Ein feste Burg ist unser Gott.”</em></p>
+        <div class="pull">Mendelssohn collects the building materials, designs the architecture, and erects the cathedral.</div>
+        <div class="byline">— Melissa Minkow</div>
+        <div class="folio">5</div>
+      </div>
+
+      <div class="leaf right">
+        <div class="sec">Orchestra Musicians</div>
+        <div class="lead-pair">
+          <div class="l"><h4>Alex Wen</h4><span>Artistic Director</span></div>
+          <div class="l"><h4>Wenqi Li</h4><span>Assistant Conductor</span></div>
+        </div>
+        <div class="roster">
+          <div class="grp">
+            <h5>Violin I</h5>
+            <div><span class="pr">Susan Metcalf</span>, Concertmaster<span class="chair">The Chad Tindel and Sonia Kuchuk Chair</span></div>
+            <div>Adeena Emery</div><div>James Leddy</div><div>Christian Lee</div><div>Qiyao Pan</div><div>Diane Ye</div><div>Siyi Zhang</div>
+          </div>
+          <div class="grp">
+            <h5>Violin II</h5>
+            <div><span class="pr">Louise Lau</span>, Principal</div>
+            <div>Barbara Freed</div><div>Rex Gayas</div><div>Ana Melo</div><div>Lynette Pettinicchi</div><div>Jennifer Sloan</div>
+          </div>
+          <div class="grp">
+            <h5>Viola</h5>
+            <div><span class="pr">Mary Ellen McNamee</span>, Principal</div>
+            <div>Molly McNally</div><div>Ania Upstill</div><div>Heather Wallace</div>
+          </div>
+          <div class="grp">
+            <h5>Cello</h5>
+            <div><span class="pr">Patricia Edens</span>, Principal</div>
+            <div>Lauren Bailey</div><div>Sheryl Reed</div><div>Rachel Santamaria-Schwartz</div><div>Hasina Torres</div><div>Diana Wayburn</div>
+          </div>
+          <div class="grp">
+            <h5>Double Bass</h5>
+            <div><span class="pr">Eli Naragon</span>, Principal</div>
+            <div>Darren Lipper</div>
+          </div>
+          <div class="grp">
+            <h5>Flute</h5>
+            <div>Hannah Donnelly</div><div>Barbara Novick</div>
+          </div>
+          <div class="grp">
+            <h5>Oboe</h5>
+            <div>Melissa Minkow</div><div>David de la Nuez</div>
+          </div>
+          <div class="grp">
+            <h5>Clarinet</h5>
+            <div>Matt Brauner</div><div>Alice Petre</div>
+            <div style="margin-top:3px"><em style="font-style:italic;color:var(--g45);font-size:7.8px">Bass Clarinet</em></div>
+            <div>Brandon Helrich</div>
+          </div>
+          <div class="grp">
+            <h5>Bassoon</h5>
+            <div>Shira Calamaro</div><div>Ezra Gans</div>
+            <div style="margin-top:3px"><em style="font-style:italic;color:var(--g45);font-size:7.8px">Contrabassoon</em></div>
+            <div>Aaron Goler</div>
+          </div>
+          <div class="grp">
+            <h5>French Horn</h5>
+            <div>Michael Cohen</div><div>Kaleb Lewis</div><div>Charity Morrison</div><div>Genevieve Scandone</div>
+          </div>
+          <div class="grp">
+            <h5>Trumpet</h5>
+            <div>Julia Cohen</div><div>Chad Tindel</div>
+          </div>
+          <div class="grp">
+            <h5>Trombone</h5>
+            <div>Greg Genova</div><div>Anthony Santiago</div>
+            <div style="margin-top:3px"><em style="font-style:italic;color:var(--g45);font-size:7.8px">Bass Trombone</em></div>
+            <div>Phil Fletcher</div>
+          </div>
+          <div class="grp">
+            <h5>Percussion</h5>
+            <div>Fred Trumpy</div>
+          </div>
+        </div>
+        <div class="folio">6</div>
+      </div>
+    </section>
+
+    <!-- SPREAD 5 — giving / donors -->
+    <section class="page">
+      <div class="leaf left">
+        <div class="sec">Support the Orchestra</div>
+        <p class="give-intro">Our concerts are made possible only by donations from audience and community members. We're raising funds for the 2026–2027 season — we'd love your support.</p>
+        <div class="tiers">
+          <div class="row"><div class="amt">$50</div><div class="who"><strong>Silver Strings</strong><p>A mention in our concert program and on our website.</p></div></div>
+          <div class="row"><div class="amt">$100</div><div class="who"><strong>Golden Brass</strong><p>A souvenir program from a signature concert, autographed by our conductor.</p></div></div>
+          <div class="row"><div class="amt">$250</div><div class="who"><strong>Platinum Percussion</strong><p>A signed souvenir poster, plus all previous rewards.</p></div></div>
+          <div class="row"><div class="amt">$500</div><div class="who"><strong>Concertmaster's Companion</strong><p>Behind-the-scenes at a dress rehearsal and early entrance the following day.</p></div></div>
+          <div class="row"><div class="amt">$1,000</div><div class="who"><strong>Maestro's Circle</strong><p>A private meet-and-greet with our conductor and select musicians.</p></div></div>
+          <div class="row"><div class="amt">$5,000</div><div class="who"><strong>Orchestra Insider</strong><p>You and a guest join a special dinner with the conductor and orchestra members.</p></div></div>
+          <div class="row"><div class="amt">$10,000</div><div class="who"><strong>Symphony Sponsor</strong><p>Sponsor a concert. Featured as main sponsor, with accolades and a plaque.</p></div></div>
+        </div>
+        <div class="give-cta">
+          <div class="t"><strong>Give today</strong>jhorchestra.org/donate — or scan to give directly to the JHBG in support of the orchestra.</div>
+          <div class="qr" aria-label="QR code placeholder"></div>
+        </div>
+        <div class="folio">7</div>
+      </div>
+
+      <div class="leaf right">
+        <div class="sec">Our Donors</div>
+        <div class="tier top">
+          <h5>Symphony Sponsor <span>$10,000</span></h5>
+          <div class="names">Kyle W. Schroeder Charitable Fund</div>
+        </div>
+        <div class="tier">
+          <h5>Maestro's Circle <span>$1,000+</span></h5>
+          <div class="names">Gilbert and Liz Dejean<br>Chad Tindel and Sonia Kuchuk<br>Pastor Paul B. Milholland</div>
+        </div>
+        <div class="tier">
+          <h5>Platinum Percussion <span>$250+</span></h5>
+          <div class="names">Anonymous<br>Dolores Dalton</div>
+        </div>
+        <div class="tier">
+          <h5>Golden Brass <span>$100+</span></h5>
+          <div class="names">Anonymous<br>Elliot Gerber<br>Armando Montes-Galicia<br>Amy Gutow<br>Julie Nymann<br>Sara Rakita<br>James Riccio<br>Roberto Soto</div>
+        </div>
+        <div class="tier">
+          <h5>Silver Strings <span>$50+</span></h5>
+          <div class="names">Deborah Rojas De Leon<br>Ruth Mueller-Maerki<br>Barbara Novick<br>Monica Valdes<br>Andres Vargas</div>
+        </div>
+        <div class="support-note">
+          This event is sponsored in part by the generous support of Pastor Paul B. Milholland and Trinity Lutheran Church of LIC &amp; Astoria.<br><br>
+          This event is made possible in part with public funds from the Queens Arts Fund, a re-grant program supported by the New York City Department of Cultural Affairs in partnership with the City Council and administered by New York Foundation for the Arts.
+        </div>
+        <div class="folio">8</div>
+      </div>
+    </section>
+
+    <!-- SPREAD 6 — acknowledgments / save the date -->
+    <section class="page">
+      <div class="leaf left">
+        <div class="sec">Acknowledgments</div>
+        <div class="ack">
+          <div class="blk">
+            <h5>The Renaissance Charter School</h5>
+            <div class="names one">Stacy Gauthier, <em>Executive Director &amp; Principal</em><br>Omar Rafael, <em>Director of Operations</em><br>Catina and John, <em>Security</em></div>
+          </div>
+          <div class="blk">
+            <h5>Trinity Lutheran Church</h5>
+            <div class="names">Pastor Paul B. Milholland<br>Deacon Roberta Detmers<br>Deacon Gwen Miller<br>Deacon Rob Sinanan<br>Scott Munson, <em>Office Admin.</em><br>Isaac Parks, Jr., <em>Parish Sexton</em><br>Gabriel Arra, <em>Handyman</em><br>Nicholas Suminski, <em>Dir. of Music</em><br>Ray Hummel and the Trinity Church Council</div>
+          </div>
+          <div class="blk">
+            <h5>JHBG Board of Directors</h5>
+            <div class="names">Leslie Ellman, <em>President</em><br>Jerold Goldman, <em>Vice President</em><br>Melissa Zavala, <em>Vice President</em><br>Daniel Karatzas, <em>Secretary</em><br>Joe Brunken, <em>Treasurer</em><br>Javier Arau<br>Len Maniace<br>John McCaffrey Jr.<br>Louise Mulvihill<br>Jim Riccio<br>Sharif Sadek<br>Edwin O'Keefe Westley<br>Doris Derwik-Wurgler</div>
+          </div>
+          <div class="blk">
+            <h5>JHO Leadership Committee</h5>
+            <div class="names">Wenqi Li<br>Liz Ionescu Schatz<br>Victoria Yam<br>Alice Petre<br>Chad Tindel</div>
+          </div>
+          <div class="blk">
+            <h5>Special Thanks</h5>
+            <div class="names one">Wenqi Li, <em>Assistant Conductor</em> · Patricia Glunt, <em>Emeritus Artistic Director</em> · Assemblywoman Catalina Cruz, <em>for her grant to the JHBG</em> · Shekar Krishnan, <em>City Council</em> · Wenqi Li &amp; Genevieve Scandone, <em>Program Book</em> — and every member of the orchestra.</div>
+          </div>
+        </div>
+        <div class="folio">9</div>
+      </div>
+
+      <div class="leaf right" style="justify-content:space-between">
+        <div class="sec">Save the Date</div>
+        <div class="back std" style="border:1px solid var(--ink);padding:26px 22px;text-align:center">
+          <div class="kicker">Concerts in Travers Park · 2026 Season</div>
+          <h3>Summer Pops</h3>
+          <div class="dt">Sunday, July 5 · 6:00 p.m.</div>
+          <p>Kicking off the season, sponsored by the Jackson Heights Beautification Group. Led by Assistant Conductor <strong>Wenqi Li</strong>, the program features marches, movie themes, and popular tunes.</p>
+        </div>
+        <div class="mosaic"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div style="text-align:center">
+          <div class="wm-sm" style="font-family:'Playfair Display',serif;font-weight:900;font-size:30px;line-height:1.06;letter-spacing:-0.03em">
+            <span style="display:block">Jackson</span><span style="display:block">Heights</span><span style="display:block">Orchestra</span>
+          </div>
+          <div class="contact" style="display:flex;justify-content:center;gap:22px;margin-top:14px;font-family:'Inter',sans-serif;font-size:8px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--g60)">
+            <span>jhorchestra.org</span><span>@jhorchestra</span>
+          </div>
+        </div>
+        <div class="folio">10</div>
+      </div>
+    </section>
+
+</doc-page>
+
+
+
+</body>
+</html>

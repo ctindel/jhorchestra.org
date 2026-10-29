@@ -1,0 +1,3 @@
+/* Minimal element defaults. Components carry their own styling. */
+a{color:var(--jho-link);text-decoration:none}
+a:hover{color:var(--jho-link-hover)}

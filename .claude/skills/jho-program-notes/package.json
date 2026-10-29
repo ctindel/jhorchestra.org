@@ -1,0 +1,10 @@
+{
+  "name": "jho-program-notes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build the JHO concert program as a print (fold-and-staple imposed) PDF and a web (single page) PDF",
+  "type": "module",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  }
+}

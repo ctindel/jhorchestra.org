@@ -1,0 +1,21 @@
+{
+  "title": "100 Years of Trinity Lutheran",
+  "blurb": "A centennial concert for the church on 37th Street.",
+  "dayname": "Wednesday",
+  "date": "May 20",
+  "iso": "2026-05-20",
+  "time": "7:30 PM",
+  "doors": "Doors 7:00 PM",
+  "venue": "Trinity Lutheran Church",
+  "address": "31-18 37th St, Astoria (parking available)",
+  "works": [
+    { "composer": "Fanny Mendelssohn-Hensel", "work": "Overture in C" },
+    { "composer": "Michael A. Lee", "work": "Cognōscent", "tag": "World Premiere" },
+    { "composer": "Felix Mendelssohn", "work": "Symphony No. 5 \"Reformation\"" }
+  ],
+  "people": [
+    { "name": "Alex Wen", "role": "Conductor", "photo": "assets/photos/alex-wen.jpg" },
+    { "name": "Michael A. Lee", "role": "Composer", "photo": "assets/photos/michael-lee.jpg" },
+    { "name": "Nicholas Pappone", "role": "Violin", "photo": "assets/photos/nicholas-pappone.jpeg" }
+  ]
+}

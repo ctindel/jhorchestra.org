@@ -1,0 +1,13 @@
+:root{
+  /* Restrained. Nothing bounces, nothing slides in on scroll. */
+  --jho-dur-fast:120ms; /* @kind other */
+  --jho-dur-base:150ms; /* @kind other */
+  --jho-dur-slow:240ms; /* @kind other */
+  --jho-ease:ease; /* @kind other */
+  --jho-ease-out:cubic-bezier(0.2,0.6,0.3,1); /* @kind other */
+
+  /* Interaction deltas */
+  --jho-hover-opacity:1; /* @kind other */       /* muted elements go to full opacity  */
+  --jho-hover-opacity-dim:0.55; /* @kind other *//* resting opacity for social icons   */
+  --jho-press-scale:0.98; /* @kind other */
+}
