@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /**
- * jho-instagram — render the five Instagram graphics the design system defines
+ * jho-instagram — render the four Instagram graphics the design system defines
  * (design-system/ui_kits/print_social/Social.jsx) from a concert JSON.
  *
  *   IG-Concert              1:1  (kit artboard 700x700 CSS px)  -> 1080x1080
  *   IG-Brand                1:1  (season card, reversed)        -> 1080x1080
  *   Story-Concert           9:16 (kit artboard 340 wide)        -> 1080x1920
  *   Story-Artist-Spotlight  9:16                                -> 1080x1920
- *   Story-Season            9:16                                -> 1080x1920
  *
  * CLI:
  *   node .claude/skills/jho-instagram/make-instagram.mjs --data <concert.json> [--out <dir>] [--allow-past]
@@ -39,21 +38,15 @@ const ADMISSION = 'Free Admission';
 const SUGGESTED = '$20 Suggested Donation';
 
 /*
- * Season copy, verbatim from Social.jsx. The concert JSON has one concert, so these
- * lists are not derived from it. NOTE: the two kit lists disagree with each other
- * (see SKILL.md "Known quirks").
+ * Season copy for IG-Brand, verbatim from Social.jsx. The concert JSON has one concert, so this
+ * list is not derived from it. It is hard-coded from the design kit and must be checked against
+ * the current season before posting (see SKILL.md "Known quirks").
  */
 const BRAND_SEASON = [
   ['Dec 9', 'Wed · 2026', 'Season Opener', 'Queens · 7:30 PM'],
   ['Mar 7 & 10', '2027', 'Winter Concert', 'Mar 7 Manhattan · Mar 10 Queens'],
   ['May 19', 'Wed · 2027', 'Spring Concert', 'Queens · 7:30 PM'],
   ['Jul 11', 'Sun · 2027', 'Summer Pops', 'Travers Park · Outdoor · 6pm'],
-];
-const STORY_SEASON = [
-  ['May 20', '2026', '100 Years of Trinity Lutheran', 'Astoria'],
-  ['Jul 05', '2026', 'Summer Pops', 'Travers Park'],
-  ['Dec 09', '2026', 'Winter Dreams', 'East Elmhurst'],
-  ['Mar 17', '2027', 'Spring in Forest Hills', 'Forest Hills'],
 ];
 
 /* Artboards: CSS px from the kit, rendered at deviceScaleFactor = outW / cssW. */
@@ -313,38 +306,9 @@ function storyArtistSpotlight(c, dsp, premiere) {
 ${storyTerms(`${c.dayname.slice(0, 3)} · ${c.date} · ${c.time}`, `${esc(c.venue)} · ${esc(c.address)}`)}
   <span style="${css({ ...PILL, background: 'var(--jho-tandoor)', color: 'var(--jho-paper)' })}">Read the notes</span>
 </div>`;
-  return artboard(STORY, { ...STORY_BASE, background: 'var(--jho-newsprint)', color: 'var(--jho-ink)' }, inner);
-}
-
-function storySeason(dsp) {
-  const inner = `
-<div>
-  <div style="${css({ ...KICKER, color: 'rgba(250,246,238,0.6)' })}">Season 26–27</div>
-  <div style="${css({ marginTop: 14 })}">${wordmark({ color: 'saffron', height: 132 })}</div>
-</div>
-<div style="${css({ display: 'flex', flexDirection: 'column', marginTop: 14, paddingTop: 12, borderTop: '1px solid var(--jho-border-invert)' })}">
-  ${STORY_SEASON.map(([d, y, t, v], i) => `<div style="${css({ display: 'grid', gridTemplateColumns: '78px 1fr', gap: 10,
-      alignItems: 'baseline', padding: '7px 0',
-      borderBottom: i < STORY_SEASON.length - 1 ? '1px solid rgba(250,246,238,0.12)' : 'none' })}">
-    <div style="${css({ fontFamily: 'var(--jho-font-display)', fontWeight: 800, fontSize: 15, color: 'var(--jho-saffron)', lineHeight: 1.15 })}">${esc(d)}
-      <span style="${css({ display: 'block', fontFamily: 'var(--jho-font-text)', fontWeight: 600, fontSize: 8,
-        letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(250,246,238,0.45)', marginTop: 1 })}">${esc(y)}</span>
-    </div>
-    <div style="${css({ fontFamily: 'var(--jho-font-display)', fontWeight: 700, fontSize: 13, lineHeight: 1.2 })}">${esc(t)}
-      <span style="${css({ display: 'block', fontFamily: 'var(--jho-font-text)', fontWeight: 500, fontSize: 9,
-        color: 'rgba(250,246,238,0.6)', marginTop: 1 })}">${esc(v)}</span>
-    </div>
-  </div>`).join('')}
-</div>
-<div>
-  <div style="${css({ borderTop: '1.5px solid rgba(250,246,238,0.4)', paddingTop: 10 })}">
-    <p style="${css({ margin: 0, fontSize: 12, lineHeight: 1.4, color: 'rgba(250,246,238,0.85)' })}">
-      Four concerts. Always free, pay what you can.
-    </p>
-  </div>
-  <span style="${css({ ...PILL, background: 'var(--jho-saffron)', color: 'var(--jho-ink)' })}">See the season</span>
-</div>`;
-  return artboard(STORY, { ...STORY_BASE, background: 'var(--jho-ink)', color: 'var(--jho-paper)' }, inner);
+  // Tighter than the shared story base (top/bottom padding 36 to 28, block gap 16 to 12), as igConcert was,
+  // so a long premiere headline fits the 604 px frame. Story-Concert keeps STORY_BASE.
+  return artboard(STORY, { ...STORY_BASE, padding: '28px 28px', gap: 12, background: 'var(--jho-newsprint)', color: 'var(--jho-ink)' }, inner);
 }
 
 /** Standalone page around one artboard. Asset paths are relative to the page's folder (dsp). */
@@ -403,7 +367,6 @@ export function buildGraphics(c, dsp) {
       reason: 'no work is tagged "Premiere" in the concert JSON. Add "tag": "Premiere" to the new work to make this story.',
     });
   }
-  graphics.push(st('Story-Season', storySeason(dsp)));
   return { graphics, skipped };
 }
 

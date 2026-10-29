@@ -1,12 +1,12 @@
 ---
 name: jho-instagram
-description: Render the five Instagram graphics the JHO design system defines (IG 1:1 concert tile, IG 1:1 brand/season card, and the 9:16 stories Concert, Artist Spotlight, Season) from a concert JSON. Writes a standalone HTML and a PNG for each into out/. Use for any JHO Instagram post or story request.
+description: Render the four Instagram graphics the JHO design system defines (IG 1:1 concert tile, IG 1:1 brand/season card, and the 9:16 stories Concert and Artist Spotlight) from a concert JSON. Writes a standalone HTML and a PNG for each into out/. Use for any JHO Instagram post or story request.
 ---
 
 # jho-instagram
 
 Turns a concert JSON into the Instagram set in `design-system/ui_kits/print_social/Social.jsx`.
-Nothing beyond those five graphics is produced.
+Nothing beyond those four graphics is produced.
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
@@ -33,11 +33,10 @@ Written on every run as `JHO_<iso>_<name>_<ratio>.html` plus `.png`:
 | `IG-Brand_1x1` | `IGBrand` | 700 x 700 | 1080 x 1080 |
 | `Story-Concert_9x16` | `StoryConcert` (paper) | 340 x 604.44 | 1080 x 1920 |
 | `Story-Artist-Spotlight_9x16` | `StoryArtistSpotlight` (newsprint) | 340 x 604.44 | 1080 x 1920 |
-| `Story-Season_9x16` | `StorySeason` (ink) | 340 x 604.44 | 1080 x 1920 |
 
 **Story-Artist-Spotlight is conditional.** It is built only when a work has a tag containing "premiere"
 (any case). The spotlight uses that work, wherever it is in the list. If no work is tagged, the graphic is
-skipped with a console notice, and the other four are still written. It is never built with a made-up premiere.
+skipped with a console notice, and the other graphics are still written. It is never built with a made-up premiere.
 
 No PDF is produced. Instagram takes raster images, so a PDF would be an artifact nobody uploads.
 
@@ -66,9 +65,9 @@ uses the same validator (`validateConcert` from `make-poster.mjs`), so the same 
   - Presenter line: "The Jackson Heights Beautification Group Presents"
   - "Free Admission" / "$20 Suggested Donation"
   - jhorchestra.org, @jhorchestra, the donate QR
-- Season copy, verbatim from `Social.jsx`: the `IGBrand` season list and the `StorySeason` rows
-  and tagline. These are constants at the top of `make-instagram.mjs` (`BRAND_SEASON`,
-  `STORY_SEASON`). Change them there for a new season. See quirks.
+- Season copy, verbatim from `Social.jsx`: the `IGBrand` season list. It is a constant at the top of
+  `make-instagram.mjs` (`BRAND_SEASON`). Check it against the current season before posting, and change it
+  there if the season has moved. See quirks.
 - The `StoryArtistSpotlight` headline is the kit sentence with the JSON filled in:
   "A new work, *premiere.work*, premieres *date*." The eyebrow is the premiere's `tag`, shown as written.
 
@@ -108,12 +107,9 @@ uses the same validator (`validateConcert` from `make-poster.mjs`), so the same 
 1. **Story artboard is not exactly 9:16.** The kit's story is 340 x 604, and 340 x 604 is not
    9:16 (604.44 is). The export uses 604.44 so the PNG is exactly 1080 x 1920. The difference is
    0.44 CSS px.
-2. **Season copy conflicts between two kit cards.** `IGBrand` lists Dec 9 2026 (Season Opener),
-   Mar 7 & 10 2027 (Winter), May 19 2027 (Spring), Jul 11 2027 (Summer Pops). `StorySeason` lists
-   May 20 2026 (100 Years of Trinity Lutheran), Jul 05 2026 (Summer Pops), Dec 09 2026 (Winter
-   Dreams), Mar 17 2027 (Spring in Forest Hills). They describe different seasons. Neither comes
-   from the concert JSON, and both are rendered verbatim. Someone should decide which season is
-   current and fix both lists in `make-instagram.mjs`.
+2. **IG-Brand's season text is hard-coded from the design kit.** It is the `BRAND_SEASON` list in
+   `make-instagram.mjs`, rendered verbatim, and it does not come from the concert JSON. Check it against
+   the current season before posting. If the season has changed, edit `BRAND_SEASON` first.
 3. **The concert JSON may be in the past.** `concert.2026-05-20.json` is dated May 20, 2026. Rendering it
    needs `--allow-past`, and `Story-Concert` says "Next concert" either way. Those labels are wrong for
    publishing now. Render from a current concert JSON before posting. `concert.2026-12-09.json` is current.
@@ -140,11 +136,16 @@ uses the same validator (`validateConcert` from `make-poster.mjs`), so the same 
 
 Run on 2026-10-29 with `concert.2026-12-09.json` (four works, roster format, no tags):
 
-- Four graphics rendered: IG-Concert, IG-Brand, Story-Concert, Story-Season, at 1080x1080 (x2) and
-  1080x1920 (x2). Story-Artist-Spotlight was skipped with the notice, because no work is tagged Premiere.
-- All four PNGs were opened and viewed. IG-Concert shows all four works and fits, with the When/Where block
-  below it and clearance above it. Story-Concert shows all four works. Story-Season and IG-Brand are the
-  kit's season copy, unchanged (quirk 2).
+- Three graphics rendered: IG-Concert, IG-Brand, Story-Concert, at 1080x1080 (x2) and 1080x1920. Story-Artist-Spotlight
+  was skipped with the notice, because no work is tagged Premiere. The run wrote three PNGs for this concert.
+- IG-Brand was opened and checked. Its season list is the `BRAND_SEASON` copy, unchanged (quirk 2). IG-Concert and
+  Story-Concert were rendered in an earlier run and were not re-opened in this pass.
+- Premiere path, fixed: a copy of this JSON with works[0] tagged "World Premiere" used to fail the overflow check on
+  Story-Artist-Spotlight (artboard scroll 340x608, frame 340x604). The spotlight now uses 28 px top/bottom padding and a
+  12 px block gap (was 36 and 16), set in `storyArtistSpotlight` only, so Story-Concert is unchanged. Three browser
+  tests cover it (4-work and 1-work premiere renders at 1080x1920, and no "undefined" in the spotlight text).
+  The headroom is about 20 CSS px at the Dec 9 title length. A much longer premiere title can still trip the overflow
+  check, which fails loudly and does not clip.
 - Automated tests cover the premiere rule, the skip notice, `--allow-past`, `--out` containment, escaping of
   the design-system path, and the overflow check (a deliberately overflowing four-work concert must fail).
 - Earlier (2026-05-20) renders are in `out/`. They were made before the overflow fix and the premiere rule,

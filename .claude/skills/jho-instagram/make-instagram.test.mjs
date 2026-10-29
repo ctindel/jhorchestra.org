@@ -91,7 +91,7 @@ describe('the premiere is the work tagged Premiere, never works[1] by position',
     const { graphics, skipped } = buildGraphics(c, '..');
     assert.deepEqual(skipped.map((s) => s.name), ['Story-Artist-Spotlight']);
     assert.match(skipped[0].reason, /Premiere/);
-    assert.deepEqual(graphics.map((g) => g.name), ['IG-Concert', 'IG-Brand', 'Story-Concert', 'Story-Season']);
+    assert.deepEqual(graphics.map((g) => g.name), ['IG-Concert', 'IG-Brand', 'Story-Concert']);
     for (const g of graphics) {
       assert.ok(!g.html.includes('undefined'), `${g.name} has "undefined" in it`);
       assert.ok(!/premieres/i.test(g.html), `${g.name} claims a premiere`);
@@ -166,13 +166,13 @@ describe('resolveOutDir(): --out must be inside the repo and not inside design-s
 });
 
 describe('renderInstagramSet(): rendered output, in a real browser', () => {
-  test('the Dec 9 set renders all four graphics at the exact sizes, with no overflow', async () => {
+  test('the Dec 9 set renders its three graphics at the exact sizes, with no overflow', async () => {
     // Why: four works is the largest list the tile and stories must hold. Clipping drops a
     // composer from a public post without any error, so overflow must fail the render.
     const c = await prepareConcert(await DEC9(), { today: TODAY });
     const outDir = path.join(work, 'dec9');
     const { results, skipped } = await renderInstagramSet(c, outDir);
-    assert.deepEqual(results.map((r) => r.graphic), ['IG-Concert', 'IG-Brand', 'Story-Concert', 'Story-Season']);
+    assert.deepEqual(results.map((r) => r.graphic), ['IG-Concert', 'IG-Brand', 'Story-Concert']);
     assert.deepEqual(skipped.map((s) => s.name), ['Story-Artist-Spotlight']);
     for (const r of results) assert.ok(r.size.includes('x'), r.graphic);
   });
@@ -201,5 +201,35 @@ describe('renderInstagramSet(): rendered output, in a real browser', () => {
       renderInstagramSet(c, path.join(work, 'overflow-story'), { only: ['Story-Concert'] }),
       /overflow/i,
     );
+  });
+
+  test('a premiere spotlight on the 4-work Dec 9 concert renders at 1080x1920 with no overflow', async () => {
+    // Why: a tagged premiere is the one story that makes a new public claim. It used to fail the
+    // overflow check (340x608 content in a 340x604 frame), so no premiere could be posted at all.
+    const c = await DEC9();
+    c.works[0] = { ...c.works[0], tag: 'World Premiere' };
+    const prepared = await prepareConcert(c, { today: TODAY });
+    const { results } = await renderInstagramSet(prepared, path.join(work, 'premiere-4work'), { only: ['Story-Artist-Spotlight'] });
+    assert.deepEqual(results.map((r) => [r.graphic, r.size]), [['Story-Artist-Spotlight', '1080x1920']]);
+  });
+
+  test('a premiere spotlight on a 1-work concert renders at 1080x1920 with no overflow', async () => {
+    // Why: the spotlight must hold with the shortest work list too, not only the longest.
+    const c = await DEC9();
+    c.works = [{ ...c.works[0], tag: 'World Premiere' }];
+    const prepared = await prepareConcert(c, { today: TODAY });
+    const { results } = await renderInstagramSet(prepared, path.join(work, 'premiere-1work'), { only: ['Story-Artist-Spotlight'] });
+    assert.deepEqual(results.map((r) => [r.graphic, r.size]), [['Story-Artist-Spotlight', '1080x1920']]);
+  });
+
+  test('the premiere spotlight text has no "undefined" and names the tagged work', async () => {
+    // Why: a stray "undefined" or a wrong work name on a premiere post is a false public claim.
+    const c = await DEC9();
+    c.works[0] = { ...c.works[0], tag: 'World Premiere' };
+    const prepared = await prepareConcert(c, { today: TODAY });
+    const spot = buildGraphics(prepared, '..').graphics.find((g) => g.name === 'Story-Artist-Spotlight');
+    assert.ok(!spot.html.includes('undefined'), 'spotlight has "undefined" in it');
+    assert.match(spot.html, new RegExp(`A new work, <em[^>]*>${esc('The Magic Flute — Overture')}</em>, premieres December 9\\.`));
+    assert.match(spot.html, />World Premiere</, 'eyebrow is the tag text');
   });
 });
