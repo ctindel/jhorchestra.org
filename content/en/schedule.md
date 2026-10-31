@@ -12,24 +12,24 @@ menu:
 
 # Next Concert
 
-## Sunday, July 5, 2026, 6pm
+## Wednesday, December 9, 2026, 7:30pm
 
-Time: 6:00pm Eastern
+Time: 7:30pm Eastern
 
-Location: Travers Park
+Location: Blessed Sacrament Church (Parking Available)
 
-Address: 76-09 34th Avenue, Jackson Heights, NY 11372
+Address: 34-43 93rd Street, Jackson Heights, NY 11372
 
-Google Maps Link: https://maps.app.goo.gl/Prq7EV825YvZ39he7
+Google Maps Link: https://maps.app.goo.gl/mNo2wqXEUkdA6gAq9
 
 ### Program:
 
-**Join us for a festive outdoor concert of pops classics, iconic movie
-soundtracks, and everything in between!**
+1. Mozart: The Magic Flute — Overture
+2. Beach: Bal Masqué
+3. Chausson: Poème
+4. Beethoven: Symphony No. 1
 
 # Future Concert Dates
-
-## Wednesday, December 9, 2026, 7:30pm
 
 ## Sunday, March 7 (Manhattan) and Wednesday, March 10 (Queens), 2027 @7:30pm 
 
