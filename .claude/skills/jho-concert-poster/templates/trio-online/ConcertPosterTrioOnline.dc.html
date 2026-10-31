@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="omelette-owns-print" content="1">
+<script src="../../templates/concert-poster-duo/support.js"></script>
+</head>
+<body>
+<!--
+  jho-concert-poster · Trio · Online (color). Skill-owned layout, same language as the Duo
+  online template (templates/duo-online/), which was rebuilt from the approved Dec 2026 reference
+  poster (20261210_JHO_Concert_Poster_Display.png, sRGB). Conductor plus two soloists.
+
+  The two soloists stack in the right column beside the programme, not side by side: a name such as
+  "Nicholas Pappone" needs about 200px at the Duo caption size, so two columns would squeeze the programme.
+  Each photo is --soloist-photo (116px, against 200px in Duo). The caption column is 240px at most: it takes the
+  width of the longest name up to that cap, and a name longer than about 18 characters wraps to two lines, which
+  makes the poster too tall, so the layout check refuses it (see SKILL.md, "Limits").
+
+  This file is NOT a design-system template. It is filled by ../../skill-templates.mjs
+  (the double-bracket slots below, the works block between the works markers) and rendered
+  by ../../make-poster.mjs. It is served with the design-system folder as site root, so
+  ../../ is the design-system root: the runtime, fonts, photos and logos resolve from there.
+  Opening this file directly from disk will not resolve those paths.
+
+  Vertical rhythm (CSS px on the 816 x 1056 sheet), identical to Duo:
+    top band 0-73 (seal 56px at y 8, rule at 72)
+    hero 73-414 (wordmark + conductor column, centred)
+    mosaic rule 414-417 (rule variant: 3px, 6px gaps)
+    when/where 417-538 (divider at 537)
+    programme 538-944 (flex, centred between the divider and the footer rule at 944)
+    footer 944-1056 (three items, space-between)
+
+  Slot names (written without brackets so the fill cannot touch this comment):
+         title_html, blurb, when, time_line, venue, address,
+         conductor_name, conductor_role, conductor_photo,
+         soloist_a_name, soloist_a_role, soloist_a_photo,
+         soloist_b_name, soloist_b_role, soloist_b_photo,
+         and the works block (one row per work).
+-->
+<x-dc>
+<!-- @template name="Concert poster · Trio · Online (skill-owned)" description="Web/social 8.5 x 11 JHO concert poster, conductor plus two soloists. Off-white paper ground. Same language as the Duo online poster." -->
+<helmet><script src="../../templates/concert-poster-duo/ds-base.js"></script><style>@page{size:letter;margin:0}
+html,body{margin:0;padding:0;background:#e9e4d8}
+.jho-sheet{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.jho-sheet *{box-sizing:border-box}
+.jho-sheet{--soloist-photo:116px;width:8.5in;height:11in;background:#FAF6EE;color:#141A2A;display:flex;flex-direction:column;box-shadow:0 30px 60px rgba(0,0,0,0.18),0 4px 12px rgba(0,0,0,0.08);border-radius:2px;overflow:hidden;font-family:'Inter',sans-serif}
+.jho-top{display:flex;align-items:flex-start;gap:36px;height:73px;padding:8px 40px 0;border-bottom:1px solid #141A2A;flex-shrink:0}
+.jho-seal{width:56px;height:56px;display:block;flex-shrink:0;object-fit:contain}
+.jho-presenter{font-family:'Inter',sans-serif;font-weight:600;font-size:16px;line-height:56px;letter-spacing:0.1em;text-transform:uppercase;color:#6A6555;white-space:nowrap}
+.jho-hero{height:341px;flex-shrink:0;display:grid;grid-template-columns:1fr 200px;column-gap:24px;align-items:center;padding:0 47px}
+.jho-mark{display:flex;justify-content:center;min-width:0;padding-right:4px}
+.jho-conductor{display:flex;flex-direction:column;align-items:center}
+.jho-photo{width:200px;height:200px;border-radius:5px;overflow:hidden;flex-shrink:0;display:block}
+.jho-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.jho-person-name{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;line-height:1.15;white-space:normal;text-align:center;color:#141A2A}
+.jho-role{font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#E04B2A;line-height:1.2;text-align:center;white-space:normal}
+.jho-rule{padding:0 47px;flex-shrink:0}
+.jho-meta{display:grid;grid-template-columns:337px 1fr;column-gap:0;padding:27px 47px 22px;border-bottom:1px solid rgba(20,26,42,0.15);flex-shrink:0}
+.jho-label{margin:0 0 6px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;line-height:1.2;letter-spacing:0.2em;text-transform:uppercase;color:#6A6555}
+.jho-meta-name{display:block;font-family:'Playfair Display',serif;font-weight:800;font-size:24px;line-height:1.2;letter-spacing:-0.01em;color:#141A2A;margin-bottom:2px;white-space:nowrap}
+.jho-meta-sub{margin:0;font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.3;color:#6A6555;white-space:nowrap}
+.jho-mid{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:minmax(296px,1fr) max-content;column-gap:24px;align-items:center;padding:0 47px}
+.jho-program{display:flex;flex-direction:column;min-width:0}
+.jho-title{font-family:'Playfair Display',serif;font-weight:800;font-size:31px;line-height:1.1;letter-spacing:-0.02em;color:#E04B2A;white-space:normal}
+.jho-title em{font-style:italic}
+.jho-blurb{margin:5px 0 0;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:18px;line-height:1.3;color:#6A6555}
+.jho-works{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.jho-composer{font-family:'Playfair Display',serif;font-weight:700;font-size:26px;line-height:1.2;letter-spacing:-0.01em;color:#141A2A;white-space:normal}
+.jho-piece{display:flex;align-items:center;flex-wrap:wrap;gap:11px;margin-top:3px;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:21px;line-height:1.25;color:#6A6555;white-space:normal}
+.jho-tag{font-family:'Inter',sans-serif;font-style:normal;font-weight:700;font-size:12px;line-height:1.2;text-transform:uppercase;letter-spacing:0.22em;color:#E04B2A;background:rgba(224,75,42,0.1);padding:4px 11px;border-radius:3px;white-space:nowrap}
+.jho-soloists{display:flex;flex-direction:column;gap:22px;min-width:200px;max-width:240px}
+.jho-soloist{display:flex;flex-direction:column;align-items:center}
+.jho-soloist .jho-photo{width:var(--soloist-photo);height:var(--soloist-photo)}
+.jho-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:17px 47px 26px;border-top:1px solid rgba(20,26,42,0.15);flex-shrink:0}
+.jho-site{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;line-height:1.15;letter-spacing:-0.01em;color:#141A2A;white-space:nowrap}
+.jho-site small{display:block;font-family:'Inter',sans-serif;font-weight:500;font-size:11px;line-height:1.3;letter-spacing:0.15em;text-transform:uppercase;color:#6A6555;margin-top:4px}
+.jho-donate{display:flex;align-items:center;gap:10px}
+.jho-qr{width:68px;height:68px;display:block;image-rendering:pixelated;flex-shrink:0}
+.jho-donate-text{white-space:nowrap;padding-top:3px}
+.jho-donate-label{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;line-height:1.2;letter-spacing:0.1em;text-transform:uppercase;color:#6A6555}
+.jho-donate-url{font-family:'Inter',sans-serif;font-weight:500;font-size:11px;line-height:1.3;color:#6A6555;margin-top:2px}
+.jho-ticket{text-align:center;white-space:nowrap;padding-top:4px}
+.jho-admission{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;line-height:1.1;color:#E04B2A}
+.jho-sugg{font-family:'Inter',sans-serif;font-weight:600;font-size:11px;line-height:1.3;letter-spacing:0.15em;text-transform:uppercase;color:#6A6555;margin-top:5px}
+@media print{
+  html,body{width:8.5in!important;height:11in!important;margin:0!important;padding:0!important;background:#fff!important;overflow:hidden!important}
+  .jho-desk{position:static!important;display:block!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;background:none!important;overflow:visible!important}
+  .jho-sheet{position:absolute!important;top:0!important;left:0!important;width:8.5in!important;height:11in!important;margin:0!important;box-shadow:none!important;border-radius:0!important;overflow:hidden!important;break-inside:avoid!important}
+  *,*::before,*::after{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+</style></helmet>
+<div class="jho-desk" data-finish="online" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px">
+<div class="jho-sheet">
+
+<header class="jho-top">
+<img class="jho-seal" src="../../assets/logos/griffin-seal.webp" alt="Jackson Heights Orchestra griffin seal">
+<div class="jho-presenter">The Jackson Heights Beautification Group Presents</div>
+</header>
+
+<section class="jho-hero">
+<div class="jho-mark"><x-import component-from-global-scope="JacksonHeightsOrchestraDesignSystem_6e3e82.Wordmark" color="subway" align="center" size="{{ markSize }}" hint-size="330px,290px"></x-import></div>
+<div class="jho-conductor">
+<span class="jho-photo"><img src="../../[[conductor_photo]]" alt="[[conductor_name]]"></span>
+<span class="jho-person-name" style="margin-top:10px">[[conductor_name]]</span>
+<span class="jho-role" style="margin-top:4px">[[conductor_role]]</span>
+</div>
+</section>
+
+<div class="jho-rule"><x-import component-from-global-scope="JacksonHeightsOrchestraDesignSystem_6e3e82.MosaicRule" variant="rule" hint-size="100%,3px"></x-import></div>
+
+<section class="jho-meta">
+<div>
+<h5 class="jho-label">When</h5>
+<strong class="jho-meta-name">[[when]]</strong>
+<p class="jho-meta-sub">[[time_line]]</p>
+</div>
+<div>
+<h5 class="jho-label">Where</h5>
+<strong class="jho-meta-name">[[venue]]</strong>
+<p class="jho-meta-sub">[[address]]</p>
+</div>
+</section>
+
+<section class="jho-mid">
+<div class="jho-program">
+<div class="jho-title">[[title_html]]</div>
+<p class="jho-blurb">[[blurb]]</p>
+<div class="jho-works"><!--works-->
+<div class="jho-work[[work_class]]"><div class="jho-composer">[[work_composer]]</div><div class="jho-piece"><span>[[work_title]]</span>[[work_tag]]</div></div>
+<!--/works-->
+</div>
+</div>
+<div class="jho-soloists">
+<div class="jho-soloist">
+<span class="jho-photo"><img src="../../[[soloist_a_photo]]" alt="[[soloist_a_name]]"></span>
+<span class="jho-person-name" style="margin-top:10px">[[soloist_a_name]]</span>
+<span class="jho-role" style="margin-top:4px">[[soloist_a_role]]</span>
+</div>
+<div class="jho-soloist">
+<span class="jho-photo"><img src="../../[[soloist_b_photo]]" alt="[[soloist_b_name]]"></span>
+<span class="jho-person-name" style="margin-top:10px">[[soloist_b_name]]</span>
+<span class="jho-role" style="margin-top:4px">[[soloist_b_role]]</span>
+</div>
+</div>
+</section>
+
+<footer class="jho-foot">
+<div class="jho-site">jhorchestra.org<small>@jhorchestra</small></div>
+<div class="jho-donate">
+<img class="jho-qr" src="../../assets/qr/donate-on-paper.png" alt="Scan to donate">
+<div class="jho-donate-text"><div class="jho-donate-label">Donate &rarr;</div><div class="jho-donate-url">jhorchestra.org/donate</div></div>
+</div>
+<div class="jho-ticket"><div class="jho-admission">Free Admission</div><div class="jho-sugg">$20 Suggested Donation</div></div>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:896,&quot;height&quot;:1136},&quot;markSize&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:93,&quot;min&quot;:64,&quot;max&quot;:104,&quot;step&quot;:1,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Masthead&quot;}}">
+class Component extends DCLogic {
+  renderVals() { return { markSize: this.props.markSize ?? 93 }; }
+}
+</script>
+</body>
+</html>

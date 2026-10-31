@@ -11,8 +11,8 @@
  *
  * Template choice (from people.length): 1 = Solo, 2 = Duo, 3 = Trio.
  * Style: color = Online (web/social), print = Print-Color, bw = Print-BW.
- * Routing: a variant/style listed in skill-templates.mjs SKILL_TEMPLATES (today Duo/color)
- * uses the skill-owned template; every other pair uses the design-system template.
+ * Routing: a variant/style listed in skill-templates.mjs SKILL_TEMPLATES (today Solo, Duo and Trio
+ * in color) uses the skill-owned template; every other pair uses the design-system template.
  *
  * The design-system templates are static HTML. The only runtime props are
  * `markSize` and `finish`; the concert text and photos are literal markup. So
@@ -26,6 +26,7 @@
  * 1..MAX_WORKS[variant] works. The tag is optional per work.
  */
 import { readFile, readdir, realpath, lstat, stat } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderPage } from '../jho-render/render.mjs';
@@ -51,13 +52,15 @@ const FOLDERS = {
   Trio: { color: 'concert-poster-trio', print: 'concert-poster-trio-print', bw: 'concert-poster-trio-bw' },
 };
 /**
- * Maximum works per template, so the works column stays inside its grid box
- * (above the footer divider). Measured in Chromium at 816x1056 for color, print
- * and bw. Free space from the column's last row to the grid's bottom edge:
- * Solo 3 = 55px, Solo 4 = 16px, Solo 5 = -62px; Duo and Trio 3 = 71px, 4 = 38px, 5 = -10px.
- * So 4 is the max for all three. See SKILL.md, "Works per template".
+ * Maximum works per skill-owned template: the most that fit in Chromium with a one-line blurb and short work
+ * titles (816 x 1056 sheet, measured 1..6 works):
+ *   Solo: 1-6 fit (6 sets as 3 + 3 in two columns). With a two-line blurb, 5 is refused (its first column is
+ *         too tall); tagged works with long titles also refuse 5.
+ *   Duo and Trio: 1-4 fit; 5 overflows the footer rule. With a two-line blurb, 4 is refused.
+ * Text that makes a count too tall is refused by the layout check in writePoster, with the rule named.
+ * See SKILL.md, "Limits".
  */
-export const MAX_WORKS = { Solo: 4, Duo: 4, Trio: 4 };
+export const MAX_WORKS = { Solo: 6, Duo: 4, Trio: 4 };
 
 const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
@@ -257,6 +260,9 @@ export async function validateConcert(c, { today = todayInNewYork(), allowPast =
       if (!p || !p.name || !p.role || !p.photo) {
         problems.push(`people[${i}] needs "name", "role" and "photo"`);
         continue;
+      }
+      if (/[{}]/.test(p.name)) {
+        problems.push(`people[${i}].name must not contain { or } (the name is also written into alt="..."): ${p.name}`);
       }
       const checked = await checkPhotoPath(p.photo);
       if (checked.problem) {
@@ -472,6 +478,165 @@ export async function buildPoster(concert, style, opts = {}) {
 }
 
 /**
+ * Layout limits for the skill-owned templates, in CSS px on the 816 x 1056 sheet. The CLI measures every
+ * skill poster in Chromium and refuses to write one that breaks a limit (writePoster). The tests use the same
+ * two functions (layoutInPage, layoutProblems), so what they assert is what the CLI enforces.
+ */
+export const LAYOUT = {
+  /** Text may reach x = 41 on the left and x = 775 on the right. The margin is 47px, but the approved Dec 2026
+   *  "Where" line already runs to x = 774.8 (6px into the margin). The limit allows that line and nothing more. */
+  edgeLeft: 41,
+  edgeRight: 775,
+  /** Clear space between the programme or a soloist block and the rule above or below it. */
+  clear: 10,
+  /** Clear space between programme text and a soloist column. */
+  columnGap: 10,
+  /** A caption name may wrap to two lines of 24px Playfair at line-height 1.15, and no more. */
+  nameMaxHeight: 2 * 24 * 1.15 + 1,
+};
+
+/** Text whose own box must hold its text (a wider text would be clipped or spill over a neighbour). */
+const BOXED_TEXT = ['title', 'composer', 'piece', 'tag', 'meta-name', 'person-name', 'role'];
+/** Text in the programme column; it must stay left of a soloist column. */
+const PROGRAMME_TEXT = ['title', 'blurb', 'composer', 'piece', 'tag'];
+
+/**
+ * Browser side of the layout check. It is passed to page.evaluate, so it must not use anything from this
+ * module. It returns the rule boxes, the soloist blocks, the works, and the ink extent of every text element
+ * (the union of its text rectangles, so padding and empty boxes do not count). Coordinates are CSS px from
+ * the sheet's top-left corner.
+ */
+export function layoutInPage() {
+  const sheet = document.querySelector('.jho-sheet');
+  const origin = sheet.getBoundingClientRect();
+  const rel = (r) => ({ left: r.left - origin.left, right: r.right - origin.left, top: r.top - origin.top, bottom: r.bottom - origin.top });
+  const box = (el) => (el ? rel(el.getBoundingClientRect()) : null);
+  const ink = (el) => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const rects = [...range.getClientRects()].filter((r) => r.width > 0 && r.height > 0);
+    if (!rects.length) return null;
+    return rel({
+      left: Math.min(...rects.map((r) => r.left)), right: Math.max(...rects.map((r) => r.right)),
+      top: Math.min(...rects.map((r) => r.top)), bottom: Math.max(...rects.map((r) => r.bottom)),
+    });
+  };
+  // A face counts as loaded when a loaded @font-face with the same family, style and a weight range that covers
+  // the element's weight exists. (document.fonts.check is not used: it is false while any unrelated subset is unloaded.)
+  const faceLoaded = (cs) => {
+    const family = cs.fontFamily.split(',')[0].replace(/["']/g, '').trim();
+    const weight = Number(cs.fontWeight);
+    return [...document.fonts].some((f) => {
+      const [lo, hi = lo] = String(f.weight).split(' ').map(Number);
+      return f.status === 'loaded' && f.style === cs.fontStyle && f.family.replace(/["']/g, '') === family && weight >= lo && weight <= hi;
+    });
+  };
+  const texts = [];
+  for (const cls of ['title', 'blurb', 'composer', 'piece', 'tag', 'person-name', 'role', 'meta-name', 'meta-sub']) {
+    for (const el of sheet.querySelectorAll('.jho-' + cls)) {
+      const cs = getComputedStyle(el);
+      texts.push({
+        cls, text: el.textContent, clientW: el.clientWidth, scrollW: el.scrollWidth, height: el.getBoundingClientRect().height, ink: ink(el),
+        fontLoaded: faceLoaded(cs),
+      });
+    }
+  }
+  return {
+    overflow: { x: sheet.scrollWidth - sheet.clientWidth, y: sheet.scrollHeight - sheet.clientHeight },
+    rules: { divider: box(document.querySelector('.jho-meta')), footer: box(document.querySelector('.jho-foot')) },
+    programme: box(document.querySelector('.jho-program')),
+    texts,
+    soloists: [...sheet.querySelectorAll('.jho-soloist')].map((el) => ({ name: el.querySelector('.jho-person-name').textContent, block: box(el) })),
+    works: [...sheet.querySelectorAll('.jho-work')].map((el) => ({ box: box(el), text: el.textContent })),
+  };
+}
+
+/**
+ * Judge a measurement from layoutInPage against LAYOUT. Returns the list of breaches (empty = clean).
+ * Every message names the element and the number that breaks the limit.
+ * @param {ReturnType<typeof layoutInPage>} m
+ * @returns {string[]}
+ */
+export function layoutProblems(m) {
+  const out = [];
+  const L = LAYOUT;
+  if (m.overflow.x > 0 || m.overflow.y > 0) out.push(`sheet overflows by ${m.overflow.x} x ${m.overflow.y} px`);
+  for (const t of m.texts) {
+    const label = `${t.cls} "${t.text.slice(0, 40)}"`;
+    if (BOXED_TEXT.includes(t.cls) && t.scrollW > t.clientW + 0.5) {
+      out.push(`${label} is ${t.scrollW - t.clientW}px wider than its box`);
+    }
+    if (t.ink && (t.ink.left < L.edgeLeft || t.ink.right > L.edgeRight)) {
+      out.push(`${label} runs past the margin: ink from x=${t.ink.left.toFixed(1)} to x=${t.ink.right.toFixed(1)} (limits ${L.edgeLeft} to ${L.edgeRight})`);
+    }
+    if (t.cls === 'person-name' && t.height > L.nameMaxHeight) out.push(`${label} wraps onto more than two lines (${t.height.toFixed(1)}px tall)`);
+    if (t.fontLoaded === false) out.push(`${label} is set in a face that did not load: a fallback would change the layout`);
+  }
+  const { divider, footer } = m.rules;
+  if (m.programme.top < divider.bottom + L.clear) {
+    out.push(`programme starts at y=${m.programme.top.toFixed(1)}, less than ${L.clear}px under the divider at y=${divider.bottom.toFixed(1)}`);
+  }
+  if (m.programme.bottom > footer.top - L.clear) {
+    out.push(`programme ends at y=${m.programme.bottom.toFixed(1)}, less than ${L.clear}px above the footer rule at y=${footer.top.toFixed(1)}: ` +
+      'shorten the title or blurb, or use fewer works');
+  }
+  for (const s of m.soloists) {
+    if (s.block.top < divider.bottom + L.clear || s.block.bottom > footer.top - L.clear) {
+      out.push(`soloist "${s.name}" block spans y=${s.block.top.toFixed(1)} to ${s.block.bottom.toFixed(1)}, outside the band between the divider and the footer rule`);
+    }
+  }
+  if (m.soloists.length) {
+    const programmeRight = Math.max(...m.texts.filter((t) => PROGRAMME_TEXT.includes(t.cls) && t.ink).map((t) => t.ink.right));
+    const soloistLeft = Math.min(...m.soloists.map((s) => s.block.left));
+    if (programmeRight > soloistLeft - L.columnGap) {
+      out.push(`programme text reaches x=${programmeRight.toFixed(1)}, into the soloist column at x=${soloistLeft.toFixed(1)}`);
+    }
+  }
+  return out;
+}
+
+/** The render check for a skill-owned poster: layoutProblems on the live page, as renderPage assertion strings. */
+export async function layoutAssertion(page) {
+  return (layoutProblems(await page.evaluate(layoutInPage))).map((p) => `poster layout: ${p}`);
+}
+
+/**
+ * Build a poster and write its PNG and PDF. For a skill-owned template the render also runs the layout
+ * limits, and renderPage writes nothing when a check fails, so a refused poster leaves no file behind.
+ * @param {any} concert  concert data (roster or explicit people)
+ * @param {string} style color | print | bw
+ * @param {{outDir?: string, scale?: number, allowPast?: boolean, today?: string, roster?: object}} [opts]
+ *        outDir defaults to pr/<YYYYMMDD>_Concert; scale defaults to 3 (288 dpi on the 8.5 in sheet).
+ * @returns {Promise<object>} template, variant, style and the renderPage result
+ */
+export async function writePoster(concert, style, { outDir, scale = 3, allowPast = false, today, roster } = {}) {
+  const { html, variant, pagePath, concert: c } = await buildPoster(concert, style, { allowPast, today, roster });
+  const dir = await resolveOutDir(outDir ?? concertOutDir(c.iso));
+  const base = `JHO_${c.iso}_Poster-${variant}_${STYLES[style].label}`;
+  const skill = !!skillTemplateFor(variant, style);
+  const result = await renderPage({
+    root: DS_ROOT,
+    pagePath,
+    html,
+    width: 816,
+    height: 1056,
+    scale,
+    pngDpi: posterPngDpi(scale),
+    viewport: { width: 896, height: 1136 },
+    selector: '.jho-sheet',
+    png: path.join(dir, base + '.png'),
+    pdf: path.join(dir, base + '.pdf'),
+    assertions: async (page) => {
+      const got = await page.evaluate(() => document.querySelector('.jho-desk')?.dataset.finish);
+      const want = STYLES[style].dataFinish;
+      const finish = got === want ? [] : [`finish is "${got}", expected "${want}" (wrong template folder?)`];
+      return skill ? [...finish, ...(await layoutAssertion(page))] : finish;
+    },
+  });
+  return { template: pagePath, variant, style, ...result };
+}
+
+/**
  * Uniqueness check for the design-system templates. Each May 2026 snippet must occur exactly
  * once in the template; applyFill throws otherwise. The check fills the May baseline with
  * itself, so the output cannot differ from the template by construction. It proves the
@@ -498,8 +663,8 @@ export async function checkBaseline() {
 }
 
 /**
- * Skill-owned templates: fill each with the Dec 2026 reference concert (concert.2026-12-09.json)
- * and check the output. A token-slot template has no byte-identity to keep, so the check is:
+ * Skill-owned templates: fill each with the Dec 2026 reference concert (concert.2026-12-09.json),
+ * given the people count of its variant (see skillFixture), and check the output. A token-slot template has no byte-identity to keep, so the check is:
  * every slot is filled exactly once, no placeholder is left, and the reference's own text
  * is present (title italic split, the When line, the roster title, the works, the violin
  * role). Also rejects the old date, which would mean a stale value leaked in.
@@ -508,20 +673,20 @@ export async function checkBaseline() {
 export async function checkSkillTemplates() {
   const results = [];
   const fixture = JSON.parse(await readFile(path.join(SKILL_DIR, 'concert.2026-12-09.json'), 'utf8'));
-  const resolved = await resolvePeople(fixture, await loadRoster());
-  const c = await validateConcert(resolved, { allowPast: true });
-  for (const [key, entry] of Object.entries(SKILL_TEMPLATES)) {
+  const roster = await loadRoster();
+  for (const [key] of Object.entries(SKILL_TEMPLATES)) {
     const [variant, style] = key.split('/');
     const t = skillTemplateFor(variant, style);
+    const c = await validateConcert(await resolvePeople(skillFixture(fixture, variant), roster), { allowPast: true });
     const src = await loadSkillSource(t);
     const html = fillSkillTemplate(src, c, { variant });
     const want = [
       'Masks <em>&amp; Revelations</em>',
       'Wednesday &middot; December 9',
       '7:30 PM &middot; Doors 7:00 PM',
-      '>Artistic Director</span>',
-      'Nicholas Pappone',
+      `>${esc(c.people[0].role)}</span>`,
       'Symphony No. 1',
+      ...c.people.flatMap((p) => [`>${esc(p.name)}</span>`, `>${esc(p.role)}</span>`]),
     ];
     const missing = want.filter((s) => !html.includes(s));
     if (missing.length) throw new Error(`skill template ${t.pagePath} lost fixture text: ${missing.join(' | ')}`);
@@ -529,6 +694,20 @@ export async function checkSkillTemplates() {
     results.push({ template: t.pagePath, fill: 'ok' });
   }
   return results;
+}
+
+/**
+ * The reference concert with the people count a variant needs. Solo drops the soloist. Trio adds
+ * a second soloist for the layout check only: Michael A. Lee with instrument "Cello" is not a
+ * fact about any concert, it is the placeholder that gives the Trio template its two soloists.
+ * Nothing here is written to a poster.
+ */
+export function skillFixture(reference, variant) {
+  if (variant === 'Solo') return { ...reference, soloists: [] };
+  if (variant === 'Trio') {
+    return { ...reference, soloists: [...reference.soloists, { name: 'Michael A. Lee', instrument: 'Cello' }] };
+  }
+  return reference;
 }
 
 /**
@@ -607,31 +786,25 @@ async function cli(argv) {
   if (!a.data || !a.style) throw new Error('--data <concert.json> and --style color|print|bw are required');
   const scale = a.scale === undefined ? 3 : parseScale(a.scale);
   const concert = JSON.parse(await readFile(path.resolve(a.data), 'utf8'));
-  const { html, variant, style, pagePath, concert: c } = await buildPoster(concert, a.style, { allowPast: !!a.allowPast });
-  const outDir = await resolveOutDir(a.out ?? concertOutDir(c.iso));
-  const base = `JHO_${c.iso}_Poster-${variant}_${STYLES[style].label}`;
-  const result = await renderPage({
-    root: DS_ROOT,
-    pagePath,
-    html,
-    width: 816,
-    height: 1056,
-    scale,
-    pngDpi: posterPngDpi(scale),
-    viewport: { width: 896, height: 1136 },
-    selector: '.jho-sheet',
-    png: path.join(outDir, base + '.png'),
-    pdf: path.join(outDir, base + '.pdf'),
-    assertions: async (page) => {
-      const got = await page.evaluate(() => document.querySelector('.jho-desk')?.dataset.finish);
-      const want = STYLES[style].dataFinish;
-      return got === want ? [] : [`finish is "${got}", expected "${want}" (wrong template folder?)`];
-    },
-  });
-  console.log(JSON.stringify({ template: pagePath, variant, style, ...result }, null, 2));
+  const out = await writePoster(concert, a.style, { outDir: a.out, scale, allowPast: !!a.allowPast });
+  console.log(JSON.stringify(out, null, 2));
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+/**
+ * True when this file is the script Node was asked to run. Both sides go through realpath: a path that
+ * reaches the file through a symlink (a /tmp that is /private/tmp, a linked checkout) is a different string
+ * for the same file, and a plain path comparison made the CLI exit silently without doing anything.
+ */
+function isMainModule(argv1 = process.argv[1], moduleUrl = import.meta.url) {
+  if (!argv1) return false;
+  try {
+    return realpathSync(argv1) === realpathSync(fileURLToPath(moduleUrl));
+  } catch {
+    return false;
+  }
+}
+
+if (isMainModule()) {
   cli(process.argv.slice(2)).catch((err) => {
     console.error(`make-poster: ${err.message}`);
     process.exit(1);

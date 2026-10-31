@@ -7,7 +7,9 @@ description: Build a Jackson Heights Orchestra concert poster (PNG + PDF) from c
 
 Turns a concert JSON into a finished 8.5x11 poster. Most layouts come from the design-system
 templates. Where a layout has been rebuilt for the skill, it comes from a skill-owned template
-under `templates/` instead. Today that is Duo online (color); see "Skill-owned templates".
+under `templates/` instead. Today that is the online (color) poster for Solo, Duo and Trio; the
+print and bw posters still come from the design-system templates and look different. See
+"Skill-owned templates".
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
@@ -36,7 +38,7 @@ value is missing, ask for it in one message and stop.
 3. **Venue name** and **venue address** (the address line includes any parking note).
 4. **Program title**, for example `Masks & Revelations`.
 5. **Program subtitle**, for example `Mystery, celebration, longing, and renewal.`
-6. **Repertoire**: 1 to 4 works, each with composer and work title. A premiere tag is only added
+6. **Repertoire**: 1 to `MAX_WORKS` works (Solo 6, Duo 4, Trio 4), each with composer and work title. A premiere tag is only added
    if the user asks for one.
 7. **Conductor**: the name. The title and headshot come from `roster.json`; if the name is not
    there, ask for the title and headshot. The conductor defaults to **Alex Wen** (Artistic Director).
@@ -125,13 +127,15 @@ Rendering goes through `../jho-render/render.mjs`, so the wait and failure rules
 | `people.length` = 1 (conductor only) | **Solo** |
 | `people.length` = 2 (conductor + 1 soloist) | **Duo** |
 | `people.length` = 3 (conductor + 2 soloists) | **Trio** |
-| `--style color` | Online (web/social). Folder `concert-poster[-duo|-trio]`, **except Duo, which is the skill-owned `templates/duo-online/`** |
+| `--style color` | Online (web/social). **Skill-owned** `templates/solo-online/`, `templates/duo-online/` or `templates/trio-online/`. (The design-system folder `concert-poster[-duo|-trio]` is not used for color any more.) |
 | `--style print` | Print-Color (commercial print, white ground). Folder `...-print` |
 | `--style bw` | Print-BW (newsprint, all #000). Folder `...-bw` |
 
 Routing is one table, `SKILL_TEMPLATES` in `skill-templates.mjs`, keyed by `"<Variant>/<style>"`.
 A pair listed there uses the skill-owned template; every other pair uses the design-system folder
-above. Today the table holds only `Duo/color`.
+above. Today the table holds `Solo/color`, `Duo/color` and `Trio/color`. So the **print** and **bw**
+posters for all three variants still use the design-system templates, which are the older layouts
+(a different hero and programme), and they do not match the online poster's look.
 
 More than 3 people is an error (no template exists). The template is checked after rendering: the
 desk's `data-finish` must match the style, or the render fails.
@@ -143,13 +147,13 @@ baseline.
 
 | Field | Example | Notes |
 | --- | --- | --- |
-| `title` | `100 Years of Trinity Lutheran` | Headline, 32px Playfair 800 in Tandoor. Wraps to 2 lines in Trio. In the skill-owned Duo online template it is 31px and the part from the first ` & ` on is italic (`Masks <em>& Revelations</em>`), as in the Dec 2026 reference. A title with no ` & ` is set upright. |
+| `title` | `100 Years of Trinity Lutheran` | Headline, 32px Playfair 800 in Tandoor. Wraps to as many lines as the layout allows. In the skill-owned Duo online template it is 31px and the part from the first ` & ` on is italic (`Masks <em>& Revelations</em>`), as in the Dec 2026 reference. A title with no ` & ` is set upright. |
 | `blurb` | `A centennial concert for the church on 37th Street.` | Italic subline |
 | `dayname`, `date` | `Wednesday`, `May 20` | Rendered as `Wednesday · May 20`. Optional: derived from `iso` if absent; validated if present |
 | `time`, `doors` | `7:30 PM`, `Doors 7:00 PM` | |
 | `venue`, `address` | `Trinity Lutheran Church`, `31-18 37th St, Astoria (parking available)` | |
 | `iso` | `2026-05-20` | Used in file names. YYYY-MM-DD |
-| `works` | 1 to 4 of `{composer, work, tag?}` | `tag` is optional. Without it the row shows no tag. See "Works per template" |
+| `works` | 1 to `MAX_WORKS` (Solo 6, Duo 4, Trio 4) of `{composer, work, tag?}` | `tag` is optional. Without it the row shows no tag. See "Works per template" |
 | `conductor`, `soloists` | roster format, see "Standing roster" | Preferred. Names are looked up in `roster.json` |
 | `people` | explicit: conductor first, then soloists; each `{name, role, photo}` | Older format, still accepted. Cannot be combined with `conductor`/`soloists`. `photo` is a path under `design-system/` |
 
@@ -172,6 +176,9 @@ is the React kit's data, not an input to the `.dc.html` templates.
 - Each snippet from the May 2026 baseline (`>Alex Wen</span>`, `alt="Alex Wen"`, `>Michael A. Lee</div>`,
   `src="../../assets/photos/…"`, etc.) must occur exactly once in the template. Otherwise the fill throws.
 - The entity-escaping matches the source (`&#333;`, `&quot;`, `&middot;`).
+- Text values also break every `{{` with an empty comment (`{<!---->{`). The design-system runtime evaluates `{{ x }}`
+  in each text node after parsing, so an entity does not help. A person name may not contain a brace at all (it is also
+  written into `alt="..."`, which a comment cannot split), and validation refuses it.
 - Works-composer and soloist names are separate slots, so a soloist can differ from the premiere composer.
 - All replacements are applied in one pass against the original, so a new value cannot match another slot.
 
@@ -190,76 +197,137 @@ replacement text is never scanned again. So a work title like `Ode to $$$` or a 
 
 ## Skill-owned templates (`templates/`, routed by `skill-templates.mjs`)
 
-Used for a layout the skill owns. `templates/duo-online/ConcertPosterDuoOnline.dc.html` is the Duo
-online (color) poster, rebuilt from the approved Dec 2026 reference (`20261210_JHO_Concert_Poster_Display.png`).
-The design-system is not modified: the template reuses the design-system runtime
+Used for a layout the skill owns. Three online (color) posters, all in the same language, rebuilt from
+the approved Dec 2026 reference (`20261210_JHO_Concert_Poster_Display.png`):
+
+| Variant | Template | Layout |
+| --- | --- | --- |
+| Solo | `templates/solo-online/ConcertPosterSoloOnline.dc.html` | Conductor only. The programme spans the width; works read down two CSS columns (3 + 2 for five, 3 + 3 for six). |
+| Duo | `templates/duo-online/ConcertPosterDuoOnline.dc.html` | Conductor, and one soloist (200px photo) in the right column beside the programme. |
+| Trio | `templates/trio-online/ConcertPosterTrioOnline.dc.html` | Conductor, and two soloists stacked in the right column (116px photos, not side by side; caption column 240px at most). |
+
+Every template keeps the same frame: the masthead, the When/Where row, the programme, and the footer.
+The design-system is not modified: the templates reuse the design-system runtime
 (`templates/concert-poster-duo/support.js` and `ds-base.js`), the Wordmark and MosaicRule components,
 fonts, photos and logos by relative path.
 
 - **Fill model.** Every value is a `[[slot]]` token (`title_html`, `blurb`, `when`, `time_line`,
-  `venue`, `address`, `conductor_*`, `soloist_*`). The works are the rows between the
-  `<!--works-->` and `<!--/works-->` markers, one row per work. `skill-templates.mjs` escapes every
+  `venue`, `address`, `conductor_*`; Duo has `soloist_*`; Trio has `soloist_a_*` and `soloist_b_*`).
+  The works are the rows between the
+  `<!--works-->` and `<!--/works-->` markers, one row per work. Each row has a `[[work_class]]` slot, which the fill
+  uses for the Solo column break and leaves empty elsewhere. `skill-templates.mjs` escapes every
   value; the only markup it builds itself is the italic title part and the tag chip. A slot the
   template lacks, a slot with no value, or any unfilled slot throws.
-- **Check.** `--check-baseline` fills the template with `concert.2026-12-09.json` and checks that
-  every slot is filled, no placeholder survives, the reference text is present (the italic
-  "& Revelations", "Wednesday · December 9", "Artistic Director", the violin soloist, the works), and
+- **Check.** `--check-baseline` fills each of the three templates with the Dec 2026 reference, using
+  the people count of its variant (Solo drops the soloist; Trio adds a layout-only second soloist,
+  Michael A. Lee with instrument "Cello", that exists in no concert). It checks that every slot is
+  filled, no placeholder survives, the reference text is present (the italic "& Revelations",
+  "Wednesday · December 9", "Artistic Director", each person's name and role, the works), and
   "December 10" does not appear. A token template has no byte-identity to keep, so this is the check.
-- **Serving.** The template is served from memory at `/jho-concert-poster/duo-online/...` with the
+- **Serving.** Each template is served from memory at `/jho-concert-poster/<variant>-online/...` with the
   design-system folder as site root, so `../../` reaches the design-system root. Opening the file
   directly from disk will not resolve its assets.
-- **Extending.** To rebuild Solo or Trio: add a template folder under `templates/`, a
-  `SKILL_TEMPLATES` entry, and a values function in `skill-templates.mjs`. The routing and the
-  `--check-baseline` fill check are generic over the table.
+- **Extending.** To add a variant: add a template folder under `templates/`, a `SKILL_TEMPLATES`
+  entry, a people count in `PEOPLE_FOR_VARIANT`, a values function in `VALUES_FOR_VARIANT`
+  (`skill-templates.mjs`), and a fixture in `skillFixture` (`make-poster.mjs`). Routing and the fill
+  check are generic over the table.
+- **Layout measured in the DOM, refused at render.** `writePoster` runs `layoutProblems` on the live page for
+  every skill-owned poster and refuses a breach (see "Limits"). The Chromium tests call the same functions.
 - **Comments in the template must not contain `[[`.** The fill replaces every occurrence, so a slot
   name written in a comment would be filled too. The header lists slot names without brackets.
 
 ## Limits
 
-- Text slots are fixed to the template. Works are 1 to 4 (see below). You cannot add a soloist to
-  Solo or change the layout. Those need a template edit in `design-system/`.
-- The works list is generated from the template's own row markup (three rows, the middle one with
-  the tag). `--check-baseline` proves the generated rows reproduce the May rows exactly.
+Every limit here is enforced. A count over `MAX_WORKS` fails validation. A text limit is found by Chromium:
+`writePoster` measures the rendered poster with `layoutProblems` and writes nothing when a rule breaks. The
+message names the element and the number, for example "programme ends at y=954.5, less than 10px above the
+footer rule at y=944.0: shorten the title or blurb, or use fewer works". A refused poster leaves no PNG or PDF.
+The rules live in `make-poster.mjs` (`LAYOUT`, `layoutInPage`, `layoutProblems`), and the tests use the same functions.
+
+The rules, for the skill-owned online templates:
+
+- The sheet does not overflow.
+- Each text element's own box holds its text (title, composer, piece, tag, names, roles, the Where line).
+- Text stays between x = 41 and x = 775 (the 47px margin, plus the 6px the approved Where line already uses).
+- The programme and each soloist block sit at least 10px below the divider and 10px above the footer rule.
+- Programme text stays at least 10px left of the soloist column.
+- A soloist name wraps to two lines at most.
+- Every text is set in a face that loaded. A fallback face would move every line, so a missing face is named, not measured.
+
+Limits found by measurement. "Reference text" is the Dec 2026 concert: a one-line blurb and short work titles.
+
+- **Works by count** (`MAX_WORKS`): Solo 6, Duo 4, Trio 4. Solo sets 6 as 3 + 3. Duo and Trio overflow the footer rule at 5.
+- **Blurb length.** A blurb that wraps to two lines (the test blurb is 146 characters, at 18px in the programme column)
+  with 4 works is refused in Duo and Trio: the programme ends 7px above the footer rule. In Solo, a two-line blurb with 5 works is refused.
+- **Tagged works whose pieces wrap.** A long piece title with a tag adds lines. Four such works fit in Duo, Trio and Solo
+  with the one-line title. In Duo, the same works with a two-line title are refused (the Trio and Solo combination was not measured).
+- **Solo, five or six works.** The split is 3 + 2 and 3 + 3 (see "Works per template"). Five works fit with short
+  titles and a one-line blurb. A long first-column title, or a two-line blurb, makes the first column too tall and
+  it is refused.
+- **Trio soloist names.** The caption column is 240px at most, and it grows to fit a shorter name. A name up to about
+  18 characters sets on one line: "Alexandra Pappone" measures 215px. A longer name wraps, and the two caption blocks
+  then run past the band between the divider and the footer rule, so the poster is refused. "Alexander Pappone-Lee"
+  and "Maria Esperanza Vidal-Ortega" are refused in Trio.
+- **Duo soloist names.** The caption column is 200px. A long name wraps to two lines and the poster is written
+  ("Maria Esperanza Vidal-Ortega" in the Duo test fixture).
+- **The Where line.** One line, and it may reach x = 775. The reference venue "Blessed Sacrament Church" already
+  reaches x = 774.8, so the margin is used up. "Our Lady of Sorrows Parish Hall" fits. "St. Joseph Hall of the Jackson
+  Heights Community" is refused (text to x = 927).
+- **Names with a brace** (`{` or `}`) are refused by validation. A name is also written into `alt="..."`, where the
+  runtime evaluates `{{ }}` and a comment cannot split it.
+- **Photos** are validated as before. Portrait photos work best: the frames crop with `object-fit: cover`.
 
 ## Works per template
 
-`MAX_WORKS` in `make-poster.mjs` is 4 for Solo, Duo and Trio. Measured in Chromium at 816x1056,
-for color, print and bw. The number is the free space from the last work row to the footer divider
-(positive is inside the box):
+`MAX_WORKS` is the most that fit with the reference text, measured in Chromium at 816 x 1056 (the sheet at 96 px/in).
+"Clear" is the free space between the programme's last line and the footer rule (rule at y = 944; the rule's clearance
+is 10px). The Solo split is forced at ceil(n / 2) works in the first column.
 
-| Template | 3 works | 4 works | 5 works |
-| --- | --- | --- | --- |
-| Solo | 55 px | 16 px | -62 px (overflows) |
-| Duo | 71 px | 38 px | -10 px (overflows) |
-| Trio | 71 px | 38 px | -10 px (overflows) |
+| Template | Works that fit | Works that do not | Programme box, reference text | Clear above footer |
+| --- | --- | --- | --- | --- |
+| Solo | 1 to 6 | none in the count | 1: 662-819; 3 and 4: 615-867; 5 and 6: 568-914 | 125 / 77 / 30 px |
+| Duo | 1 to 4 | 5 overflows | 1: 673-808; 3: 603-879; 4: 568-914 | 136 / 65 / 30 px (soloist block ends 871) |
+| Trio | 1 to 4 | 5 overflows | 1: 673-808; 3: 603-879; 4: 568-914 | 136 / 65 / 30 px (soloist block ends 924, 20px clear) |
 
-Five works overflow Duo and Trio into the footer divider and Solo badly, so 5 is rejected.
-The skill-owned Duo online template (above) is laid out differently: with 4 works the last work's
-ink ends at y 914 and the footer rule is at y 944, about 30px free. Re-measure it if its layout changes.
-- Long titles can wrap (the Trio title already wraps to two lines). Check the PNG.
-- Portrait photos must be 1:1 friendly. Template frames use `object-fit: cover`, so landscape shots are cropped.
-- The BW output swaps photos for `assets/photos/bw/` only through the template's own CSS filter
-  (`[data-finish="print-bw"] .jho-photo img`). It does not use the baked `bw/` PNG copies. Check the
-  BW PNG for photo quality and greyscale.
+Re-measure after any layout change: `layoutInPage` and `layoutProblems` give the boxes and the verdict, and the
+layout matrix in `make-poster.test.mjs` pins which fixtures are written and which are refused.
 
-## Known template quirks (found during verification)
+## Known template quirks
 
 - The design-system `ConcertPosterDuo` print and bw templates label the second person as **Composer**
   (Michael A. Lee, the May premiere composer). Set `people[1].role` to what you want shown. The
   skill-owned Duo online template shows the soloist's instrument as given, so this does not apply to color.
-- The Trio title wraps to two lines under the 2-column programme (seen in the rendered trio PNG). The layout still fits the sheet.
+- Titles wrap to as many lines as the layout allows. The Dec 2026 title fits on one line in Duo; a longer title
+  wraps, and the render check decides whether the programme still fits.
 - `design-system/ui_kits/print_social/Poster.jsx` CONCERT has `admission: 'Free admission'` (lowercase). The locked copy in `design-system/CLAUDE.md` is "Free Admission". The templates use the locked copy. The kit's data is not used by these templates.
 - The solo template shows Alex Wen only (conductor). Good. The duo and trio templates show Alex Wen as conductor too.
+- **Solo column split.** The works are in two CSS columns with a forced break before the first work of column 2
+  (`jho-col-start`, at ceil(n / 2)). So 3 works read 2 + 1, 4 read 2 + 2, 5 read 3 + 2 and 6 read 3 + 3, whatever
+  their heights. Column balancing alone was tried first and rejected: after a tall first work it gave 1 + 2.
+- **Solo with one work.** The one work sits alone in the left column and the rest of the programme band is empty.
+  The type scale is the same as with four works; nothing is added to fill it. Judged acceptable for a single-work
+  programme; revisit if it recurs.
+- **Trio soloists are stacked, not side by side.** Two columns would need about 400px for the captions and squeeze
+  the programme, so each photo is 116px (Duo's is 200px). The caption column is 240px at most (see Limits).
+- **A wrapped piece can split "Op." from its number** ("Op." at the end of one line, "43" on the next). The text is
+  set as given; the skill does not insert non-breaking spaces.
+- The Trio layout fixture adds "Michael A. Lee, Cello" in the baseline check and in the layout tests. It is
+  not a fact about any concert; it only gives the template its second soloist.
 
 ## Verified
 
-Tests: `node --test .claude/skills/jho-concert-poster/*.test.mjs` (no rendering). Use the explicit glob:
-on Node 24, `node --test <directory>` fails with "Cannot find module". The suite runs 79 tests: date
-(New York today), the default `pr/<YYYYMMDD>_Concert/` folder and its date checks, time, works, photos (case, symlinks, canonical path), roster, `esc` (astral
-characters), `$` and `[[slot]]` text in user values, the design-system uniqueness check and substitution
-test (eight templates), Duo online routing, the skill template's fill check and loud-failure path,
-and the `--scale` and `--out` argument checks. The `--out` and photo symlink tests create fixtures under
-`.claude/skills/jho-concert-poster/` and remove them afterwards.
+Tests: `node --test .claude/skills/jho-concert-poster/*.test.mjs` (use the glob: on Node 24, `node --test <directory>`
+fails with "Cannot find module"). The Chromium tests render each layout fixture once, through the same
+`writePoster` path the CLI uses, so the file takes about 45 seconds. They cover: dates; time; works and `MAX_WORKS`;
+photos (case, symlinks, canonical path); roster; `esc` (astral characters, and braces: a title of `{{ markSize }}`
+shows literally in the rendered sheet); the design-system uniqueness and substitution checks; routing; the skill
+fill check and loud-failure paths; the layout matrix (each fixture is written clean or refused with the rule named,
+and the expected verdict is listed in the test file); the Solo column order by bounding boxes; the Trio caption
+width; the font-face judgement; the CLI entry point run through a symlinked file and a symlinked folder; the CLI
+output (288 dpi PNG at 2448x3168, one-page Letter PDF); and the `--scale` and `--out` checks.
+
+The Dec 2026 Duo poster is re-rendered after each template change. Its decoded pixels are identical to
+`pr/20261209_Concert/JHO_2026-12-09_Poster-Duo_Online.png` (2448x3168, 288 dpi tag).
 
 Duo online (`concert.2026-12-09.json`) was rebuilt to the Dec 2026 reference. Measured against the
 reference converted to sRGB (its embedded profile is Adobe RGB (1998)):
@@ -280,6 +348,10 @@ reference converted to sRGB (its embedded profile is Adobe RGB (1998)):
 
 Earlier renders from the May 2026 data (solo color, duo bw, trio print) were checked visually in an
 earlier session, before the skill-owned template existed.
+
+Solo and Trio online were rebuilt in the Duo language and checked by viewing their renders at every works count the
+limit allows (Solo 1 to 6, Duo and Trio 1 to 4) and at the stress cases in "Limits". Solo drops the soloist; Trio adds the
+layout-only second soloist.
 
 ## Output
 

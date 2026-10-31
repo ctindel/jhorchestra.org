@@ -14,8 +14,8 @@
  * piece of template text is filled with one replace call. Replacement text is never
  * scanned again, so a value such as "[[venue]]" or "$&" prints exactly as typed.
  *
- * To add Solo or Trio: add a template folder, a SKILL_TEMPLATES entry, and a
- * `fillValues` for its slots. Nothing else in make-poster.mjs changes.
+ * To add a variant: add a template folder, a SKILL_TEMPLATES entry, and a values function
+ * in VALUES_FOR_VARIANT. Nothing else in make-poster.mjs changes.
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -30,11 +30,22 @@ const SKILL_DIR = path.dirname(fileURLToPath(import.meta.url));
  * path has exactly two directory levels.
  */
 export const SKILL_TEMPLATES = {
+  'Solo/color': {
+    file: 'templates/solo-online/ConcertPosterSoloOnline.dc.html',
+    pagePath: '/jho-concert-poster/solo-online/ConcertPosterSoloOnline.dc.html',
+  },
   'Duo/color': {
     file: 'templates/duo-online/ConcertPosterDuoOnline.dc.html',
     pagePath: '/jho-concert-poster/duo-online/ConcertPosterDuoOnline.dc.html',
   },
+  'Trio/color': {
+    file: 'templates/trio-online/ConcertPosterTrioOnline.dc.html',
+    pagePath: '/jho-concert-poster/trio-online/ConcertPosterTrioOnline.dc.html',
+  },
 };
+
+/** People per variant: conductor plus this many soloists. */
+export const PEOPLE_FOR_VARIANT = { Solo: 1, Duo: 2, Trio: 3 };
 
 /** Entry for a variant and style, or null when the design-system template is used. */
 export function skillTemplateFor(variant, style) {
@@ -47,10 +58,21 @@ export function skillTemplateFor(variant, style) {
  * HTML-escape plain text the way the templates' source does (named + numeric entities).
  * Non-ASCII is matched per code point (the u flag), so an astral character such as U+1D11E
  * becomes one entity, not two broken surrogates. Shared with make-poster.mjs and jho-instagram.
+ *
+ * The design-system runtime evaluates "{{ x }}" in each DOM text node, after the HTML is parsed. So an
+ * entity does not help (&#123; is decoded to "{" before the runtime reads it), and a title of
+ * "{{ markSize }}" would print the runtime value 93. An empty comment between two braces splits the
+ * text node, so no node holds "{{", and the visible text and textContent are unchanged. Comments are
+ * not rendered, so the layout is unchanged too.
+ *
+ * Only text is safe this way. A brace in an attribute value cannot be split, so person names (which
+ * also go into alt="...") are refused with a brace in them, in validateConcert. Brackets are not
+ * encoded: the fill never re-reads a value, so "[[slot]]" in a value prints as typed.
  */
 export function esc(s) {
   return String(s)
     .replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c])
+    .replace(/\{(?=\{)/g, '{<!---->')
     .replace(/[^\x00-\x7F]/gu, (ch) => `&#${ch.codePointAt(0)};`);
 }
 
@@ -72,9 +94,9 @@ export function titleHtml(title) {
   return `${esc(title.slice(0, i))} <em>${esc(title.slice(i + 1))}</em>`;
 }
 
-/** The slot values for a Duo concert (conductor first, then one soloist). */
-export function duoValues(c) {
-  const [cond, solo] = c.people;
+/** Slots every variant has: the programme text, the When/Where lines and the conductor. */
+function commonValues(c) {
+  const cond = c.people[0];
   return {
     title_html: titleHtml(c.title),
     blurb: esc(c.blurb),
@@ -85,11 +107,35 @@ export function duoValues(c) {
     conductor_name: esc(cond.name),
     conductor_role: esc(cond.role),
     conductor_photo: photoSrc(cond.photo),
-    soloist_name: esc(solo.name),
-    soloist_role: esc(solo.role),
-    soloist_photo: photoSrc(solo.photo),
   };
 }
+
+/** One soloist's caption and photo slots, under `prefix` (for example "soloist" or "soloist_a"). */
+function personValues(prefix, p) {
+  return {
+    [`${prefix}_name`]: esc(p.name),
+    [`${prefix}_role`]: esc(p.role),
+    [`${prefix}_photo`]: photoSrc(p.photo),
+  };
+}
+
+/** Slot values for a Solo concert (conductor only). */
+export function soloValues(c) {
+  return commonValues(c);
+}
+
+/** Slot values for a Duo concert (conductor first, then one soloist). */
+export function duoValues(c) {
+  return { ...commonValues(c), ...personValues('soloist', c.people[1]) };
+}
+
+/** Slot values for a Trio concert (conductor, then two soloists). */
+export function trioValues(c) {
+  return { ...commonValues(c), ...personValues('soloist_a', c.people[1]), ...personValues('soloist_b', c.people[2]) };
+}
+
+/** Values builder per variant. A variant with no entry has no skill template fill. */
+const VALUES_FOR_VARIANT = { Solo: soloValues, Duo: duoValues, Trio: trioValues };
 
 const WORKS_OPEN = '<!--works-->';
 const WORKS_CLOSE = '<!--/works-->';
@@ -100,6 +146,9 @@ const WORK_SLOTS = {
   work_composer: (w) => esc(w.composer),
   work_title: (w) => esc(w.work),
   work_tag: (w) => (w.tag ? `<span class="jho-tag">${esc(w.tag)}</span>` : ''),
+  // The first work of the second column. Solo lays the works in two CSS columns and breaks before this one, so
+  // 3 works read 2 + 1 and 5 read 3 + 2 whatever the heights (column balancing would give 1 + 2 after a tall work).
+  work_class: (w, { i, n }) => (i > 0 && i === Math.ceil(n / 2) ? ' jho-col-start' : ''),
 };
 
 /**
@@ -126,7 +175,7 @@ function worksRegion(src) {
 
 /** One row per work, each built from the template row in a single replace over the row text. */
 function workRows(row, works) {
-  return works.map((w) => row.replace(SLOT_RE, (_, key) => WORK_SLOTS[key](w)));
+  return works.map((w, i) => row.replace(SLOT_RE, (_, key) => WORK_SLOTS[key](w, { i, n: works.length })));
 }
 
 /**
@@ -149,8 +198,11 @@ export function fillWorks(src, works) {
  * @returns {string}
  */
 export function fillSkillTemplate(src, c, { variant }) {
-  if (variant !== 'Duo') throw new Error(`no skill template fill for ${variant}`);
-  const values = duoValues(c);
+  if (!VALUES_FOR_VARIANT[variant]) throw new Error(`no skill template fill for ${variant}`);
+  if (c.people.length !== PEOPLE_FOR_VARIANT[variant]) {
+    throw new Error(`${variant} template needs ${PEOPLE_FOR_VARIANT[variant]} people, got ${c.people.length}`);
+  }
+  const values = VALUES_FOR_VARIANT[variant](c);
   const { start, end, row } = worksRegion(src);
   const outside = src.slice(0, start) + src.slice(end);
   const slots = [...new Set([...outside.matchAll(SLOT_RE)].map((m) => m[1]))];
