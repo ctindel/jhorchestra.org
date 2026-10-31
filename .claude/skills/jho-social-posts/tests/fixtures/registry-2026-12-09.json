@@ -1,0 +1,64 @@
+{
+  "Jackson Heights Beautification Group": {
+    "name": "Jackson Heights Beautification Group",
+    "type": "org",
+    "platforms": {
+      "facebook": { "status": "unknown" },
+      "instagram": { "status": "verified", "handle": "@jhbgny", "source": "user-provided", "verified_on": "2026-10-31" },
+      "x": { "status": "verified", "handle": "@JHBGNY", "source": "user-provided", "verified_on": "2026-10-31" }
+    }
+  },
+  "Jackson Heights Orchestra": {
+    "name": "Jackson Heights Orchestra",
+    "type": "org",
+    "platforms": {
+      "facebook": { "status": "candidate", "handle": "@JacksonHeightsOrchestra", "source": "repo:content/en/contact.md", "confidence": "high", "note": "Listed on the org's own contact page; not re-checked on Facebook" },
+      "instagram": { "status": "verified", "handle": "@jhorchestra", "source": "user-provided", "verified_on": "2026-10-31", "note": "User states this is the footer handle; contact page agrees" },
+      "x": { "status": "candidate", "handle": "@jhorchestra", "source": "repo:content/en/contact.md", "confidence": "high", "note": "Listed on the org's own contact page; not re-checked on X" }
+    }
+  },
+  "Alex Wen": {
+    "name": "Alex Wen",
+    "type": "person",
+    "platforms": {
+      "facebook": { "status": "unknown" },
+      "instagram": { "status": "verified", "handle": "@alexwn", "source": "user-provided", "verified_on": "2026-10-31" },
+      "x": { "status": "verified", "handle": "@alexwn", "source": "user-provided", "verified_on": "2026-10-31" }
+    }
+  },
+  "Nicholas Pappone": {
+    "name": "Nicholas Pappone",
+    "type": "person",
+    "platforms": {
+      "facebook": { "status": "unknown" },
+      "instagram": { "status": "verified", "handle": "@npviolin", "source": "user-provided", "verified_on": "2026-10-31" },
+      "x": { "status": "verified", "handle": "@npviolin", "source": "user-provided", "verified_on": "2026-10-31" }
+    }
+  },
+  "Blessed Sacrament Church": {
+    "name": "Blessed Sacrament Church",
+    "type": "venue",
+    "address": { "status": "verified", "value": "34-43 93rd St, Jackson Heights, NY 11372", "source": "user-provided", "verified_on": "2026-10-31" },
+    "maps_url": { "status": "verified", "value": "https://maps.app.goo.gl/mNo2wqXEUkdA6gAq9", "source": "user-provided", "verified_on": "2026-10-31" },
+    "platforms": {
+      "facebook": { "status": "unknown", "note": "A Facebook page exists per the user; its handle is not known" },
+      "instagram": { "status": "verified", "handle": "@blessedsacramentchurchnyc", "source": "user-provided", "verified_on": "2026-10-31" },
+      "x": { "status": "none", "source": "user-provided", "verified_on": "2026-10-31" }
+    }
+  },
+  "Catalina Cruz": {
+    "name": "Catalina Cruz",
+    "type": "person",
+    "platforms": { "facebook": { "status": "unknown" }, "instagram": { "status": "unknown" }, "x": { "status": "unknown" } }
+  },
+  "Wenqi Li": {
+    "name": "Wenqi Li",
+    "type": "person",
+    "platforms": { "facebook": { "status": "unknown" }, "instagram": { "status": "unknown" }, "x": { "status": "unknown" } }
+  },
+  "Michael A. Lee": {
+    "name": "Michael A. Lee",
+    "type": "person",
+    "platforms": { "facebook": { "status": "unknown" }, "instagram": { "status": "unknown" }, "x": { "status": "unknown" } }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_comment": "Catalina Cruz and Jackson Heights Beautification Group are named as plain text in the approved Facebook thanks paragraph (verbatim), so both are waived on Facebook. No Facebook handle is on record for either, and the user approved the post text as written.",
+  "title": "Masks & Revelations",
+  "blurb": "Mystery, celebration, longing, and renewal.",
+  "dayname": "Wednesday",
+  "date": "December 9",
+  "iso": "2026-12-09",
+  "time": "7:30 PM",
+  "doors": "Doors 7:00 PM",
+  "venue": "Blessed Sacrament Church",
+  "address": "34-43 93rd St, Jackson Heights (parking available)",
+  "works": [
+    { "composer": "Mozart", "work": "The Magic Flute — Overture" },
+    { "composer": "Amy Beach", "work": "Bal Masqué" },
+    { "composer": "Chausson", "work": "Poème" },
+    { "composer": "Beethoven", "work": "Symphony No. 1" }
+  ],
+  "conductor": { "name": "Alex Wen" },
+  "soloists": [
+    { "name": "Nicholas Pappone", "instrument": "Violin" }
+  ],
+  "social": {
+    "presenter": "Jackson Heights Beautification Group",
+    "venue_key": "Blessed Sacrament Church",
+    "venue_parking": true,
+    "soloist_blurbs": { "Nicholas Pappone": "local NYC violin" },
+    "thanks": "We are very thankful to the Jackson Heights Beautification Group for making this wonderful partnership possible by working with the office of Assemblywoman Catalina Cruz NY to help fund this important opportunity for our community.",
+    "waive": [
+      "Alex Wen:facebook",
+      "Nicholas Pappone:facebook",
+      "Blessed Sacrament Church:facebook",
+      "Catalina Cruz:facebook",
+      "Jackson Heights Beautification Group:facebook"
+    ]
+  }
+}
