@@ -13,7 +13,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
-import { countSpreads, buildProgramNotes, WEB_NAME, PRINT_NAME } from './make-program-notes.mjs';
+import { countSpreads, buildProgramNotes, programOutDir, WEB_NAME, PRINT_NAME } from './make-program-notes.mjs';
 import { markerKey, alignedMad, parseArgs } from './check-order.mjs';
 
 const execFileP = promisify(execFile);
@@ -82,13 +82,44 @@ describe('check-order helpers', () => {
   });
 });
 
+describe('output folder: --concert-date is required and names pr/<YYYYMMDD>_Concert', () => {
+  // Why: the booklet has no concert of its own. A program written without a concert date would
+  // land in a folder that is not for any concert, so the date is required and there is no default folder.
+  const REPO_ROOT = path.resolve(HERE, '../../..');
+
+  test('a missing --concert-date fails loud, with the reason, and names no folder', () => {
+    assert.throws(() => programOutDir({}), /--concert-date is required/);
+    assert.throws(() => programOutDir({ out: path.join(HERE, 'x') }), /--concert-date is required/);
+  });
+
+  test('the May 2026 program goes to pr/20260520_Concert, in either date form', () => {
+    assert.equal(programOutDir({ concertDate: '2026-05-20' }), path.join(REPO_ROOT, 'pr', '20260520_Concert'));
+    assert.equal(programOutDir({ concertDate: '20260520' }), path.join(REPO_ROOT, 'pr', '20260520_Concert'));
+  });
+
+  test('an invalid calendar date is refused before any folder is chosen', () => {
+    for (const bad of ['2026-02-30', '2026-12-9', '../2026-12-09', '2026-12-09/..', '']) {
+      assert.throws(() => programOutDir({ concertDate: bad }), /concert date must be YYYY-MM-DD or YYYYMMDD/, JSON.stringify(bad));
+    }
+  });
+
+  test('--out is the explicit override: it replaces the concert folder', () => {
+    // Why: --out is the only way to write somewhere other than pr/<YYYYMMDD>_Concert.
+    assert.equal(programOutDir({ concertDate: '2026-05-20', out: path.join(HERE, 'elsewhere') }), path.join(HERE, 'elsewhere'));
+  });
+
+  test('a blank --out is refused rather than resolved to the working directory', () => {
+    assert.throws(() => programOutDir({ concertDate: '2026-05-20', out: '  ' }), /--out must be a folder path/);
+  });
+});
+
 describe('build + check, end to end on the real booklet', () => {
   let scratch;
   let out;
   before(async () => {
     scratch = await mkdtemp(path.join(os.tmpdir(), 'jho-notes-test-'));
     out = path.join(scratch, 'out');
-    await buildProgramNotes({ out });
+    await buildProgramNotes({ out, concertDate: '2026-05-20' });
   });
   after(async () => {
     await rm(scratch, { recursive: true, force: true });

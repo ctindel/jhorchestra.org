@@ -2,13 +2,14 @@
 /**
  * jho-program-notes — build the JHO concert program from the program booklet HTML.
  *
- * Writes two PDFs into <out> (default <repo>/out):
+ * Writes two PDFs into <repo>/pr/<YYYYMMDD>_Concert/ (from --concert-date, which is required):
  *   JHO-program-print-letter-landscape.pdf  Fold-and-staple imposition. Each PDF page is one side of one
  *                                           sheet: US Letter landscape, 11 x 8.5 in, two 5.5 x 8.5 in leaves.
  *   JHO-program-web.pdf                     Single pages in reading order, 5.5 x 8.5 in each.
  *
  * CLI:
- *   node make-program-notes.mjs [--source <booklet.html>] [--out <dir>] [--timeout 60000]
+ *   node make-program-notes.mjs --concert-date <YYYY-MM-DD|YYYYMMDD> [--source <booklet.html>] [--out <dir>] [--timeout 60000]
+ *   --out replaces the whole destination folder. --concert-date is still required with it.
  *
  * Pipeline:
  *   1. Each <section class="page"> spread is rendered to a 1-page PDF (11 x 8.5 in) by ../jho-render/render.mjs.
@@ -29,13 +30,29 @@ import {
   PDFDocument, pushGraphicsState, popGraphicsState, rectangle, clip, endPath, rgb,
 } from 'pdf-lib';
 import { renderPage } from '../jho-render/render.mjs';
+import { concertOutDir } from '../jho-concert-poster/make-poster.mjs';
 
 const SKILL_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(SKILL_DIR, '../../..');
 export const DEFAULT_SOURCE = path.join(
   REPO, 'design-system', 'uploads', 'Jackson Heights Orchestra Branding', 'JHO Program Booklet.html',
 );
-export const DEFAULT_OUT = path.join(REPO, 'out');
+
+/**
+ * Folder for the two PDFs. --concert-date is required: the booklet has no concert of its own, so the
+ * folder is always the concert's pr/<YYYYMMDD>_Concert/. --out, when given, replaces that folder.
+ * @param {{concertDate?: string, out?: string}} o
+ * @returns {string} absolute folder path (not created)
+ */
+export function programOutDir({ concertDate, out }) {
+  if (concertDate === undefined) {
+    throw new Error('--concert-date is required (YYYY-MM-DD or YYYYMMDD), so the program lands in pr/<YYYYMMDD>_Concert/');
+  }
+  const concertDir = concertOutDir(concertDate, { repo: REPO }); // throws on an invalid date
+  if (out === undefined) return concertDir;
+  if (typeof out !== 'string' || !out.trim()) throw new Error('--out must be a folder path');
+  return path.resolve(out);
+}
 
 /** Leaf = one booklet page, 5.5 x 8.5 in (528 x 816 CSS px, 396 x 612 pt). */
 export const LEAF_PT = { w: 396, h: 612 };
@@ -205,13 +222,14 @@ async function embedSpreads(doc, files) {
  * Build both PDFs. Returns a summary with the page-by-page order.
  * @param {object} o
  * @param {string} [o.source]
- * @param {string} [o.out]
+ * @param {string} o.concertDate  required: YYYY-MM-DD or YYYYMMDD, names the pr/<YYYYMMDD>_Concert/ folder
+ * @param {string} [o.out]  explicit folder, replaces the concert folder
  * @param {number} [o.timeoutMs]
  */
-export async function buildProgramNotes({ source = DEFAULT_SOURCE, out = DEFAULT_OUT, timeoutMs = 60000 } = {}) {
+export async function buildProgramNotes({ source = DEFAULT_SOURCE, concertDate, out, timeoutMs = 60000 } = {}) {
+  const outAbs = programOutDir({ concertDate, out }); // before any work: an invalid date writes nothing
   const srcAbs = path.resolve(source);
   await stat(srcAbs); // ENOENT with the path if missing
-  const outAbs = path.resolve(out);
   await mkdir(outAbs, { recursive: true });
 
   const html = await readFile(srcAbs, 'utf8');
@@ -294,7 +312,8 @@ async function cli(argv) {
   const a = parseArgs(argv);
   const result = await buildProgramNotes({
     source: a.source ?? DEFAULT_SOURCE,
-    out: a.out ?? DEFAULT_OUT,
+    concertDate: a['concert-date'],
+    out: a.out,
     timeoutMs: a.timeout ? Number(a.timeout) : 60000,
   });
   console.log(JSON.stringify(result, null, 2));

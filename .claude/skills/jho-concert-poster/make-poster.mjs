@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
  * jho-concert-poster — pick a JHO poster template, fill it with concert data,
- * render PNG + PDF into <repo>/out/.
+ * render PNG + PDF into <repo>/pr/<YYYYMMDD>_Concert/ (from the concert's iso).
  *
  * CLI:
  *   node make-poster.mjs --data <concert.json> --style color|print|bw [--out <dir>] [--scale 3] [--allow-past]
+ *   --out replaces the whole destination folder; without it the folder is pr/<YYYYMMDD>_Concert/.
  *   node make-poster.mjs --check-baseline      # design-system templates: every May 2026 snippet occurs exactly once;
  *                                              # skill templates: Dec 2026 fill must be complete
  *
@@ -36,7 +37,6 @@ export { esc };
 const SKILL_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(SKILL_DIR, '../../..');
 const DS_ROOT = path.join(REPO, 'design-system');
-const DEFAULT_OUT = path.join(REPO, 'out');
 
 const VARIANTS = { 1: 'Solo', 2: 'Duo', 3: 'Trio' };
 const STYLES = {
@@ -86,6 +86,33 @@ export function calendarFacts(iso) {
   const dt = new Date(Date.UTC(y, mo - 1, d));
   if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d) return null;
   return { weekday: WEEKDAYS[dt.getUTCDay()], month: MONTHS[mo - 1], day: d };
+}
+
+const DATE_FORMS = [/^(\d{4})-(\d{2})-(\d{2})$/, /^(\d{4})(\d{2})(\d{2})$/];
+
+/**
+ * Folder name for a concert date: "2026-12-09" or "20261209" -> "20261209_Concert". Only a real
+ * calendar date in one of the two forms passes, and only digits reach the name, so it cannot hold
+ * a separator or a "..".
+ * @param {unknown} date
+ * @returns {string}
+ */
+export function concertFolder(date) {
+  const m = typeof date === 'string' ? DATE_FORMS.map((re) => re.exec(date)).find(Boolean) : undefined;
+  if (!m || !calendarFacts(`${m[1]}-${m[2]}-${m[3]}`)) {
+    throw new Error(`concert date must be YYYY-MM-DD or YYYYMMDD and a real calendar date, got ${JSON.stringify(date)}`);
+  }
+  return `${m[1]}${m[2]}${m[3]}_Concert`;
+}
+
+/**
+ * The default destination for a concert: <repo>/pr/<YYYYMMDD>_Concert. Used when --out is not given.
+ * @param {unknown} date
+ * @param {{repo?: string}} [opts]
+ * @returns {string}
+ */
+export function concertOutDir(date, { repo = REPO } = {}) {
+  return path.join(repo, 'pr', concertFolder(date));
 }
 
 /** "Mon D" short form used in messages, e.g. "Dec 9". */
@@ -568,9 +595,9 @@ async function cli(argv) {
   }
   if (!a.data || !a.style) throw new Error('--data <concert.json> and --style color|print|bw are required');
   const scale = a.scale === undefined ? 3 : parseScale(a.scale);
-  const outDir = await resolveOutDir(a.out ?? DEFAULT_OUT);
   const concert = JSON.parse(await readFile(path.resolve(a.data), 'utf8'));
   const { html, variant, style, pagePath, concert: c } = await buildPoster(concert, a.style, { allowPast: !!a.allowPast });
+  const outDir = await resolveOutDir(a.out ?? concertOutDir(c.iso));
   const base = `JHO_${c.iso}_Poster-${variant}_${STYLES[style].label}`;
   const result = await renderPage({
     root: DS_ROOT,

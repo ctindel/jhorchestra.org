@@ -5,7 +5,8 @@ description: Build the JHO concert program booklet from design-system/uploads/Ja
 
 # jho-program-notes
 
-Turns the program booklet HTML into two PDFs in `<repo>/out/`:
+Turns the program booklet HTML into two PDFs in `<repo>/pr/<YYYYMMDD>_Concert/`, the folder of the concert named by
+`--concert-date` (required; there is no default folder):
 
 | File | What it is |
 | --- | --- |
@@ -71,15 +72,26 @@ cd "$(git rev-parse --show-toplevel)/.claude/skills/jho-render" && npm install &
 cd "$(git rev-parse --show-toplevel)/.claude/skills/jho-program-notes" && npm install   # pdf-lib, local to this skill
 ```
 
-Build both PDFs (default source and output):
+Build both PDFs for a concert:
 
 ```bash
 cd "$(git rev-parse --show-toplevel)"
-node .claude/skills/jho-program-notes/make-program-notes.mjs
+node .claude/skills/jho-program-notes/make-program-notes.mjs --concert-date 2026-12-09
 ```
 
-Options: `--source <booklet.html>` (default: the booklet in `design-system/uploads/...`), `--out <dir>`
-(default `<repo>/out`), `--timeout <ms>` (per spread, default 60000).
+**The booklet source is the May 2026 program until it is updated.** The build does not know which concert a
+program is for, so pass the date of the concert the program is for. Passing `--concert-date 2026-05-20` is
+correct only while the source is still the May program. For a program for another concert, update the source
+first, then build with that concert's date.
+
+Options:
+
+- `--concert-date <YYYY-MM-DD or YYYYMMDD>` **required.** Must be a real calendar date. The PDFs go to
+  `<repo>/pr/<YYYYMMDD>_Concert/`. A missing or invalid date fails before anything is written.
+- `--source <booklet.html>` (default: the booklet in `design-system/uploads/...`).
+- `--out <dir>` replaces the concert folder. It is the only way to write elsewhere. `--concert-date` is still
+  required with it.
+- `--timeout <ms>` (per spread, default 60000).
 
 It prints JSON with the page counts, sizes and the sheet map. Expect:
 
@@ -92,7 +104,7 @@ Check the result (renders both PDFs back to pixels and compares them with the so
 
 ```bash
 node .claude/skills/jho-program-notes/check-order.mjs \
-  --web out/JHO-program-web.pdf --print out/JHO-program-print-letter-landscape.pdf [--dpi 30] \
+  --web pr/20260520_Concert/JHO-program-web.pdf --print pr/20260520_Concert/JHO-program-print-letter-landscape.pdf [--dpi 30] \
   [--cover-marker "Beautification Group presents"] [--mission-marker "Our Mission"]
 ```
 
@@ -107,10 +119,11 @@ Quick text check on the web file (the last line is the folio on pages 2-11; the 
 show their footer line instead):
 
 ```bash
-for p in $(seq 1 12); do printf "p$p: "; pdftotext -f $p -l $p -layout out/JHO-program-web.pdf - | grep -v '^\s*$' | tail -1; done
+for p in $(seq 1 12); do printf "p$p: "; pdftotext -f $p -l $p -layout pr/20260520_Concert/JHO-program-web.pdf - | grep -v '^\s*$' | tail -1; done
 ```
 
-Use `pdfinfo out/JHO-program-print-letter-landscape.pdf` to confirm 6 pages, 792 x 612 pt.
+Use `pdfinfo pr/20260520_Concert/JHO-program-print-letter-landscape.pdf` to confirm 6 pages, 792 x 612 pt.
+(Those paths are the May 2026 program that already exists. Substitute the folder for the concert you built.)
 
 ## How it works
 

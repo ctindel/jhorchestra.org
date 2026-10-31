@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 import {
   findPremiere, buildGraphics, prepareConcert, resolveOutDir, parseArgs, renderInstagramSet,
 } from './make-instagram.mjs';
-import { esc } from '../jho-concert-poster/make-poster.mjs';
+import { esc, concertOutDir } from '../jho-concert-poster/make-poster.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CONCERTS = path.join(HERE, '..', 'jho-concert-poster');
@@ -144,9 +144,14 @@ describe('resolveOutDir(): --out must be inside the repo and not inside design-s
     await symlink(path.join(work, 'outside-repo'), path.join(repo, 'escape-link'));
   });
 
-  test('the default out/ (inside the repo) is accepted', async () => {
-    const dir = await resolveOutDir(undefined, { repo });
-    assert.equal(dir, path.join(await realpath(repo), 'out'));
+  test('the default folder for the concert date, pr/<YYYYMMDD>_Concert, is accepted', async () => {
+    // Why: the default is derived from the concert's iso, so a Dec 9 set lands in the Dec 9 folder.
+    const dir = await resolveOutDir(concertOutDir('2026-12-09', { repo }), { repo });
+    assert.equal(dir, path.join(await realpath(repo), 'pr', '20261209_Concert'));
+  });
+
+  test('there is no fallback folder: a missing --out is refused, so nothing lands outside a concert folder', async () => {
+    await assert.rejects(resolveOutDir(undefined, { repo }), /--out must be a folder path/);
   });
 
   test('a folder inside design-system/ is refused', async () => {

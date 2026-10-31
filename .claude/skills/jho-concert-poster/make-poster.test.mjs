@@ -556,3 +556,39 @@ describe('--out (realpath must be inside the repo and outside design-system/)', 
     await assert.rejects(mp.resolveOutDir(path.join(FIX, 'link-up', 'elsewhere')), /inside the repo/);
   });
 });
+
+describe('default output folder: pr/<YYYYMMDD>_Concert, derived from the concert date', () => {
+  test('the folder is the date with the dashes removed, plus _Concert', () => {
+    // Why: the folder is how a reader finds a concert's files. It must match the date on the poster.
+    assert.equal(mp.concertFolder('2026-12-09'), '20261209_Concert');
+    assert.equal(mp.concertFolder('2026-05-20'), '20260520_Concert');
+  });
+
+  test('the compact YYYYMMDD form is accepted and gives the same folder', () => {
+    assert.equal(mp.concertFolder('20261209'), '20261209_Concert');
+  });
+
+  test('the default path is pr/<folder> under the repo, for the Dec 9 concert', () => {
+    assert.equal(mp.concertOutDir('2026-12-09', { repo: FIX }), path.join(FIX, 'pr', '20261209_Concert'));
+    assert.equal(path.dirname(mp.concertOutDir('2026-12-09')), path.join(REPO, 'pr'));
+  });
+
+  test('a date that is not a real calendar day is refused: 2026-02-30 would name a folder no concert uses', () => {
+    assert.throws(() => mp.concertFolder('2026-02-30'), /concert date must be YYYY-MM-DD or YYYYMMDD/);
+    assert.throws(() => mp.concertFolder('20260230'), /concert date must be/);
+    assert.throws(() => mp.concertFolder('2026-13-01'), /concert date must be/);
+  });
+
+  test('malformed dates are refused, including mixed forms and stray characters', () => {
+    for (const bad of ['2026-12-9', '2026-1209', '202612-09', '2026/12/09', '2026-12-09 ', '2026-12-09\n', 'Dec 9 2026', '', 'x', 20261209, null, undefined]) {
+      assert.throws(() => mp.concertFolder(bad), /concert date must be/, JSON.stringify(bad));
+    }
+  });
+
+  test('a traversal in the date is refused before any path is built', () => {
+    // Why: the date goes into a filesystem path. Only digits can pass, so no "..", no "/" can reach it.
+    for (const bad of ['../2026-12-09', '2026-12-09/../..', '20261209/../../x', '..']) {
+      assert.throws(() => mp.concertOutDir(bad, { repo: FIX }), /concert date must be/, bad);
+    }
+  });
+});

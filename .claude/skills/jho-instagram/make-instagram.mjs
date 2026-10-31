@@ -10,12 +10,13 @@
  *
  * CLI:
  *   node .claude/skills/jho-instagram/make-instagram.mjs --data <concert.json> [--out <dir>] [--allow-past]
- *   --out defaults to <repo>/out and must resolve inside the repo, not inside design-system/.
+ *   --out defaults to <repo>/pr/<YYYYMMDD>_Concert (from the concert's iso). It must resolve inside the
+ *   repo, not inside design-system/.
  *   --allow-past is needed only for a concert whose date has already passed.
  *
  * Each graphic is written as a standalone .html (into --out, which must be inside the repo)
  * and rendered to .png through ../jho-render/render.mjs. The HTML references the design system
- * by relative path (../design-system/...), so it opens in a browser from its out/ folder.
+ * by relative path (../design-system/...), so it opens in a browser from its concert folder.
  *
  * The kit's React components are ported to DC markup (the same runtime the posters use) so the
  * shared jho-render wait contract applies. Wordmark and MosaicRule are real design-system
@@ -25,7 +26,7 @@ import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderPage } from '../jho-render/render.mjs';
-import { esc, validateConcert, resolvePeople, loadRoster } from '../jho-concert-poster/make-poster.mjs';
+import { esc, validateConcert, resolvePeople, loadRoster, concertOutDir } from '../jho-concert-poster/make-poster.mjs';
 
 const SKILL_DIR = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(SKILL_DIR, '../../..');
@@ -395,14 +396,15 @@ async function realpathLoose(p) {
 /**
  * Where the PNG and HTML files go. Must resolve (through any symlink) to a folder inside the repo
  * and not inside design-system/, so generated files never land in the design-system source tree.
- * @param {string|undefined} arg  --out, or undefined for <repo>/out
+ * @param {string} arg  --out, or the concert's default folder (concertOutDir)
  * @param {{repo?: string}} [opts]
  * @returns {Promise<string>} the real absolute path
  */
 export async function resolveOutDir(arg, { repo = REPO } = {}) {
+  if (typeof arg !== 'string' || !arg.trim()) throw new Error('--out must be a folder path');
   const repoReal = await realpath(repo);
   const dsReal = path.join(repoReal, 'design-system');
-  const target = await realpathLoose(path.resolve(arg ?? path.join(repo, 'out')));
+  const target = await realpathLoose(path.resolve(arg));
   if (!isInside(repoReal, target)) {
     throw new Error(`--out must be inside the repo (${repoReal}), got ${target}`);
   }
@@ -458,7 +460,7 @@ export async function prepareConcert(raw, { allowPast = false, today, roster } =
 
 /**
  * Write each graphic's HTML and PNG into outDir. The PNG is rendered from the page in memory, served
- * at the design-system root (so the server never sees the repo or out/). The HTML written to outDir
+ * at the design-system root (so the server never sees the repo or the output folder). The HTML written to outDir
  * is the same page with paths relative to outDir, so it opens from there.
  * @param {object} c validated concert (from prepareConcert)
  * @param {string} outDir real path, already checked by resolveOutDir
@@ -524,7 +526,7 @@ async function cli(argv) {
   const a = parseArgs(argv);
   if (!a.data) throw new Error('--data <concert.json> is required (e.g. .claude/skills/jho-concert-poster/concert.2026-12-09.json)');
   const c = await prepareConcert(JSON.parse(await readFile(path.resolve(a.data), 'utf8')), { allowPast: !!a.allowPast });
-  const outDir = await resolveOutDir(a.out);
+  const outDir = await resolveOutDir(a.out ?? concertOutDir(c.iso));
   const { results, skipped } = await renderInstagramSet(c, outDir);
   for (const s of skipped) console.warn(`make-instagram: skipped ${s.name}: ${s.reason}`);
   console.log(JSON.stringify(results, null, 2));

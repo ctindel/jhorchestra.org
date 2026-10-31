@@ -1,6 +1,6 @@
 ---
 name: jho-concert-poster
-description: Build a Jackson Heights Orchestra concert poster (PNG + PDF) from concert data. Picks the Solo, Duo or Trio template by people count and the color, print or bw style, fills it, and renders to out/. Use for any JHO concert poster request.
+description: Build a Jackson Heights Orchestra concert poster (PNG + PDF) from concert data. Picks the Solo, Duo or Trio template by people count and the color, print or bw style, fills it, and renders to pr/<YYYYMMDD>_Concert/. Use for any JHO concert poster request.
 ---
 
 # jho-concert-poster
@@ -20,7 +20,10 @@ baseline is one). Without it, a past `iso` is a validation error. "Past" means t
 (the venue's zone), not the machine's zone.
 
 `--scale` must be a finite positive number. `--out` must resolve (after symlinks) to a folder inside
-the repo and not inside `design-system/`; a `..` segment is refused. The default is `<repo>/out/`.
+the repo and not inside `design-system/`; a `..` segment is refused. `--out` replaces the whole destination
+folder. Without it, the folder is `<repo>/pr/<YYYYMMDD>_Concert/`, where `YYYYMMDD` is the concert's `iso`
+with the dashes removed (2026-12-09 -> `pr/20261209_Concert/`). The `iso` is validated first, so an invalid
+date writes nothing.
 
 ## Intake checklist (ask before building)
 
@@ -108,7 +111,7 @@ The conductor entry may override `title` and `photo`; a soloist may override `ph
 who is not in the roster needs both `title` and `photo` in the concert JSON. The older `people[]`
 format (each `{name, role, photo}`) still works, but the two formats cannot be mixed.
 
-Output (default `<repo>/out/`, gitignored):
+Output (default `<repo>/pr/<YYYYMMDD>_Concert/`, gitignored):
 
 - `JHO_<iso>_Poster-<Solo|Duo|Trio>_<Online|Print-Color|Print-BW>.png` at 2448x3168 (288 dpi)
 - `JHO_<iso>_Poster-<...>.pdf`, one page, 8.5x11 in, vector type, fonts embedded
@@ -251,8 +254,8 @@ ink ends at y 914 and the footer rule is at y 944, about 30px free. Re-measure i
 ## Verified
 
 Tests: `node --test .claude/skills/jho-concert-poster/*.test.mjs` (no rendering). Use the explicit glob:
-on Node 24, `node --test <directory>` fails with "Cannot find module". The suite runs 73 tests: date
-(New York today), time, works, photos (case, symlinks, canonical path), roster, `esc` (astral
+on Node 24, `node --test <directory>` fails with "Cannot find module". The suite runs 79 tests: date
+(New York today), the default `pr/<YYYYMMDD>_Concert/` folder and its date checks, time, works, photos (case, symlinks, canonical path), roster, `esc` (astral
 characters), `$` and `[[slot]]` text in user values, the design-system uniqueness check and substitution
 test (eight templates), Duo online routing, the skill template's fill check and loud-failure path,
 and the `--scale` and `--out` argument checks. The `--out` and photo symlink tests create fixtures under
@@ -280,4 +283,5 @@ earlier session, before the skill-owned template existed.
 
 ## Output
 
-Files are written to `<repo>/out/`. Do not commit them. `out/` is in the root `.gitignore`.
+Files are written to `<repo>/pr/<YYYYMMDD>_Concert/` (the concert's date, or the `--out` folder). Do not commit
+them. `pr/` is in the root `.gitignore`.

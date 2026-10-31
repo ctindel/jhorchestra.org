@@ -1,6 +1,6 @@
 ---
 name: jho-instagram
-description: Render the four Instagram graphics the JHO design system defines (IG 1:1 concert tile, IG 1:1 brand/season card, and the 9:16 stories Concert and Artist Spotlight) from a concert JSON. Writes a standalone HTML and a PNG for each into out/. Use for any JHO Instagram post or story request.
+description: Render the four Instagram graphics the JHO design system defines (IG 1:1 concert tile, IG 1:1 brand/season card, and the 9:16 stories Concert and Artist Spotlight) from a concert JSON. Writes a standalone HTML and a PNG for each into pr/<YYYYMMDD>_Concert/. Use for any JHO Instagram post or story request.
 ---
 
 # jho-instagram
@@ -11,10 +11,11 @@ Nothing beyond those four graphics is produced.
 ```bash
 cd "$(git rev-parse --show-toplevel)"
 node .claude/skills/jho-instagram/make-instagram.mjs \
-  --data .claude/skills/jho-concert-poster/concert.2026-12-09.json [--out out] [--allow-past]
+  --data .claude/skills/jho-concert-poster/concert.2026-12-09.json [--out <dir>] [--allow-past]
 ```
 
-- `--out` defaults to `<repo>/out/`. It must resolve (through any symlink) to a folder inside the repo and
+- `--out` defaults to `<repo>/pr/<YYYYMMDD>_Concert/`, from the concert's `iso` (2026-12-09 -> `pr/20261209_Concert/`).
+  `--out` replaces that folder. It must resolve (through any symlink) to a folder inside the repo and
   not inside `design-system/`.
 - `--allow-past` is needed only when the concert's date has already passed. Without it, a past date is refused.
 - The command prints a JSON array, one entry per graphic, with the HTML path, PNG path, pixel size, the
@@ -73,13 +74,13 @@ uses the same validator (`validateConcert` from `make-poster.mjs`), so the same 
 
 ## How it is built (read before changing it)
 
-- **Standalone HTML.** Each file in `out/` is a complete page. It loads `../design-system/styles.css`,
+- **Standalone HTML.** Each file in the output folder is a complete page. It loads `../design-system/styles.css`,
   `_ds_bundle.js` and the DC runtime from `design-system/templates/concert-poster/support.js`, by
   relative path. The runtime is referenced, not copied. Opening the file needs the repo layout and
   a network connection (fonts and React load from the CDN).
 - **PNGs are rendered from the same page, served from memory.** The render serves `design-system/` as its
   root with the page's HTML supplied in memory, with paths relative to the design-system root (`./styles.css`).
-  The file in `out/` differs only in that prefix (`../design-system/`). The server never sees the repo or `out/`.
+  The file in the output folder differs only in that prefix (`../design-system/`). The server never sees the repo or the output folder.
 - **Overflow check.** Every artboard must fit. A text block that runs past its artboard, or into the block below,
   fails the render (`overflow: block N runs X px into block N+1`). A clipped list would drop a composer from a post
   with no error, so this is loud on purpose. The Dec 2026 four-work tile originally overflowed by about 30 CSS px.
@@ -148,7 +149,7 @@ Run on 2026-10-29 with `concert.2026-12-09.json` (four works, roster format, no 
   check, which fails loudly and does not clip.
 - Automated tests cover the premiere rule, the skip notice, `--allow-past`, `--out` containment, escaping of
   the design-system path, and the overflow check (a deliberately overflowing four-work concert must fail).
-- Earlier (2026-05-20) renders are in `out/`. They were made before the overflow fix and the premiere rule,
+- Earlier (2026-05-20) renders are in `pr/20260520_Concert/`. They were made before the overflow fix and the premiere rule,
   so re-render them rather than post them.
 
 Not verified: a pixel diff against the kit's own JSX render (`ui_kits/print_social/index.html`);
@@ -165,4 +166,4 @@ files in the feed or profile grid.
 
 ## Output
 
-Files go to `<repo>/out/`, which is gitignored. Do not commit them.
+Files go to `<repo>/pr/<YYYYMMDD>_Concert/` (or the `--out` folder), which is gitignored. Do not commit them.

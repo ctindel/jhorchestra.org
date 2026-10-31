@@ -8,8 +8,10 @@ dev_publish
 public
 themes
 
-# Rendered concert assets (jho-concert-poster / jho-render)
-out/
+# Rendered concert assets, one folder per concert: pr/<YYYYMMDD>_Concert/ (jho-concert-poster, jho-instagram,
+# jho-program-notes). This also covers jho-program-notes' scratch folder (.program-notes-spreads), which
+# is written inside the output folder.
+pr/
 
 # Skill dependencies (jho-render, jho-program-notes)
 node_modules/

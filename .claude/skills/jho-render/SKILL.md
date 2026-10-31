@@ -29,7 +29,7 @@ node .claude/skills/jho-render/render.mjs \
   --html design-system/templates/concert-poster/ConcertPoster.dc.html \
   --root design-system \
   --preset poster-letter --selector .jho-sheet \
-  --png out/example.png --pdf out/example.pdf
+  --png /path/to/example.png --pdf /path/to/example.pdf
 ```
 
 | Flag | Meaning |
@@ -59,7 +59,7 @@ await renderPage({
   viewport: { width: 896, height: 1136 },
   scale: 3,
   selector: '.jho-sheet',
-  png: '/abs/out/x.png', pdf: '/abs/out/x.pdf',
+  png: '/abs/path/x.png', pdf: '/abs/path/x.pdf',
   assertions: async (page) => [], // return strings to fail the render
 });
 ```
