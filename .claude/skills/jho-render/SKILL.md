@@ -127,6 +127,10 @@ The result lists every host requested in `hosts`.
   `file://` the DC runtime logs `Fetch API cannot load file:///...`. Over HTTP that error does not occur.
 - **PDF** uses print media and the templates' `@media print` rules. Fonts come out embedded (Type 3).
 - **Raster sizing** is 96 CSS px per inch, so 3x = 288 dpi for an 8.5x11 sheet.
+- **Resolution tag.** Chromium writes no pHYs chunk, so a PNG reads as 72 dpi. Pass `pngDpi` (library only, no CLI
+  flag) to write a pHYs chunk (unit = metre) before IDAT. `withPngDpi(buf, dpi)` replaces any existing pHYs and leaves
+  every other byte as it was, so the pixels are unchanged. Unset (the default) writes no tag. The poster passes
+  `816 * scale / 8.5`. Instagram and the programme do not set it, because they are screen output.
 - pdfinfo missing means the PDF page count is not verified. The result then carries a warning.
 
 ## Not in scope here

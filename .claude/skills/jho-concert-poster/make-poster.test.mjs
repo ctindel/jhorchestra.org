@@ -9,6 +9,8 @@ import { test, describe, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { readFile, mkdir, symlink, writeFile, rm, realpath } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateConcert, buildPoster, checkBaseline, checkSkillTemplates, calendarFacts, MAX_WORKS, loadRoster, resolvePeople, esc } from './make-poster.mjs';
@@ -590,5 +592,41 @@ describe('default output folder: pr/<YYYYMMDD>_Concert, derived from the concert
     for (const bad of ['../2026-12-09', '2026-12-09/../..', '20261209/../../x', '..']) {
       assert.throws(() => mp.concertOutDir(bad, { repo: FIX }), /concert date must be/, bad);
     }
+  });
+});
+
+const execFileP = promisify(execFile);
+
+/** pHYs chunks and the IHDR size of a PNG (independent of render.mjs). */
+function pngPhysAndSize(buf) {
+  let pos = 8; const phys = []; let size = null;
+  while (pos < buf.length) {
+    const len = buf.readUInt32BE(pos);
+    const type = buf.toString('latin1', pos + 4, pos + 8);
+    const d = buf.subarray(pos + 8, pos + 8 + len);
+    if (type === 'IHDR') size = { width: d.readUInt32BE(0), height: d.readUInt32BE(4) };
+    if (type === 'pHYs') phys.push({ x: d.readUInt32BE(0), y: d.readUInt32BE(4), unit: d[8] });
+    pos += 12 + len;
+  }
+  return { size, phys };
+}
+
+describe('poster PNG resolution: pHYs follows the sheet size and the --scale', () => {
+  test('posterPngDpi is pixel width over the 8.5 in sheet, so it tracks --scale', () => {
+    // Why: a fixed 288 would tag a --scale 2 PNG as 288 dpi, and it would print 17 in wide, not 8.5.
+    assert.equal(mp.posterPngDpi(3), 288);
+    assert.equal(mp.posterPngDpi(2), 192);
+    assert.equal(mp.posterPngDpi(2.5) * 8.5, 2040);
+  });
+
+  test('the poster CLI writes a PNG that reports 288 dpi at 2448x3168 px, and the PDF is written', async () => {
+    // Why: this is the shipped path. Unit checks cannot show the file that print tools open.
+    const out = path.join(FIX, 'cli-out');
+    await execFileP(process.execPath, [path.join(HERE, 'make-poster.mjs'), '--data', path.join(HERE, 'concert.2026-12-09.json'),
+      '--style', 'color', '--out', out], { maxBuffer: 16 * 1024 * 1024 });
+    const png = pngPhysAndSize(await readFile(path.join(out, 'JHO_2026-12-09_Poster-Duo_Online.png')));
+    assert.deepEqual(png.size, { width: 2448, height: 3168 });
+    assert.deepEqual(png.phys, [{ x: 11339, y: 11339, unit: 1 }]);
+    await readFile(path.join(out, 'JHO_2026-12-09_Poster-Duo_Online.pdf'));
   });
 });

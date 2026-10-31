@@ -531,6 +531,17 @@ export async function checkSkillTemplates() {
   return results;
 }
 
+/**
+ * Resolution tag for the poster PNG: pixel width over the physical width. The sheet is 816 CSS px
+ * (8.5 in at 96 px/in) rendered at `scale`, so scale 3 gives 2448 px / 8.5 in = 288 dpi, and the tag
+ * follows --scale rather than assuming it.
+ * @param {number} scale
+ * @returns {number} dpi
+ */
+export function posterPngDpi(scale) {
+  return (816 * scale) / 8.5;
+}
+
 /** --scale: a finite, positive number. Anything else is an error, not a silent default. */
 export function parseScale(v) {
   const n = typeof v === 'string' && v.trim() !== '' ? Number(v) : NaN;
@@ -606,6 +617,7 @@ async function cli(argv) {
     width: 816,
     height: 1056,
     scale,
+    pngDpi: posterPngDpi(scale),
     viewport: { width: 896, height: 1136 },
     selector: '.jho-sheet',
     png: path.join(outDir, base + '.png'),

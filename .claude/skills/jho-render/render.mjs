@@ -19,7 +19,7 @@
  */
 import { createServer } from 'node:http';
 import { createReadStream } from 'node:fs';
-import { mkdir, stat, open, realpath, rm } from 'node:fs/promises';
+import { mkdir, stat, open, realpath, rm, readFile, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -292,6 +292,67 @@ async function pngSize(file) {
   }
 }
 
+const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+const CRC_TABLE = Uint32Array.from({ length: 256 }, (_, n) => {
+  let c = n;
+  for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+  return c >>> 0;
+});
+
+/** CRC-32 (IEEE, as PNG chunks use). */
+function crc32(buf) {
+  let c = 0xffffffff;
+  for (const b of buf) c = CRC_TABLE[(c ^ b) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+}
+
+/**
+ * Tag a PNG with a physical resolution: write one pHYs chunk (unit = metre) before the first IDAT,
+ * replacing any pHYs already there. Every other byte is copied as it was, so the pixels (IDAT) are
+ * untouched. The input is checked (signature, chunk lengths, each chunk's CRC) and refused if malformed.
+ * @param {Buffer} png  PNG file contents
+ * @param {number} dpi  Resolution in dots per inch (288 = 11339 pixels per metre)
+ * @returns {Buffer} the tagged PNG
+ */
+export function withPngDpi(png, dpi) {
+  if (!Number.isFinite(dpi) || dpi <= 0) throw new Error(`withPngDpi: dpi must be a positive number, got ${dpi}`);
+  if (!png.subarray(0, 8).equals(PNG_SIGNATURE)) throw new Error('withPngDpi: input is not a PNG (bad signature)');
+  const ppm = Math.round(dpi / 0.0254);
+  const body = Buffer.alloc(9);
+  body.writeUInt32BE(ppm, 0);
+  body.writeUInt32BE(ppm, 4);
+  body[8] = 1; // unit: metre
+  const type = Buffer.from('pHYs', 'latin1');
+  const phys = Buffer.alloc(21);
+  phys.writeUInt32BE(9, 0);
+  type.copy(phys, 4);
+  body.copy(phys, 8);
+  phys.writeUInt32BE(crc32(phys.subarray(4, 17)), 17);
+
+  const parts = [PNG_SIGNATURE];
+  let wroteIdat = false;
+  let pos = 8;
+  while (pos < png.length) {
+    if (pos + 12 > png.length) throw new Error('withPngDpi: truncated chunk header');
+    const len = png.readUInt32BE(pos);
+    const end = pos + 12 + len;
+    if (end > png.length) throw new Error(`withPngDpi: chunk at byte ${pos} runs past the end of the file`);
+    const chunkType = png.toString('latin1', pos + 4, pos + 8);
+    if (crc32(png.subarray(pos + 4, pos + 8 + len)) !== png.readUInt32BE(pos + 8 + len)) {
+      throw new Error(`withPngDpi: CRC mismatch in ${chunkType} chunk at byte ${pos}`);
+    }
+    pos = end;
+    if (chunkType === 'pHYs') continue;
+    if (chunkType === 'IDAT' && !wroteIdat) {
+      parts.push(phys);
+      wroteIdat = true;
+    }
+    parts.push(png.subarray(end - 12 - len, end));
+  }
+  if (!wroteIdat) throw new Error('withPngDpi: no IDAT chunk');
+  return Buffer.concat(parts);
+}
+
 /** Page count and first-page size via poppler's pdfinfo (null if not installed). */
 async function pdfInfo(file) {
   try {
@@ -317,6 +378,9 @@ async function pdfInfo(file) {
  * @param {number} [o.scale=1]   deviceScaleFactor for PNG (3 = 288 dpi on a 96 px/in page).
  * @param {string} [o.selector]  Capture only this element (default: whole viewport).
  * @param {string} [o.png]       Absolute output path for PNG.
+ * @param {number} [o.pngDpi]    Write a pHYs resolution tag of this many dpi into the PNG (see withPngDpi).
+ *        Unset = no tag, the file is exactly what Chromium wrote. Needs png. The caller derives it from
+ *        the pixel size over the physical size (the poster passes 816 * scale / 8.5).
  * @param {string} [o.pdf]       Absolute output path for PDF (single page, exact size).
  * @param {Array<{family:string,weight:number}>} [o.requireFonts] Fonts that must have loaded.
  * @param {(page: import('playwright').Page) => Promise<string[]>} [o.assertions]
@@ -333,9 +397,10 @@ export async function renderPage(o) {
   const {
     root, pagePath, html, width, height, scale = 1, selector, png, pdf, viewport,
     requireFonts = [{ family: 'Playfair Display', weight: 900 }, { family: 'Inter', weight: 600 }],
-    assertions, timeoutMs = 60000, imageTimeoutMs = 10000, dc = true,
+    assertions, timeoutMs = 60000, imageTimeoutMs = 10000, dc = true, pngDpi,
   } = o;
   if (!png && !pdf) throw new Error('renderPage: give png and/or pdf');
+  if (pngDpi !== undefined && !png) throw new Error('renderPage: pngDpi tags the PNG, so it needs png');
   if (!pagePath.startsWith('/')) throw new Error(`pagePath must start with "/": ${pagePath}`);
 
   const warnings = [];
@@ -402,8 +467,9 @@ export async function renderPage(o) {
       } else {
         await page.screenshot({ path: png, type: 'png', animations: 'disabled', caret: 'hide' });
       }
+      if (pngDpi !== undefined) await writeFile(png, withPngDpi(await readFile(png), pngDpi));
       written.push(png);
-      out.png = { path: png, ...(await pngSize(png)), scale };
+      out.png = { path: png, ...(await pngSize(png)), scale, ...(pngDpi !== undefined ? { dpi: pngDpi } : {}) };
     }
 
     if (pdf) {

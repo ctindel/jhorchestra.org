@@ -113,7 +113,7 @@ format (each `{name, role, photo}`) still works, but the two formats cannot be m
 
 Output (default `<repo>/pr/<YYYYMMDD>_Concert/`, gitignored):
 
-- `JHO_<iso>_Poster-<Solo|Duo|Trio>_<Online|Print-Color|Print-BW>.png` at 2448x3168 (288 dpi)
+- `JHO_<iso>_Poster-<Solo|Duo|Trio>_<Online|Print-Color|Print-BW>.png` at 2448x3168, tagged 288 dpi in its pHYs chunk (so `sips` and layout tools size it at 8.5x11 in, not 72 dpi). The tag is `816 * scale / 8.5`, so it follows `--scale`.
 - `JHO_<iso>_Poster-<...>.pdf`, one page, 8.5x11 in, vector type, fonts embedded
 
 Rendering goes through `../jho-render/render.mjs`, so the wait and failure rules in that skill apply.
