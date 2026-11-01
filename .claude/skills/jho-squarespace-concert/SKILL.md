@@ -20,7 +20,7 @@ Ask for anything missing. Never guess.
 - **Excerpt.** Short, from the user or from `content/en/post/<YYYYMMDD>-concert.md`.
 - **Venue.** Look it up in the venue table in `jho-squarespace/reference/data-model.md`. If it is not there,
   ask for the official street address. Do not guess an address.
-- **Start and end time.** Set both. Historical events use an assumed 7:30 PM start and end 2 hours later
+- **Start and end time.** Set both. Historical events use an assumed 7:30 PM start and end 1 hour later (concerts are always 1 hour)
   (see "Historical events" and `historical/README.md`).
 - **Publish or Draft.** Default is Draft. Publishing is visible to the public, so confirm with the user unless
   the request already said to publish.

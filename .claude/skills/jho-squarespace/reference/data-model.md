@@ -105,7 +105,7 @@ Called from the logged-in admin tab. Headers and the bulk recipe: `ui-recipes.md
 - Footer address typo fixed: "P.O. Boe 881 / Jackaon Helghts" is now "P.O. Box 881 / Jackson Heights".
 
 Open items:
-- Historical events (2012–2023) start at an assumed 7:30 PM, with end = start + 2 hours. The start time is not in the
+- Historical events (2012–2023) start at an assumed 7:30 PM, with end = start + 1 hour (owner: concerts are always 1 hour; changed from +2h on 2026-11-01). The start time is not in the
   source sheet and is not verified. See `jho-squarespace-concert/historical/README.md`.
 - Travers Park concerts `20230702` and `20250706` exist as events (see the historical README). All 43 past events have `publishOn` = `startDate` (checked 2026-10-31). A PUT changes `startDate` only if `structuredContent.startDate` is set too.
 

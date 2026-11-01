@@ -40,7 +40,7 @@ has `publishOn` = `startDate`, which the footer's paging depends on (`../../jho-
 | Item | What was done | Status |
 | --- | --- | --- |
 | Start time | 7:30 PM, except 20180203, 20181215 and 20190209 at 4:00 PM | **Verified** against the program PDF of each concert (30 of 30 read). The sheet itself has no times. |
-| End time | Start + 2 hours | **Choice.** The sheet has no end time. |
+| End time | Start + 1 hour | **Owner decision 2026-11-01:** concerts are always 1 hour long. All 53 events were changed from +2h to +1h. |
 | Titles | Generated. December = "Holiday Concert", February = "Winter Concert", otherwise "Spring Concert". Prefixed "Jackson Heights Orchestra — " | Generated, not from the programs |
 | Excerpts | Generated from conductor, soloists and the first four works | Generated |
 | Pat Glunt | Shown as "Patricia Glunt" | Changed |
@@ -66,7 +66,7 @@ Addresses and pins were verified before use.
   program and soloist as 20150311 (Julia Meynert, Mozart Violin Concerto No. 5), so it reuses that event's text and PDF.
 - `20220703`, 6:00 PM, Travers Park: announced in the May 2022 program. No conductor or program is known, so none is shown.
 - `20230702`, 6:00 PM, Travers Park: conductor "Alicia Lieu (guest conductor)", from the Dec 2022, Mar 2023 and May 2023 programs.
-- `20250706` has no conductor source and shows none.
+- `20250706`: conductor Wenqi Li, per the owner (2026-11-01). In `jho-data` and the excerpt; no title shown.
 
 Total: 45 past events. Publishing resets `publishOn`, so set `publishOn` = `startDate` again after setting `workflowState` to 1.
 
@@ -78,7 +78,7 @@ soloists or conductor are known, and no source confirms they took place): Traver
 40.7556, -73.7574 comes from one unverified source and the hall is not named. Not created: 2020-07-04/05 (canceled).
 The owner thought an earlier markdown file listed assets per concert; none exists (only `assets-inventory.json` in the
 backup, which has URLs and filenames). The sheet ends at 2024-05-15; later concerts were already on the site.
-No program states an end time, so every end time is start + 2 hours.
+No program states an end time; every end time is start + 1 hour (owner decision).
 
 ## Per-work notes (VERIFIED 2026-10-31)
 
