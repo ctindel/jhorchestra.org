@@ -60,8 +60,11 @@ Section toolbar, at the right: Edit Section, View Layouts, **Remove** (deletes t
 - Over the photo, five colour tiles in a row: yellow (2 columns), green (3), orange (2), blue (3), purple (2).
   The owner chose the 2-3-2-3-2 widths. Five equal tiles do not fit a 12-column grid.
 - Button "Upcoming Concert" text contains a real U+00A0 (see `ui-recipes.md`).
-- **Known issue (2026-10-31):** the "About the Orchestra" button has an empty link (`href=""`). The owner has not
-  chosen a target; `/about` is probable. Do not set it without asking.
+- The "About the Orchestra" button was removed on 2026-10-31 (the About page is in the menu).
+- **Mobile (VERIFIED 2026-10-31):** Fluid Engine cannot place a block narrower than 2 of the 8 mobile columns, so five
+  tiles wrapped and shrank the photo. A `@media (max-width: 767px)` block at the end of Custom CSS pins the photo and the
+  five tiles with `!important` longhand `grid-row-start/end` and `grid-column-start/end` on each `.fe-block-<id>`.
+  Do not write `a/b/c/d` shorthand there: the CSS preprocessor treats the slashes as division.
 
 ## Contact and Join
 

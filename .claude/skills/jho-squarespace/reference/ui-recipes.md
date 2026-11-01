@@ -119,6 +119,9 @@ Check the result afterwards from the page's HTML, not the editor.
 4. Use `find` to locate "upload button (arrow-up icon) next to Search files in link editor". Call `file_upload`
    on that ref.
 5. The file is served at `/s/<filename>`, which redirects to `static1.squarespace.com/static/<siteid>/t/<id>/<ts>/<filename>`.
+5a. The input takes **one file per `file_upload` call**. A call with several paths uploads only the first. Calls under 10 MB
+   each. Several calls can be sent in one turn. Afterwards list the stored names from the dialog DOM to check them, and
+   `fetch('/s/<name>',{method:'HEAD'})` from the admin tab: 404 means not stored, a CORS error means it redirects (stored).
 6. Click **Exit**. **Never Save** the page you borrowed the dialog from. No prompt appeared when exiting.
 
 ## Edit the footer text (VERIFIED)

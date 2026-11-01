@@ -1,6 +1,6 @@
 # jho-data
 
-One JSON file per concert, named `<YYYYMMDD>.json`, for the Squarespace footer script. Keys: `season`, `venue`, `conductor`, `program`, `soloists`, `recordingYouTube`, `podcastYouTube`, and `programPdf` (a `/s/<filename>.pdf` path, in 20231212 and 20260520 only). A key is left out when no source in the repo supports it. `tickets` is never written.
+One JSON file per concert, named `<YYYYMMDD>.json`, for the Squarespace footer script. Keys: `season`, `venue`, `conductor`, `program`, `soloists`, `recordingYouTube`, `podcastYouTube`, and `programPdf` (a `/s/<filename>.pdf` path, in 20231212, 20260520 and all 30 historical events 20120313 to 20230517). A key is left out when no source in the repo supports it. `tickets` is never written.
 
 The footer renders buttons from `tickets`, `recordingYouTube`, `programPdf`, `podcastSpotify` and `podcastYouTube`. `season` and `venue` affect grouping and card text. `program`, `conductor` and `soloists` are stored, not rendered.
 

@@ -39,7 +39,7 @@ has `publishOn` = `startDate`, which the footer's paging depends on (`../../jho-
 
 | Item | What was done | Status |
 | --- | --- | --- |
-| Start time | 7:30 PM for every event (America/New_York) | **Assumption.** The sheet has no times. The 2023-12-12 concert actually started at 7:00 PM. |
+| Start time | 7:30 PM, except 20180203, 20181215 and 20190209 at 4:00 PM | **Verified** against the program PDF of each concert (30 of 30 read). The sheet itself has no times. |
 | End time | Start + 2 hours | **Choice.** The sheet has no end time. |
 | Titles | Generated. December = "Holiday Concert", February = "Winter Concert", otherwise "Spring Concert". Prefixed "Jackson Heights Orchestra — " | Generated, not from the programs |
 | Excerpts | Generated from conductor, soloists and the first four works | Generated |
@@ -47,7 +47,7 @@ has `publishOn` = `startDate`, which the footer's paging depends on (`../../jho-
 | Raffle entries | Entries containing "raffle" in the conductor column were dropped from the conductor list | Changed |
 | Typos | Fixed "MIniatures", "Wanger", "Basoon". Other source spellings kept | Changed |
 | Images | No posters exist for these events, so the cards have no image | Fact |
-| Program PDFs | Not attached. Not mapped to dates | **Open** |
+| Program PDFs | 30 PDFs from the Drive folder uploaded to Squarespace file storage as `<YYYYMMDD>_JHO_Program.pdf`; each event's `jho-data` has `programPdf` = `/s/<file>` | **Done 2026-10-31.** Mapped by the concert date printed in each PDF, not by program number. The 2020-03-11 program (canceled) is not uploaded. 2015-03-08 (St. Joseph's, 5 PM) is listed in the 2015 program but is not in the sheet and has no event. |
 
 ## Venues
 
@@ -60,10 +60,12 @@ Addresses and pins were verified before use.
 | St. Joseph's Roman Catholic Church | 43-19 30th Avenue, Astoria, NY 11103 | 40.762681, -73.9118015 |
 | P.S. 69Q – The Jackson Heights School | 77-02 37th Avenue, Jackson Heights, NY 11372 | 40.7489118, -73.8884855 |
 
-## Not created
+## Travers Park
 
-- Travers Park, `2023-07-02` and `2025-07-06`: no sheet data, or the conductor is not verified. Create them only
-  after the data is checked.
+`20230702` and `20250706` were created later the same day (published, jho-data without `conductor`, because no source
+names the conductor; Wenqi Li usually conducts the summer pops, unverified). Their start times are not from a program.
+The 2022 and 2023 programs announce them (July 3, 2022 6 PM at Travers Park; July 2, 2023 at Travers Park), but the July 2022
+event was not created.
 
 ## Troubleshooting
 
