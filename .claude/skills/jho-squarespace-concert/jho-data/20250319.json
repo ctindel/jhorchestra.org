@@ -1,0 +1,26 @@
+{
+  "season": "2024–25",
+  "venue": "Lexington School",
+  "conductor": "Alex Wen",
+  "soloists": [
+    {
+      "name": "Julia Cohen",
+      "instrument": "trumpet"
+    }
+  ],
+  "program": [
+    {
+      "composer": "Boulanger",
+      "work": "D’un matin de printemps"
+    },
+    {
+      "composer": "Bolling",
+      "work": "selections from “Toot Suite” featuring Julia Cohen on trumpet"
+    },
+    {
+      "composer": "Schumann",
+      "work": "Symphony No. 1 in B-flat major, Op. 38 (AKA the Spring Symphony)"
+    }
+  ],
+  "podcastYouTube": "https://www.youtube.com/watch?v=IBqhp-o9FVY"
+}

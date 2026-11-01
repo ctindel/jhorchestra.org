@@ -1,0 +1,29 @@
+{
+  "season": "2023–24",
+  "venue": "St. Mark's Episcopal Church",
+  "conductor": "Alex Wen",
+  "program": [
+    {
+      "composer": "Copland",
+      "work": "Fanfare for the Common Man"
+    },
+    {
+      "composer": "Ellington",
+      "work": "Selections"
+    },
+    {
+      "composer": "Burleigh",
+      "work": "Three Spirituals"
+    },
+    {
+      "composer": "Dvorak",
+      "work": "Biblical Songs"
+    },
+    {
+      "composer": "Dvorak",
+      "work": "Symphony No. 8"
+    }
+  ],
+  "recordingYouTube": "https://www.youtube.com/watch?v=j1VOTXka0tA",
+  "podcastYouTube": "https://www.youtube.com/watch?v=zw2cV5l9TFo"
+}

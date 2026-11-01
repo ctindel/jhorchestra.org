@@ -1,0 +1,25 @@
+{
+  "season": "2023–24",
+  "venue": "St. Mark's Episcopal Church",
+  "conductor": "Alex Wen",
+  "program": [
+    {
+      "composer": "De Falla",
+      "work": "Ritual Fire Dance from El Amor Brujo"
+    },
+    {
+      "composer": "Ravel",
+      "work": "Mother Goose Suite Selections"
+    },
+    {
+      "composer": "Mozart",
+      "work": "Clarinet Concerto"
+    },
+    {
+      "composer": "Elgar",
+      "work": "Enigma Variations"
+    }
+  ],
+  "recordingYouTube": "https://www.youtube.com/watch?v=wUsMhZ1ZFs8",
+  "podcastYouTube": "https://www.youtube.com/watch?v=LmRqt97RHx8"
+}

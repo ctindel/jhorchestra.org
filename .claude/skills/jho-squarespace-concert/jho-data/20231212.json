@@ -1,0 +1,57 @@
+{
+  "season": "2023–24",
+  "venue": "St. Mark's Episcopal Church",
+  "conductor": "Alex Wen",
+  "program": [
+    {
+      "composer": "Saint-Saens",
+      "work": "IV. March Militaire Française from Suite l'Algérienne, op. 60"
+    },
+    {
+      "composer": "Bach",
+      "work": "Concerto no. 3 for Two Violins in D minor, BWV 1043"
+    },
+    {
+      "composer": "Glazunov",
+      "work": "Prelude, Winter from The Seasons (Die Jahreszeit)"
+    },
+    {
+      "composer": "Strauss",
+      "work": "Pizzicato Polka"
+    },
+    {
+      "composer": "Bizet",
+      "work": "IV. Farandole from l'Arlesienne Suite no. 2"
+    },
+    {
+      "composer": "Tchaikovsky",
+      "work": "Selections from \"The Nutcracker\""
+    },
+    {
+      "composer": "Coleridge-Taylor",
+      "work": "Christmas Overture"
+    },
+    {
+      "composer": "Vaughan Williams (/ arr. Greaves)",
+      "work": "Fantasia on Greensleeves"
+    },
+    {
+      "composer": "arr. Hayman",
+      "work": "Carol of the Bells"
+    },
+    {
+      "composer": "arr. Custer",
+      "work": "Hanukkah Festival Overture"
+    },
+    {
+      "composer": "Handel",
+      "work": "Messiah: Hallelujah Chorus"
+    },
+    {
+      "composer": "Anderson",
+      "work": "Sleigh Ride"
+    }
+  ],
+  "recordingYouTube": "https://www.youtube.com/watch?v=XshBwhdJ5CQ",
+  "programPdf": "/s/20231212_JHO_Program_Book.pdf"
+}
