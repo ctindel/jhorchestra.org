@@ -25,7 +25,7 @@ do not use these files.
 
 ## Events created
 
-30 events, all published, slugs `/concerts/<YYYYMMDD>` (VERIFIED 2026-10-31):
+30 events from the sheet, all published, slugs `/concerts/<YYYYMMDD>` (VERIFIED 2026-10-31):
 
 `20120313 20121212 20130515 20131218 20140312 20140514 20141210 20150311 20150513 20151209 20160316 20160518
 20161214 20170315 20170517 20171213 20180203 20180314 20180516 20181215 20190209 20190313 20190515 20191211
@@ -60,12 +60,20 @@ Addresses and pins were verified before use.
 | St. Joseph's Roman Catholic Church | 43-19 30th Avenue, Astoria, NY 11103 | 40.762681, -73.9118015 |
 | P.S. 69Q – The Jackson Heights School | 77-02 37th Avenue, Jackson Heights, NY 11372 | 40.7489118, -73.8884855 |
 
-## Travers Park
+## Added after the first import (VERIFIED 2026-10-31)
 
-`20230702` and `20250706` were created later the same day (published, jho-data without `conductor`, because no source
-names the conductor; Wenqi Li usually conducts the summer pops, unverified). Their start times are not from a program.
-The 2022 and 2023 programs announce them (July 3, 2022 6 PM at Travers Park; July 2, 2023 at Travers Park), but the July 2022
-event was not created.
+- `20150308`, 5:00 PM, St. Joseph's RC Church, Astoria: listed with its own time and venue in the 2015 program. Same
+  program and soloist as 20150311 (Julia Meynert, Mozart Violin Concerto No. 5), so it reuses that event's text and PDF.
+- `20220703`, 6:00 PM, Travers Park: announced in the May 2022 program. No conductor or program is known, so none is shown.
+- `20230702`, 6:00 PM, Travers Park: conductor "Alicia Lieu (guest conductor)", from the Dec 2022, Mar 2023 and May 2023 programs.
+- `20250706` has no conductor source and shows none.
+
+Total: 45 past events. Publishing resets `publishOn`, so set `publishOn` = `startDate` again after setting `workflowState` to 1.
+
+Other summer Travers/Queensborough dates appear in programs only as announcements, with no program, soloist or confirmation
+that they took place, so no events were made: 2014-05-04 (Queensborough CC), 2014-07-06, 2015-05-02 (Queensborough CC),
+2015-07-05, 2016-07-03, 2017-07-02, 2018-07-01. 2020-07-04/05 was announced and later canceled. No program states an end
+time, so every end time is start + 2 hours.
 
 ## Troubleshooting
 
