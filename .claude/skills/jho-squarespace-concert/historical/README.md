@@ -70,12 +70,15 @@ Addresses and pins were verified before use.
 
 Total: 45 past events. Publishing resets `publishOn`, so set `publishOn` = `startDate` again after setting `workflowState` to 1.
 
-Announced-only Travers Park concerts were created as **drafts** (not public), because no program, soloist or conductor is
-known and nothing confirms they took place: `20140706` (3:30 PM), `20150705` (4:00 PM; the 2015 programs say 3:00 and
-4:00, the later one was used), `20160703`, `20170702`, `20180701` (all 4:00 PM). Publish a draft only after the owner
-confirms it. Also drafts: `20140504` (1:00 PM; program 4 says 2:00 PM, later programs 1:00 PM) and `20150502` (6:30 PM) at
-Queensborough Community College, 222-05 56th Avenue, Bayside, NY 11364 (address from qcc.cuny.edu; the map pin
-40.7556, -73.7574 is from one unverified source, check it before publishing; the hall is not named). Not created: 2020-07-04/05 (canceled). No program states an end time, so every end time is start + 2 hours.
+Announced-only concerts, **published 2026-10-31 on the owner's instruction** (date, time and venue only; no program,
+soloists or conductor are known, and no source confirms they took place): Travers Park `20140706` (3:30 PM),
+`20150705` (4:00 PM; the 2015 programs say 3:00 and 4:00, the later one was used), `20160703`, `20170702`, `20180701`
+(all 4:00 PM); Queensborough Community College, 222-05 56th Avenue, Bayside, NY 11364 (address from qcc.cuny.edu),
+`20140504` (1:00 PM; program 4 says 2:00 PM, later programs 1:00 PM) and `20150502` (6:30 PM). The college map pin
+40.7556, -73.7574 comes from one unverified source and the hall is not named. Not created: 2020-07-04/05 (canceled).
+The owner thought an earlier markdown file listed assets per concert; none exists (only `assets-inventory.json` in the
+backup, which has URLs and filenames). The sheet ends at 2024-05-15; later concerts were already on the site.
+No program states an end time, so every end time is start + 2 hours.
 
 ## Per-work notes (VERIFIED 2026-10-31)
 
