@@ -59,8 +59,41 @@ See `ui-recipes.md` (Event Settings, Location recipe). Status values: Draft, Nee
 - **Program PDFs** cannot go in the Asset Library. Upload them through a link dialog (`ui-recipes.md`).
   Stored: `20231212_JHO_Program_Book.pdf` (since Aug 2026) and `20260520_JHO_Program.pdf` (uploaded 2026-10-31;
   its identity as the final program is unconfirmed).
-- **Verified result:** Archives lists the 11 real past concerts, with Program PDF, Recording and YouTube links on
-  the six events above.
+- **Verified result:** Archives lists 41 past concerts across 15 seasons after the historical import (VERIFIED
+  2026-10-31; see "Pagination of past events"). Program PDF, Recording and YouTube links are on the six events above.
+
+## Admin API shapes (VERIFIED 2026-10-31)
+
+Called from the logged-in admin tab. Headers and the bulk recipe: `ui-recipes.md`, "Bulk-create events through the admin API".
+
+- **Clone:** `POST /api/content/copy/item?sourceId=<templateEventId>&copyWorkflowState=4` returns `{id, collectionId, ...}`.
+  The copy is a draft.
+- **Read:** `GET /api/content/calendars/<collectionId>/events/<id>`. Concerts `collectionId` is `6a7952feaa0a3f0876d04511`.
+- **Write:** `PUT` the same URL with the full item. Always PUT a freshly GET item. A stale body returns an empty 400.
+- **Item body:** `{layout:{columns:12,rows:[{columns:[{blocks:[...]}]}]},raw:false}`.
+- **Excerpt:** `{html:'<p class="" style="white-space:pre-wrap;">TEXT</p>',raw:false}`. Never put raw `<script>` text in it.
+- **Code block:** `{type:1337, definitionName:'website.components.code', value:{html:<code>, wysiwyg:{engine:'code', mode:'htmlmixed', source:<code>, ...}}}`.
+- **Text block:** `{type:1337, value:{html, source, engine:'wysiwyg', ...}}`.
+- **Editable fields:** `title`, `urlId`, `startDate`, `endDate`, `structuredContent.startDate`, `structuredContent.endDate`,
+  `location` (`addressTitle`, `addressLine1`, `addressLine2`, `markerLat`, `markerLng`, `mapLat`, `mapLng`), `excerpt`,
+  body blocks, `assetUrl` (`''` for no image), `workflowState` (4 = draft, 1 = published), `publishOn`.
+
+## Pagination of past events (VERIFIED 2026-10-31)
+
+- `/concerts?format=json` returns 30 past events per page. Squarespace pages with `pagination.nextPageOffset`, which
+  is keyed on each item's `publishOn`.
+- **Rule:** every event must have `publishOn` = its `startDate`. Historical events were set this way. Set it on every
+  new event too. Without it, older concerts stop appearing once there are more than 30 past events.
+- **Footer patch** (Code Injection, Footer). The old loader paged with `start=`, which Squarespace ignores, so older
+  concerts never appeared. The patched `loadConcerts`/`loadJSONPage`:
+  - `loadJSONPage(start, offset)` appends `&offset=<offset>` to the URL.
+  - `let offset=""` is declared before the loop.
+  - After `extractEvents(json)`:
+    `offset = (json && json.pagination && json.pagination.nextPage && json.pagination.nextPageOffset) ? json.pagination.nextPageOffset : "";`
+  - The early-exit test is `if (!offset && events.length < CONFIG.pageSize)`.
+- **Original footer:** `squarespace-backup/20261031/code-injection/footer.html` (gitignored).
+- **Verified:** the Archives preview shows 41 past concerts across 15 seasons (2011–12 to 2025–26). There is no 2020–21
+  season, because no concerts were held.
 
 ## Known data issues fixed on 2026-10-31 (VERIFIED)
 
@@ -72,8 +105,9 @@ See `ui-recipes.md` (Event Settings, Location recipe). Status values: Draft, Nee
 - Footer address typo fixed: "P.O. Boe 881 / Jackaon Helghts" is now "P.O. Box 881 / Jackson Heights".
 
 Open items:
-- Historic event end times are Squarespace defaults (about 11 PM). Not verified.
-- Four concerts on the Hugo site have **no Squarespace event yet**: `20230315`, `20230517`, `20230702`, `20250706`.
+- Historical events (2012–2023) start at an assumed 7:30 PM, with end = start + 2 hours. The start time is not in the
+  source sheet and is not verified. See `jho-squarespace-concert/historical/README.md`.
+- Travers Park concerts `20230702` and `20250706` have **no Squarespace event yet** (not created; see the historical README).
 
 ## Source of truth in the repo
 

@@ -137,3 +137,21 @@ Logged-in requests to public URLs redirect to the admin. Check the rendered page
 2. Top right, click the ▷ **Preview** button.
 3. The page renders inside an iframe. Search every `iframe`'s `contentDocument` for `[data-jho]`.
 4. Close the preview with the X at the top right.
+
+## Bulk-create events through the admin API (VERIFIED 2026-10-31)
+
+Used for the 30 historical events, instead of 30 UI rounds. Run from the logged-in admin tab, so the session cookies
+are sent. Shapes: `data-model.md`, "Admin API shapes". One concert is still done in the UI (`jho-squarespace-concert`).
+
+1. **Template.** Make one draft event with two blocks, a text block and a Code block. Note its id.
+2. **Headers** for every call: `X-CSRF-Token` = the value of the `crumb` cookie, and `Content-Type: application/json`.
+3. **Clone:** `POST /api/content/copy/item?sourceId=<templateEventId>&copyWorkflowState=4`. Keep the returned `id` and
+   `collectionId`. The copy is a draft.
+4. **Read:** `GET /api/content/calendars/<collectionId>/events/<id>` right before editing.
+5. **Edit** the item: `title`, `urlId` (`YYYYMMDD`), `startDate`, `endDate`, `structuredContent` dates, `location`,
+   `excerpt`, body blocks, `assetUrl` (`''` for no image), and `publishOn` = `startDate`.
+6. **Write:** `PUT` the same URL with the full item. A stale body returns an empty 400, so repeat step 4 first.
+7. **Verify** each draft at `/concerts/<slug>?format=json`. Publish only after the check, by setting `workflowState`
+   to 1.
+
+Rules: never put raw `<script>` text in `excerpt`. Never delete an event; set `workflowState` to 4 (Draft) instead.

@@ -20,7 +20,8 @@ Ask for anything missing. Never guess.
 - **Excerpt.** Short, from the user or from `content/en/post/<YYYYMMDD>-concert.md`.
 - **Venue.** Look it up in the venue table in `jho-squarespace/reference/data-model.md`. If it is not there,
   ask for the official street address. Do not guess an address.
-- **Start and end time.** Set both. Historic events keep Squarespace's default end time (about 11 PM).
+- **Start and end time.** Set both. Historical events use an assumed 7:30 PM start and end 2 hours later
+  (see "Historical events" and `historical/README.md`).
 - **Publish or Draft.** Default is Draft. Publishing is visible to the public, so confirm with the user unless
   the request already said to publish.
 
@@ -92,14 +93,23 @@ Then verify (section 6).
 
 ## Historical events
 
-Four concerts on the Hugo site have **no Squarespace event yet**: `20230315`, `20230517`, `20230702`, `20250706`.
-Their `jho-data/` files already exist.
+Source: the Drive folder "Programs - PG Archive" (under Leadership_Committee_Shared, owner `ctindel`, in the
+jhorchestra.org Drive), which holds the program PDFs and the sheet `JHO repertoire history.xlsx`. The sheet was
+exported read-only to `historical/repertoire-history.psv`. No file named "manifest" exists; this sheet is the
+nearest match and was used. (VERIFIED 2026-10-31)
 
-- To publish one, create the event (section 4), then apply its `jho-data` file per the recipe.
+- **Created:** 30 events, 2012-03-13 to 2023-05-17, slugs `/concerts/<YYYYMMDD>`, all published. Each has a
+  7:30 PM start (an assumption), a venue and pin, a Program/Soloists body and a `jho-data` Code block.
+- **Not created:** 2020-03-11 (canceled, COVID), the undated Dvorak 8 row, concerts already on the site
+  (2023-12-12 onward), and the Travers Park concerts 2023-07-02 and 2025-07-06 (no sheet data or unverified
+  conductor).
+- **Program PDFs:** not attached. They are not mapped to dates.
+- **Assumptions, venues and pins:** `historical/README.md`.
+- **Pagination:** each historical event has `publishOn` = `startDate`, and the footer loader was patched. New
+  events must follow this too (`jho-squarespace/reference/data-model.md`, "Pagination of past events").
+- The `jho-data` blocks on historical events are not in the "Applied" list above, which covers only the
+  per-concert `jho-data/` files. The two sources are not compared here.
 - YouTube links come only from `content/en/media.md`. Never guess a link.
-- No manifest of past events was found on disk or in the jhorchestra.org Drive. The Drive folder
-  "Programs - PG Archive" (owner `ctindel`, under Leadership_Committee) may be the program archive. Its contents
-  have not been checked.
 
 ## Final checklist
 
