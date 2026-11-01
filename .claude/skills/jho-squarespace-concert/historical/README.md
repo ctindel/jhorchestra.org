@@ -70,10 +70,11 @@ Addresses and pins were verified before use.
 
 Total: 45 past events. Publishing resets `publishOn`, so set `publishOn` = `startDate` again after setting `workflowState` to 1.
 
-Other summer Travers/Queensborough dates appear in programs only as announcements, with no program, soloist or confirmation
-that they took place, so no events were made: 2014-05-04 (Queensborough CC), 2014-07-06, 2015-05-02 (Queensborough CC),
-2015-07-05, 2016-07-03, 2017-07-02, 2018-07-01. 2020-07-04/05 was announced and later canceled. No program states an end
-time, so every end time is start + 2 hours.
+Announced-only Travers Park concerts were created as **drafts** (not public), because no program, soloist or conductor is
+known and nothing confirms they took place: `20140706` (3:30 PM), `20150705` (4:00 PM; the 2015 programs say 3:00 and
+4:00, the later one was used), `20160703`, `20170702`, `20180701` (all 4:00 PM). Publish a draft only after the owner
+confirms it. Not created: the Queensborough Community College dates 2014-05-04 and 2015-05-02 (no verified address and
+pin) and 2020-07-04/05 (canceled). No program states an end time, so every end time is start + 2 hours.
 
 ## Troubleshooting
 
