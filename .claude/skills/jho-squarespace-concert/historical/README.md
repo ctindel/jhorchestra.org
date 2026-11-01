@@ -73,8 +73,9 @@ Total: 45 past events. Publishing resets `publishOn`, so set `publishOn` = `star
 Announced-only Travers Park concerts were created as **drafts** (not public), because no program, soloist or conductor is
 known and nothing confirms they took place: `20140706` (3:30 PM), `20150705` (4:00 PM; the 2015 programs say 3:00 and
 4:00, the later one was used), `20160703`, `20170702`, `20180701` (all 4:00 PM). Publish a draft only after the owner
-confirms it. Not created: the Queensborough Community College dates 2014-05-04 and 2015-05-02 (no verified address and
-pin) and 2020-07-04/05 (canceled). No program states an end time, so every end time is start + 2 hours.
+confirms it. Also drafts: `20140504` (1:00 PM; program 4 says 2:00 PM, later programs 1:00 PM) and `20150502` (6:30 PM) at
+Queensborough Community College, 222-05 56th Avenue, Bayside, NY 11364 (address from qcc.cuny.edu; the map pin
+40.7556, -73.7574 is from one unverified source, check it before publishing; the hall is not named). Not created: 2020-07-04/05 (canceled). No program states an end time, so every end time is start + 2 hours.
 
 ## Per-work notes (VERIFIED 2026-10-31)
 
