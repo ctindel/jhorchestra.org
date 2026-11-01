@@ -76,6 +76,13 @@ known and nothing confirms they took place: `20140706` (3:30 PM), `20150705` (4:
 confirms it. Not created: the Queensborough Community College dates 2014-05-04 and 2015-05-02 (no verified address and
 pin) and 2020-07-04/05 (canceled). No program states an end time, so every end time is start + 2 hours.
 
+## Per-work notes (VERIFIED 2026-10-31)
+
+The sheet's Notes column (premieres, arrangers, commissions) is now on the pages as a parenthetical after the work in the
+Program list, for the 15 concerts that have notes (for example "Tango for Orchestra (World premiere)"). The 2020-03-11
+"canceled - Covid" notes and the 2023-12-12 Nutcracker note are not applied. The `.psv` keeps notes per concert, not per
+work; the per-work mapping came from the xlsx.
+
 ## Troubleshooting
 
 - **A historical concert is missing from the Archives:** check that its `publishOn` equals its `startDate`, and that the
