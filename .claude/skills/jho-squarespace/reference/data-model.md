@@ -51,7 +51,7 @@ See `ui-recipes.md` (Event Settings, Location recipe). Status values: Draft, Nee
 | `programPdf` | "Program PDF" button. Value is a path such as `/s/<file>.pdf`; a leading `/` becomes the site origin |
 | `podcastSpotify` | "Spotify" button |
 | `podcastYouTube` | "YouTube" button |
-| `season`, `venue` | Grouping, and card venue text (else the event's location title) |
+| `season`, `venue` | Grouping, and card venue text (else the event's location title). `season` is **always** `YYYY–YYYY` (EN DASH U+2013), see below |
 | `program`, `conductor`, `soloists` | Read and stored. Not rendered |
 
 - **Applied** to 20231212, 20240313, 20240515, 20241211, 20250319 and 20260520. The other files in `jho-data/`
@@ -61,6 +61,15 @@ See `ui-recipes.md` (Event Settings, Location recipe). Status values: Draft, Nee
   its identity as the final program is unconfirmed).
 - **Verified result:** Archives lists 41 past concerts across 15 seasons after the historical import (VERIFIED
   2026-10-31; see "Pagination of past events"). Program PDF, Recording and YouTube links are on the six events above.
+
+### Season format rule (2026-11-01)
+
+- Archives groups by the exact `season` string, so every event must carry it in `jho-data`, as `YYYY–YYYY`: four-digit
+  start and end years, one EN DASH (U+2013), end = start + 1. Not `2017–18`, not `2017-2018`.
+- The footer's fallback (no `season` in `jho-data`) is two-digit (`2025–26`), so an event without a season splits off
+  its group. Add a `jho-data` block with at least `{"season":"..."}` to every published event.
+- Season runs September to August: concert month >= 9 gives year to year+1, else year-1 to year (New York local date).
+- Checked by `jho-squarespace-concert/check-seasons.mjs` and the "Season check" step in that skill's Verify section.
 
 ## Admin API shapes (VERIFIED 2026-10-31)
 
@@ -92,7 +101,7 @@ Called from the logged-in admin tab. Headers and the bulk recipe: `ui-recipes.md
     `offset = (json && json.pagination && json.pagination.nextPage && json.pagination.nextPageOffset) ? json.pagination.nextPageOffset : "";`
   - The early-exit test is `if (!offset && events.length < CONFIG.pageSize)`.
 - **Original footer:** `squarespace-backup/20261031/code-injection/footer.html` (gitignored).
-- **Verified:** the Archives preview shows 41 past concerts across 15 seasons (2011–12 to 2025–26). There is no 2020–21
+- **Verified:** the Archives preview shows 41 past concerts across 15 seasons (2011–2012 to 2025–2026). There is no 2020–2021
   season, because no concerts were held.
 
 ## Known data issues fixed on 2026-10-31 (VERIFIED)

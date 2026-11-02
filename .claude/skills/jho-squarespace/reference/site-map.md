@@ -40,7 +40,7 @@ When logged in, these redirect to the admin. To check a rendered page, use the p
   - `data-jho="upcoming"` on the home page (`data-limit="3"`),
   - `data-jho="schedule"` on the Schedule page,
   - `data-jho="archive"` on the Archives page (with the season select `#jho-archive-season-select`).
-  - Seasons run September to August, labelled like `2025–26`.
+  - Seasons run September to August, labelled like `2025–2026`.
 - **Custom CSS:** about 4.6 KB.
 
 Edit the footer only with a full backup in hand (`SKILL.md` section 3). Keep the guard and the `CONFIG` object as they are unless the change is intended.

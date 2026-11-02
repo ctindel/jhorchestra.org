@@ -64,6 +64,7 @@ Per-event links (program PDF, recording, podcast, tickets) go in a Code block in
 `<script class="jho-data">` line. Keys and rendering: `jho-squarespace/reference/data-model.md`. Steps:
 `jho-squarespace/reference/ui-recipes.md`, "Add the jho-data block to an event".
 
+- `season` is always `YYYY–YYYY` (four-digit years, EN DASH), for example `2017–2018`. Never `2017–18`.
 - The source is `jho-data/<YYYYMMDD>.json` (see `jho-data/README.md`).
 - **Applied:** 20231212, 20240313, 20240515, 20241211, 20250319, 20260520. The other files are stored, not applied.
 - To change an applied block, remove it (ui-recipes, "Remove a block") and add the new one.
@@ -84,6 +85,25 @@ Check in this order. Report each item as verified or not verified.
 4. Schedule (`/schedule`) and Home (`/`), in the preview: the concert shows in `data-jho="schedule"`, and in
    `data-jho="upcoming"` on Home if it is among the next three.
 5. For a Draft: the event is **absent** from the public lists and **present** in the admin.
+6. **Season check.** Every published event needs a `jho-data` block with a `season` (the footer's fallback label is
+   two-digit, `2025–26`, and would split the Archives group). Years are always four digits.
+   - `season` must match `^\d{4}–\d{4}$` (EN DASH U+2013), end = start + 1, and equal the season computed from the
+     event date in New York time (month >= 9: year to year+1, else year-1 to year).
+   - After any add or edit, list the distinct labels from the admin tab and **fail** if any label is non-canonical, if
+     two labels differ only by format, or if an event has no season. Console snippet (admin tab):
+
+     ```js
+     const cid='6a7952feaa0a3f0876d04511'; let all=[],st=null;
+     do{const j=await(await fetch(`/api/content/calendars/${cid}/events`+(st?`?start=${st}`:''))).json();all=all.concat(j.results);st=j.hasNextPage?j.nextPageStart:null}while(st);
+     const exp=ms=>{const [y,m]=new Date(ms).toLocaleDateString('en-CA',{timeZone:'America/New_York'}).split('-').map(Number);return m>=9?`${y}–${y+1}`:`${y-1}–${y}`};
+     const rows=[];for(const e of all){const j=await(await fetch(`/api/content/calendars/${cid}/events/${e.id}`)).json();const it=j.item||j;
+       if(it.workflowState!==1)continue;let s=null;const w=o=>{if(o&&typeof o==='object'){if(o.value&&typeof o.value.html==='string'&&o.value.html.includes('jho-data'))s=JSON.parse(o.value.html.match(/\{[\s\S]*\}/)[0]).season;Object.values(o).forEach(w)}};w(it.body);
+       rows.push({slug:it.urlId,s,want:exp(it.startDate)})}
+     rows.filter(r=>r.s!==r.want||!/^\d{4}–\d{4}$/.test(r.s||''))  // must be []
+     ```
+
+   - Repo files: `node .claude/skills/jho-squarespace-concert/check-seasons.mjs` (validates `jho-data/*.json`; tests:
+     `node --test .claude/skills/jho-squarespace-concert/check-seasons.test.mjs`).
 
 ## 7. Post-concert updates
 

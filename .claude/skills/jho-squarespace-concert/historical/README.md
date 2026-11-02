@@ -7,6 +7,7 @@ do not use these files.
 
 - `repertoire-history.psv`: 30 concerts, one per line, pipe-separated:
   `date|season|venue|conductor(s)|soloist(s)|notes|Composer:Work~Composer:Work`
+  `season` is `YYYY–YYYY` (EN DASH), for example `2017–2018`. Four-digit years always.
 
 ## Source
 
