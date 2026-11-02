@@ -69,7 +69,8 @@ Section toolbar, at the right: Edit Section, View Layouts, **Remove** (deletes t
 ## Contact and Join
 
 - **Contact page:** three full-width cards: General Inquiries (info@jhorchestra.org), Auditions & Membership
-  (personnel@jhorchestra.org), Stay Connected with social icons. **No contact form** (owner decision).
+  (no email since 2026-11-01: text "...please visit our Join page." with "Join page" linked to `/join`, per owner),
+  Stay Connected with social icons. **No contact form** (owner decision).
 - **Join page:** the hero "Contact Us" button links to `/contact`.
 
 ## Asset Library
