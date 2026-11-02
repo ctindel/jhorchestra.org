@@ -103,3 +103,16 @@ website/
   (`jho-squarespace-concert`, section 3a).
 
 Mechanics are in `ui-recipes.md`.
+
+## The /concerts collection page (2026-11-01)
+
+`/concerts` is the Events collection. It renders a full list of events (31 items) and was reachable by URL only: not in any
+navigation (it is under Not Linked), no page links to it. Sources of the link: the sitemap.xml `<loc>`, and the
+"Back to All Events" link on every event page (`/concerts/<YYYYMMDD>`, template-level, not editable per event).
+- **A URL mapping `/concerts -> /schedule 301` does nothing** (tested; Squarespace applies mappings only when no real page
+  exists, and the collection is a real page). It was saved, verified a no-op, and removed; URL Mappings is empty again
+  (`/config/settings/developer-tools/url-mappings`).
+- **Applied:** collection page Settings > SEO > "Hide Page from Search Results" (adds `<meta name="ROBOTS" content="NOINDEX">`
+  to `/concerts`; event pages also carry NOINDEX).
+- **Must stay working:** `/concerts?format=json` (the footer script's feed: 1 upcoming, 30 past) and event pages
+  `/concerts/<YYYYMMDD>`. The collection cannot be deleted and "Enable Page" must stay on, or the feed and event URLs break.
