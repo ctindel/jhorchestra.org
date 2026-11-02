@@ -53,6 +53,7 @@ See `ui-recipes.md` (Event Settings, Location recipe). Status values: Draft, Nee
 | `podcastYouTube` | "YouTube" button |
 | `season`, `venue` | Grouping, and card venue text (else the event's location title). `season` is **always** `YYYY–YYYY` (EN DASH U+2013), see below |
 | `program`, `conductor`, `soloists` | Read and stored. Not rendered |
+| `mapUrl` | **Unused.** Present in the 20261209 block (added 2026-11-01). The owner chose no map-link script, so nothing reads it |
 
 - **Applied** to 20231212, 20240313, 20240515, 20241211, 20250319 and 20260520. The other files in `jho-data/`
   are stored but not applied.

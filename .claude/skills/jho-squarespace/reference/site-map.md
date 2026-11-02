@@ -96,4 +96,10 @@ website/
   - website assets: in `website/<kind>/`.
 - **Still numbered, left for the owner:** logo (2), logo (3), logo (4), people (2), location (2).
 
+- **Event poster (2026-11-01):** the 20261209 event's featured image and its body image block use
+  `concert/20261209/20261209_JHO_Poster_Web.png` (1000x1294, 344 KB file). The older `20261210_JHO_Concert_Poster_Display.png`
+  files (4250x5500, served about 2500 px / 1.2 MB, and showing "December 10") stay in the folder but are not used. Rule for
+  every event: the Web PNG from `jho-concert-poster`, never the print or hi-res poster
+  (`jho-squarespace-concert`, section 3a).
+
 Mechanics are in `ui-recipes.md`.
