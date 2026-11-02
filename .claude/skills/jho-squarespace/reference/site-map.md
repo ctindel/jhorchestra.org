@@ -66,6 +66,11 @@ Section toolbar, at the right: Edit Section, View Layouts, **Remove** (deletes t
   five tiles with `!important` longhand `grid-row-start/end` and `grid-column-start/end` on each `.fe-block-<id>`.
   Do not write `a/b/c/d` shorthand there: the CSS preprocessor treats the slashes as division.
 
+## Media page
+
+- Hero button "See Program Details" (a plain button block linking to the 20231212 program PDF, not footer-script output) was deleted 2026-11-01 at the owner's request. Other pages do not contain that text.
+- Bottom gallery (a gallery section, grid layout) had 16 items: 5 photos (JHO - 00000007/30/32/35/37) were uploaded twice as separate assets (byte-identical, different asset ids). The 5 later copies were removed; 11 unique items remain in original order. The page HTML also renders a hidden lightbox list, so a raw `img` count is double the visible grid.
+
 ## Contact and Join
 
 - **Contact page:** three full-width cards: General Inquiries (info@jhorchestra.org), Auditions & Membership
