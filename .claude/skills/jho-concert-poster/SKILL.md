@@ -17,11 +17,18 @@ node .claude/skills/jho-concert-poster/make-poster.mjs \
   --data <concert.json> [--style color|print|bw[,..]] [--out <dir>] [--scale 3] [--allow-past]
 ```
 
-**Default run (no `--style`): writes the online poster AND the black-and-white print poster**, each as a PDF and a
-PNG (4 files), into `pr/<YYYYMMDD>_Concert/`: `JHO_<iso>_Poster-<Variant>_Online.{pdf,png}` and
-`JHO_<iso>_Poster-<Variant>_Print-BW.{pdf,png}`. Poster page only; no Instagram squares. Pass `--style` (one value or a
+**Default run (no `--style`): writes the online poster, the black-and-white print poster AND the website PNG** (5 files),
+into `pr/<YYYYMMDD>_Concert/`: `JHO_<iso>_Poster-<Variant>_Online.{pdf,png}`, `JHO_<iso>_Poster-<Variant>_Print-BW.{pdf,png}`
+and `JHO_<iso>_Poster-<Variant>_Web.png`. Poster page only; no Instagram squares. Pass `--style` (one value or a
 comma list) to build only some. With one style the CLI prints that result object; with the default it prints
-`{ "posters": [...] }`.
+`{ "posters": [...] }`. The color poster's entry carries a `web` object (`path`, `width`, `height`, `bytes`).
+
+**Web PNG (`..._Web.png`) is for the Squarespace event page only.** The full poster PNG is 2448x3168 (about 1.4 MB),
+too big for a web page. The Web PNG is the same color sheet at 1000 x 1294 px (8.5 x 11 ratio, sRGB, untagged
+72 dpi), about 350 KB for the Dec 2026 Duo. It is rendered at a smaller device scale (1000 / 816), not resampled, so
+its text is sharp at that size. It is made only from the color (Online) poster: `--style color` writes it, and
+`--style print` or `--style bw` does not. Use the PDFs and the hi-res PNGs for print and social. Do not upload the
+2448 px PNG to the event page.
 
 **Print-BW is pure black ink on white.** It reuses the design system's own `concert-poster[-duo|-trio]-bw` template, whose
 text is already `#000000`. That template drew its rules in `rgba(0,0,0,0.4)` (a grey) and put a 9% grey tint behind tags,
@@ -131,6 +138,7 @@ Output (default `<repo>/pr/<YYYYMMDD>_Concert/`, gitignored):
 
 - `JHO_<iso>_Poster-<Solo|Duo|Trio>_<Online|Print-Color|Print-BW>.png` at 2448x3168, tagged 288 dpi in its pHYs chunk (so `sips` and layout tools size it at 8.5x11 in, not 72 dpi). The tag is `816 * scale / 8.5`, so it follows `--scale`.
 - `JHO_<iso>_Poster-<...>.pdf` (same name stem as the PNG), one page, 8.5x11 in, vector type, fonts embedded
+- `JHO_<iso>_Poster-<Solo|Duo|Trio>_Web.png` (color only): 1000x1294 px, for the event page. See "Web PNG" above. `WEB_WIDTH` in `make-poster.mjs` sets the width.
 
 Rendering goes through `../jho-render/render.mjs`, so the wait and failure rules in that skill apply.
 
@@ -338,7 +346,8 @@ shows literally in the rendered sheet); the design-system uniqueness and substit
 fill check and loud-failure paths; the layout matrix (each fixture is written clean or refused with the rule named,
 and the expected verdict is listed in the test file); the Solo column order by bounding boxes; the Trio caption
 width; the font-face judgement; the CLI entry point run through a symlinked file and a symlinked folder; the CLI
-output (288 dpi PNG at 2448x3168, one-page Letter PDF); and the `--scale` and `--out` checks.
+output (288 dpi PNG at 2448x3168, one-page Letter PDF); the Web PNG (1000 x 1294, PNG signature, under 700 KB, color
+only); and the `--scale` and `--out` checks.
 
 The Dec 2026 Duo poster is re-rendered after each template change. Its decoded pixels are identical to
 `pr/20261209_Concert/JHO_2026-12-09_Poster-Duo_Online.png` (2448x3168, 288 dpi tag).

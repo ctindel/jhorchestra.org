@@ -6,6 +6,7 @@
  * CLI:
  *   node make-poster.mjs --data <concert.json> [--style color|print|bw[,..]] [--out <dir>] [--scale 3] [--allow-past]
  *   --out replaces the whole destination folder; without it the folder is pr/<YYYYMMDD>_Concert/.
+ *   Every color (Online) poster also writes <Variant>_Web.png, WEB_WIDTH px wide, for the website's event page.
  *   node make-poster.mjs --check-baseline      # design-system templates: every May 2026 snippet occurs exactly once;
  *                                              # skill templates: Dec 2026 fill must be complete
  *
@@ -42,6 +43,12 @@ const DS_ROOT = path.join(REPO, 'design-system');
 const VARIANTS = { 1: 'Solo', 2: 'Duo', 3: 'Trio' };
 /** One run writes these unless --style says otherwise: the online poster and the pure-black print poster. */
 export const DEFAULT_STYLES = ['color', 'bw'];
+/**
+ * Width in px of the website PNG (<Variant>_Web.png, color only). Its height is 1294 px, the 8.5 x 11 ratio.
+ * It is the same sheet rendered at a smaller device scale (WEB_WIDTH / 816), so its text is rasterised at
+ * that size, not resampled from the 2448 px PNG.
+ */
+export const WEB_WIDTH = 1000;
 const STYLES = {
   color: { finish: 'online', label: 'Online', dataFinish: 'online' },
   print: { finish: 'print-color', label: 'Print-Color', dataFinish: 'print-color' },
@@ -630,6 +637,12 @@ export async function writePoster(concert, style, { outDir, scale = 3, allowPast
   const dir = await resolveOutDir(outDir ?? concertOutDir(c.iso));
   const base = `JHO_${c.iso}_Poster-${variant}_${STYLES[style].label}`;
   const skill = !!skillTemplateFor(variant, style);
+  const assertions = async (page) => {
+    const got = await page.evaluate(() => document.querySelector('.jho-desk')?.dataset.finish);
+    const want = STYLES[style].dataFinish;
+    const finish = got === want ? [] : [`finish is "${got}", expected "${want}" (wrong template folder?)`];
+    return skill ? [...finish, ...(await layoutAssertion(page))] : finish;
+  };
   const result = await renderPage({
     root: DS_ROOT,
     pagePath,
@@ -642,14 +655,26 @@ export async function writePoster(concert, style, { outDir, scale = 3, allowPast
     selector: '.jho-sheet',
     png: path.join(dir, base + '.png'),
     pdf: path.join(dir, base + '.pdf'),
-    assertions: async (page) => {
-      const got = await page.evaluate(() => document.querySelector('.jho-desk')?.dataset.finish);
-      const want = STYLES[style].dataFinish;
-      const finish = got === want ? [] : [`finish is "${got}", expected "${want}" (wrong template folder?)`];
-      return skill ? [...finish, ...(await layoutAssertion(page))] : finish;
-    },
+    assertions,
   });
-  return { template: pagePath, variant, style, ...result };
+  if (style !== 'color') return { template: pagePath, variant, style, ...result };
+  // The website's event page gets a small PNG of the same sheet: the same render at a smaller device scale, no PDF,
+  // no resolution tag (72 dpi is fine on screen). Written after the Online poster, so a refused poster writes neither.
+  const webPng = path.join(dir, `JHO_${c.iso}_Poster-${variant}_Web.png`);
+  const web = await renderPage({
+    root: DS_ROOT,
+    pagePath,
+    html,
+    width: 816,
+    height: 1056,
+    scale: WEB_WIDTH / 816,
+    viewport: { width: 896, height: 1136 },
+    selector: '.jho-sheet',
+    png: webPng,
+    assertions,
+  });
+  const bytes = (await stat(webPng)).size;
+  return { template: pagePath, variant, style, ...result, web: { path: webPng, width: web.png.width, height: web.png.height, bytes } };
 }
 
 /**

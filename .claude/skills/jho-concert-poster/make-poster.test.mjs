@@ -997,4 +997,21 @@ describe('default CLI run writes the online poster AND the pure-black print post
       } });
     assert.deepEqual(bad, []);
   });
+
+  test('the Online poster also writes a 1000 px Web PNG for the event page, and the print poster does not', async () => {
+    // Why: the event page cannot take the 2448 px print PNG (1.4 MB). Its small PNG must be a real PNG at
+    // WEB_WIDTH wide, under 700 KB, and made from the color design only. The print run writes no Web file, so
+    // the Web name (which has no style in it) is never overwritten by the bw run.
+    const { stdout } = await execFileP(process.execPath, [path.join(HERE, 'make-poster.mjs'), '--data', path.join(HERE, 'concert.2026-12-09.json'), '--out', out, '--allow-past'],
+      { maxBuffer: 16 * 1024 * 1024 });
+    const res = JSON.parse(stdout);
+    const web = path.join(out, 'JHO_2026-12-09_Poster-Duo_Web.png');
+    const buf = await readFile(web);
+    assert.deepEqual([...buf.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], 'PNG signature');
+    assert.deepEqual(pngPhysAndSize(buf).size, { width: 1000, height: 1294 }, '1000 px wide at the 8.5 x 11 ratio');
+    assert.ok(buf.length < 700 * 1024, `Web PNG is ${buf.length} bytes; the event page needs it under 700 KB`);
+    assert.equal(res.posters[0].web.width, 1000);
+    assert.equal(res.posters[0].web.bytes, buf.length, 'the CLI reports the bytes it wrote');
+    assert.equal(res.posters[1].web, undefined, 'the Print-BW run must not write a Web PNG');
+  });
 });
