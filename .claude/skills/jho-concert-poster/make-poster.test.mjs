@@ -952,7 +952,7 @@ describe('poster PNG resolution: pHYs follows the sheet size and the --scale', (
     // Why: this is the shipped path. Unit checks cannot show the file that print tools open.
     const out = path.join(FIX, 'cli-out');
     await execFileP(process.execPath, [path.join(HERE, 'make-poster.mjs'), '--data', path.join(HERE, 'concert.2026-12-09.json'),
-      '--style', 'color', '--out', out], { maxBuffer: 16 * 1024 * 1024 });
+      '--style', 'color', '--out', out, '--allow-past'], { maxBuffer: 16 * 1024 * 1024 });
     const png = pngPhysAndSize(await readFile(path.join(out, 'JHO_2026-12-09_Poster-Duo_Online.png')));
     assert.deepEqual(png.size, { width: 2448, height: 3168 });
     assert.deepEqual(png.phys, [{ x: 11339, y: 11339, unit: 1 }]);
@@ -964,7 +964,7 @@ describe('default CLI run writes the online poster AND the pure-black print post
   const out = path.join(REPO, 'pr', `_test-default-${process.pid}`);
   after(() => rm(out, { recursive: true, force: true }));
   test('file set, sizes, and every bw text/rule pixel is #000 with no color', async () => {
-    const { stdout } = await execFileP(process.execPath, [path.join(HERE, 'make-poster.mjs'), '--data', path.join(HERE, 'concert.2026-12-09.json'), '--out', out],
+    const { stdout } = await execFileP(process.execPath, [path.join(HERE, 'make-poster.mjs'), '--data', path.join(HERE, 'concert.2026-12-09.json'), '--out', out, '--allow-past'],
       { maxBuffer: 16 * 1024 * 1024 });
     const res = JSON.parse(stdout);
     assert.deepEqual(res.posters.map((p) => p.style), ['color', 'bw']);
