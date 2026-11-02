@@ -959,3 +959,42 @@ describe('poster PNG resolution: pHYs follows the sheet size and the --scale', (
     await readFile(path.join(out, 'JHO_2026-12-09_Poster-Duo_Online.pdf'));
   });
 });
+
+describe('default CLI run writes the online poster AND the pure-black print poster (8.5 x 11, PDF + PNG each)', () => {
+  const out = path.join(REPO, 'pr', `_test-default-${process.pid}`);
+  after(() => rm(out, { recursive: true, force: true }));
+  test('file set, sizes, and every bw text/rule pixel is #000 with no color', async () => {
+    const { stdout } = await execFileP(process.execPath, [path.join(HERE, 'make-poster.mjs'), '--data', path.join(HERE, 'concert.2026-12-09.json'), '--out', out],
+      { maxBuffer: 16 * 1024 * 1024 });
+    const res = JSON.parse(stdout);
+    assert.deepEqual(res.posters.map((p) => p.style), ['color', 'bw']);
+    for (const f of ['Online', 'Print-BW']) {
+      for (const ext of ['png', 'pdf']) assert.ok(existsSync(path.join(out, `JHO_2026-12-09_Poster-Duo_${f}.${ext}`)), `${f}.${ext} missing`);
+    }
+    const bw = res.posters[1];
+    assert.equal(bw.pdf.pages, 1);
+    assert.equal(bw.pdf.widthPt, 612);
+    assert.equal(bw.pdf.heightPt, 792);
+    // Why: grey text or grey rules print as a tint on newsprint. Text is #000 in the template; the rules were
+    // rgba(0,0,0,.4) until hardBlackBw. Check computed styles in the live page, not just the source.
+    const built = await buildPoster(JSON.parse(await readFile(path.join(HERE, 'concert.2026-12-09.json'), 'utf8')), 'bw', { allowPast: true });
+    let bad = null;
+    await renderPage({ root: path.join(REPO, 'design-system'), pagePath: built.pagePath, html: built.html, width: 816, height: 1056, png: path.join(out, 'check.png'),
+      selector: '.jho-sheet',
+      assertions: async (page) => {
+        bad = await page.evaluate(() => {
+          const out = [];
+          for (const el of document.querySelectorAll('.jho-sheet *')) {
+            const cs = getComputedStyle(el);
+            if (el.childNodes.length && [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()) && cs.color !== 'rgb(0, 0, 0)') out.push('text ' + cs.color + ' ' + el.textContent.trim().slice(0, 30));
+            for (const side of ['Top', 'Bottom']) {
+              if (parseFloat(cs['border' + side + 'Width']) > 0 && cs['border' + side + 'Style'] !== 'none' && cs['border' + side + 'Color'] !== 'rgb(0, 0, 0)') out.push('rule ' + cs['border' + side + 'Color']);
+            }
+          }
+          return out;
+        });
+        return [];
+      } });
+    assert.deepEqual(bad, []);
+  });
+});

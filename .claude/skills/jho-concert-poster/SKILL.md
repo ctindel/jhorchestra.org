@@ -14,8 +14,22 @@ print and bw posters still come from the design-system templates and look differ
 ```bash
 cd "$(git rev-parse --show-toplevel)"
 node .claude/skills/jho-concert-poster/make-poster.mjs \
-  --data <concert.json> --style color|print|bw [--out <dir>] [--scale 3] [--allow-past]
+  --data <concert.json> [--style color|print|bw[,..]] [--out <dir>] [--scale 3] [--allow-past]
 ```
+
+**Default run (no `--style`): writes the online poster AND the black-and-white print poster**, each as a PDF and a
+PNG (4 files), into `pr/<YYYYMMDD>_Concert/`: `JHO_<iso>_Poster-<Variant>_Online.{pdf,png}` and
+`JHO_<iso>_Poster-<Variant>_Print-BW.{pdf,png}`. Poster page only; no Instagram squares. Pass `--style` (one value or a
+comma list) to build only some. With one style the CLI prints that result object; with the default it prints
+`{ "posters": [...] }`.
+
+**Print-BW is pure black ink on white.** It reuses the design system's own `concert-poster[-duo|-trio]-bw` template, whose
+text is already `#000000`. That template drew its rules in `rgba(0,0,0,0.4)` (a grey) and put a 9% grey tint behind tags,
+so `make-poster.mjs` (`hardBlackBw`) injects one CSS override into the filled copy: every rule `#000000`, no tint.
+`design-system/` is not edited. Photos and the griffin seal keep the template's grayscale treatment (they are
+continuous-tone art, not text). Edges of text are antialiased by the rasteriser in the PNG; the PDF is vector with
+only `0 0 0` (and white `1 1 1`) colour operators. Note the bw layout is the older design-system layout, not the
+online poster's layout (see below).
 
 `--allow-past` is only for rebuilding a poster for a date that has already passed (the May 2026
 baseline is one). Without it, a past `iso` is a validation error. "Past" means the date in New York
@@ -116,7 +130,7 @@ format (each `{name, role, photo}`) still works, but the two formats cannot be m
 Output (default `<repo>/pr/<YYYYMMDD>_Concert/`, gitignored):
 
 - `JHO_<iso>_Poster-<Solo|Duo|Trio>_<Online|Print-Color|Print-BW>.png` at 2448x3168, tagged 288 dpi in its pHYs chunk (so `sips` and layout tools size it at 8.5x11 in, not 72 dpi). The tag is `816 * scale / 8.5`, so it follows `--scale`.
-- `JHO_<iso>_Poster-<...>.pdf`, one page, 8.5x11 in, vector type, fonts embedded
+- `JHO_<iso>_Poster-<...>.pdf` (same name stem as the PNG), one page, 8.5x11 in, vector type, fonts embedded
 
 Rendering goes through `../jho-render/render.mjs`, so the wait and failure rules in that skill apply.
 

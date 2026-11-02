@@ -4,7 +4,7 @@
  * render PNG + PDF into <repo>/pr/<YYYYMMDD>_Concert/ (from the concert's iso).
  *
  * CLI:
- *   node make-poster.mjs --data <concert.json> --style color|print|bw [--out <dir>] [--scale 3] [--allow-past]
+ *   node make-poster.mjs --data <concert.json> [--style color|print|bw[,..]] [--out <dir>] [--scale 3] [--allow-past]
  *   --out replaces the whole destination folder; without it the folder is pr/<YYYYMMDD>_Concert/.
  *   node make-poster.mjs --check-baseline      # design-system templates: every May 2026 snippet occurs exactly once;
  *                                              # skill templates: Dec 2026 fill must be complete
@@ -40,6 +40,8 @@ const REPO = path.resolve(SKILL_DIR, '../../..');
 const DS_ROOT = path.join(REPO, 'design-system');
 
 const VARIANTS = { 1: 'Solo', 2: 'Duo', 3: 'Trio' };
+/** One run writes these unless --style says otherwise: the online poster and the pure-black print poster. */
+export const DEFAULT_STYLES = ['color', 'bw'];
 const STYLES = {
   color: { finish: 'online', label: 'Online', dataFinish: 'online' },
   print: { finish: 'print-color', label: 'Print-Color', dataFinish: 'print-color' },
@@ -474,7 +476,21 @@ export async function buildPoster(concert, style, opts = {}) {
   const src = await readFile(t.abs, 'utf8');
   const baseline = await baselineConcert(c.people.length);
   const html = applyFill(src, replacementsFor(baseline, c, src));
-  return { html, variant, style, pagePath: t.rel, concert: c };
+  return { html: style === 'bw' ? hardBlackBw(html) : html, variant, style, pagePath: t.rel, concert: c };
+}
+
+/**
+ * Print-BW is pure black ink on white. The design-system bw template already forces text to #000
+ * but draws its rules in rgba(0,0,0,0.4) (a grey) and keeps a 9% grey tint behind tags. This
+ * override, injected into the filled copy only (design-system/ is never edited), makes every rule
+ * solid #000 and removes the tint. Photos and the seal keep the template's grayscale treatment.
+ */
+const BW_HARD_BLACK_CSS = '[data-finish="print-bw"] .jho-sheet,[data-finish="print-bw"] .jho-sheet *{color:#000000!important;border-color:#000000!important}'
+  + '[data-finish="print-bw"] .jho-tint{background:transparent!important}';
+export function hardBlackBw(html) {
+  const marker = '</style></helmet>';
+  if (html.split(marker).length !== 2) throw new Error('bw override: expected exactly one "</style></helmet>" in the template');
+  return html.replace(marker, () => BW_HARD_BLACK_CSS + marker);
 }
 
 /**
@@ -783,11 +799,13 @@ async function cli(argv) {
     console.log(JSON.stringify({ baseline: await checkBaseline(), skill: await checkSkillTemplates() }, null, 2));
     return;
   }
-  if (!a.data || !a.style) throw new Error('--data <concert.json> and --style color|print|bw are required');
+  if (!a.data) throw new Error('--data <concert.json> is required (--style color|print|bw is optional; default is color and bw)');
   const scale = a.scale === undefined ? 3 : parseScale(a.scale);
   const concert = JSON.parse(await readFile(path.resolve(a.data), 'utf8'));
-  const out = await writePoster(concert, a.style, { outDir: a.out, scale, allowPast: !!a.allowPast });
-  console.log(JSON.stringify(out, null, 2));
+  const styles = a.style === undefined ? DEFAULT_STYLES : a.style.split(',');
+  const outs = [];
+  for (const style of styles) outs.push(await writePoster(concert, style, { outDir: a.out, scale, allowPast: !!a.allowPast }));
+  console.log(JSON.stringify(a.style !== undefined && styles.length === 1 ? outs[0] : { posters: outs }, null, 2));
 }
 
 /**

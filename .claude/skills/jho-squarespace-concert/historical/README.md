@@ -93,3 +93,5 @@ work; the per-work mapping came from the xlsx.
   footer patch is in place. See `data-model.md`, "Pagination of past events".
 - **A start time is wrong:** the 7:30 PM start is an assumption. Correct the event in Event Settings once the real
   time is known.
+
+- **Queensborough CC map pin (events 20140504 and 20150502):** the pin (about 40.7556, -73.7574; hall unnamed) was left as-is, unverified, by owner decision 2026-11-01.
